@@ -56,7 +56,7 @@ public class InstructionsScreen extends Screen {
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
-		font.draw(s, "Intructions", 50, 50);
+		font.draw(s, "Intructions", 500, 50);
 		s.end();
 	}
 
