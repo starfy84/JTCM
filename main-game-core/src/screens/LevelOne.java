@@ -7,6 +7,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 
+/**
+ * This class runs level one of the game </br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 5/18/18 </br>
+ * Time spent: 4:00 (including associated graphics) 
+ * @author Rohit
+ */
+
 public class LevelOne extends Screen {
 	BitmapFont font;
 	Texture map, person;
