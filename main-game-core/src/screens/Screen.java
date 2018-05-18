@@ -3,6 +3,7 @@
  */
 package screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -27,7 +28,8 @@ public abstract class Screen {
 	 */
 	public Screen(ScreenManager sm) {
 		this.sm = sm;
-		cam = new OrthographicCamera();
+		cam = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		pointer = new Vector3();
 	}
 

@@ -1,36 +1,40 @@
 package screens;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class LevelTwo extends Screen {
+	BitmapFont font;
 
 	public LevelTwo(ScreenManager sm) {
 		super(sm);
-
+		font = new BitmapFont();
+		font.setColor(Color.BLACK);
+		font.getData().setScale(2);
 	}
 
 	@Override
 	public void getInput() {
-
 
 	}
 
 	@Override
 	public void update(double t) {
 
-
 	}
 
 	@Override
 	public void render(SpriteBatch s) {
-
-
+		s.begin();
+		font.draw(s, "Two", 50, 50);
+		s.end();
 	}
 
 	@Override
 	public void dispose() {
 
-
+		font.dispose();
 	}
 
 }
