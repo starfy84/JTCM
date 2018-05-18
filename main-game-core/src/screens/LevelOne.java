@@ -2,7 +2,6 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,7 +10,7 @@ import com.main.game.JTCM;
 public class LevelOne extends Screen {
 	BitmapFont font;
 	Texture map, person;
-	int xCoord = -2500, yCoord = -700;
+	double xCoord = -2500, yCoord = -700;
 	public LevelOne(ScreenManager sm) {
 		super(sm);
 		map = new Texture("map.png");
@@ -23,15 +22,15 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void getInput() {
-		if (Gdx.input.isKeyJustPressed(Keys.RIGHT))
-			xCoord -= 10;
-		else if (Gdx.input.isKeyJustPressed(Keys.LEFT))
-			xCoord += 10;
-		else if (Gdx.input.isKeyJustPressed(Keys.UP))
-			yCoord -= 10;
-		else if (Gdx.input.isKeyJustPressed(Keys.DOWN))
+		if (Gdx.input.isKeyPressed(Keys.RIGHT))
+			xCoord -= 3.5;
+		else if (Gdx.input.isKeyPressed(Keys.LEFT))
+			xCoord += 3.5;
+		else if (Gdx.input.isKeyPressed(Keys.UP))
+			yCoord -= 3.5;
+		else if (Gdx.input.isKeyPressed(Keys.DOWN))
 		{
-			yCoord += 10;
+			yCoord += 3.5;
 		}
 	}
 
@@ -44,7 +43,7 @@ public class LevelOne extends Screen {
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
-		s.draw(map, xCoord, yCoord, JTCM.WIDTH*5, JTCM.HEIGHT*5);
+		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		s.draw(person, JTCM.WIDTH/2-90, JTCM.HEIGHT/2-100, person.getWidth()*5, person.getHeight()*5);
 		s.end();
 
@@ -53,6 +52,7 @@ public class LevelOne extends Screen {
 	@Override
 	public void dispose() {
 		map.dispose();
+		person.dispose();
 	}
 
 }

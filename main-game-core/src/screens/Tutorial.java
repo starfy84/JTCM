@@ -36,6 +36,7 @@ public class Tutorial extends Screen {
 	public void dispose() {
 
 		font.dispose();
+		
 	}
 
 }
