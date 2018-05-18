@@ -1,6 +1,7 @@
 package screens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -12,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Dereck
  */
 public class LevelSelectScreen extends Screen {
-	BitmapFont font;
+	Texture bg;
 
 	/**
 	 * {@link MenuScreen} Constructor
@@ -22,9 +23,7 @@ public class LevelSelectScreen extends Screen {
 	 */
 	public LevelSelectScreen(ScreenManager sm) {
 		super(sm);
-		font = new BitmapFont();
-		font.setColor(Color.BLACK);
-		font.getData().setScale(2);
+		bg = new Texture("lvlslct.jpg");
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class LevelSelectScreen extends Screen {
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
-		font.draw(s, "Level Select", 50, 50);
+		
 		s.end();
 
 	}
@@ -65,7 +64,7 @@ public class LevelSelectScreen extends Screen {
 	 */
 	@Override
 	public void dispose() {
-		font.dispose();
+		bg.dispose();
 	}
 
 }
