@@ -15,6 +15,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.main.game.JTCM;
 
 public class LevelOne extends Screen implements ContactListener {
+/**
+ * This class runs level one of the game </br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 5/18/18 </br>
+ * Time spent: 4:00 (including associated graphics) 
+ * @author Rohit
+ */
+
 	BitmapFont font;
 	Texture map;
 	Sprite person;
