@@ -37,7 +37,7 @@ public class LevelOne extends Screen {
 	public LevelOne(ScreenManager sm) {
 		super(sm);
 		map = new Texture("map.png");
-//		collide = new Pixmap(Gdx.files.internal("collisionDetection.png"));
+		//collide = new Pixmap(Gdx.files.internal("collisionDetection.png"));
 		person = new Sprite(new Texture("person.png"));
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
 		person.setPosition(JTCM.WIDTH/2-12, JTCM.HEIGHT/2-29);
