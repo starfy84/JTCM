@@ -1,29 +1,35 @@
+/**
+ * 
+ */
 package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 
 /**
- * This class runs the tutorial of the game </br>
+ * This is the menu screen.</br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/18/18 </br>
- * Time spent: 0:15 (Reused from levelOne)
- * @author Rohit
+ * Date: 5/14/18 </br>
+ * Time Spent: 15 mins </br>
+ * @version 0.1
+ * @author Dereck
  */
+public class MenuScreen extends Screen {
 
-public class Tutorial extends Screen {
-	BitmapFont font;
-	Texture map, person;
-	double xCoord = -2500, yCoord = -700;
-	public Tutorial(ScreenManager sm) {
+	private Texture menu;
+
+	/**
+	 * {@link MenuScreen} Constructor
+	 * 
+	 * @param sm
+	 *            Screen manager.
+	 */
+	public MenuScreen(ScreenManager sm) {
 		super(sm);
-		map = new Texture("map.png");
-		person = new Texture("person.png");
+		menu = new Texture("menu.png");
 	}
 
 	/**
@@ -31,37 +37,50 @@ public class Tutorial extends Screen {
 	 */
 	@Override
 	public void getInput() {
-		if (Gdx.input.isKeyPressed(Keys.RIGHT))
-			xCoord -= 3.5;
-		else if (Gdx.input.isKeyPressed(Keys.LEFT))
-			xCoord += 3.5;
-		else if (Gdx.input.isKeyPressed(Keys.UP))
-			yCoord -= 3.5;
-		else if (Gdx.input.isKeyPressed(Keys.DOWN))
+		if (Gdx.input.isKeyJustPressed(Keys.NUM_1))
+			sm.set(new LevelSelectScreen(sm));
+		else if (Gdx.input.isKeyJustPressed(Keys.NUM_2))
+			sm.set(new HighScoresScreen(sm));
+		else if (Gdx.input.isKeyJustPressed(Keys.NUM_3))
+			sm.set(new InstructionsScreen(sm));
+		else if (Gdx.input.isKeyJustPressed(Keys.NUM_4))
 		{
-			yCoord += 3.5;
+			Gdx.app.exit();
 		}
 	}
 
+	/**
+	 * This method will be run on a loop.
+	 * 
+	 * @param t
+	 *            Delta time.
+	 */
 	@Override
 	public void update(double t) {
 		getInput();
 
 	}
 
+	/**
+	 * This method draws my graphics
+	 * 
+	 * @param s
+	 *            The needed sprite batch.
+	 */
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
-		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
-		s.draw(person, JTCM.WIDTH/2-90, JTCM.HEIGHT/2-100, person.getWidth()*2, person.getHeight()*2);
+		s.draw(menu, 0, 0, JTCM.WIDTH, JTCM.HEIGHT);
 		s.end();
 
 	}
 
+	/**
+	 * This method disposes uneeded resources.
+	 */
 	@Override
 	public void dispose() {
-		map.dispose();
-		person.dispose();
+		menu.dispose();
 	}
 
 }
