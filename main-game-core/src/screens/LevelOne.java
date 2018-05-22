@@ -25,11 +25,13 @@ public class LevelOne extends Screen {
  * This class runs level one of the game </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/18/18 </br>
- * Time spent: 4:00 (including associated graphics) 
+ * Rohit's Time spent: 4:00 (including associated graphics)</br>
+ * Dereck's Time spent: 6:00 (Attempted unit collision)</br>
+ * @version 0.2
  * @author Rohit
  */
 	private Texture map;
-	private Sprite person,detection;
+	private Sprite person,detection,box;
 	private double xCoord = -2500, yCoord = -700;
 	//int[][][]boxes = {{{-437,-1838},{-1746,-1838},{-437,-1640},{-1746,-1640}}};
 	//Rectangle rect = new Rectangle(-437,-1640,1309,198);
@@ -37,15 +39,14 @@ public class LevelOne extends Screen {
 	public LevelOne(ScreenManager sm) {
 		super(sm);
 		map = new Texture("map.png");
-		//collide = new Pixmap(Gdx.files.internal("collisionDetection.png"));
+//		collide = new Pixmap(Gdx.files.internal("collisionDetection.png"));
 		person = new Sprite(new Texture("person.png"));
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
 		person.setPosition(JTCM.WIDTH/2-12, JTCM.HEIGHT/2-29);
 		detection = new Sprite(new Texture("collisionDetection.png"));
 		detection.setSize(JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		detection.setPosition(Math.round(xCoord), Math.round(yCoord));
-		bound = new Rectangle(-1796,-95,-1732,880);
-		
+		bound = new Rectangle(-3545,-2058,1755,1105);
 	}
 
 	/**
@@ -53,7 +54,6 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void getInput() {
-
 		if (Gdx.input.isKeyPressed(Keys.RIGHT))
 			xCoord -= 5.5;
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
@@ -70,8 +70,8 @@ public class LevelOne extends Screen {
 	@Override
 	public void update(double t) {
 		getInput();
-		System.out.println(bound);
-		System.out.println(bound.contains(new Rectangle(detection.getX(),detection.getY(),person.getWidth(),person.getHeight())));
+//		System.out.println(bound);
+		System.out.println(bound.overlaps(new Rectangle(detection.getX(),detection.getY(),person.getWidth(),person.getHeight())));
 		System.out.println(detection.getX()+" "+ detection.getY());
 //		System.out.println("Person: "+person.getX()+" "+person.getY());
 //		System.out.println("Detection: "+detection.getX()+" "+detection.getY());
@@ -86,7 +86,6 @@ public class LevelOne extends Screen {
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		detection.setPosition(Math.round(xCoord), Math.round(yCoord));
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
-		
 		s.end();
 
 	}
