@@ -13,7 +13,8 @@ import com.main.game.JTCM;
  * Teacher: Ms. Krasteva </br>
  * Date: 5/18/18 </br>
  * Time spent: 0:15 (Reused from levelOne)
- * @author Rohit
+ * @version 0.2
+ * @author Rohit & Dereck
  */
 
 public class BonusLevel extends Screen {
