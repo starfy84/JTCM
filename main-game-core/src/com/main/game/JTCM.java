@@ -15,7 +15,8 @@ import screens.*;
  * This is the main class of our game, it starts the Main Menu screen. </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
- * 
+ * Time Spent: 1:45</br>
+ * @version 0.1
  * @author Dereck
  */
 public class JTCM extends ApplicationAdapter {
@@ -27,6 +28,8 @@ public class JTCM extends ApplicationAdapter {
 	private ScreenManager sm;
 	private SpriteBatch batch;
 
+	
+	
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the
 	 * screen manager.
@@ -54,7 +57,7 @@ public class JTCM extends ApplicationAdapter {
 	}
 
 	/**
-	 * This method disposes uneeded resources.
+	 * This method disposes unneeded resources.
 	 */
 	@Override
 	public void dispose() {
