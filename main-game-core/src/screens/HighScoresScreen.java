@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
- * 
+ * @version 0.1
  * @author Dereck
  */
 public class HighScoresScreen extends Screen {
