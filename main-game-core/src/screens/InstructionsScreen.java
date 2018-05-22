@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * This is the main class of our game, it starts the Main Menu screen. </br>
+ * This class shows an instructions screen ---UNIMPLEMENTED--- </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
- * 
+ * @version 0.1
  * @author Dereck
  */
 public class InstructionsScreen extends Screen {
