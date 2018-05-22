@@ -13,7 +13,8 @@ import com.main.game.JTCM;
  * This is the menu screen.</br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
- * 
+ * Time Spent: 15 mins </br>
+ * @version 0.1
  * @author Dereck
  */
 public class MenuScreen extends Screen {
