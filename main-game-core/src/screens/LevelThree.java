@@ -12,7 +12,8 @@ import com.main.game.JTCM;
  * This class runs level three of the game </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/18/18 </br>
- * Time spent: 0:15 (Reused from levelOne)
+ * Time spent: 0:15 (Reused from levelOne)</br>
+ * @version 0.2
  * @author Rohit
  */
 
