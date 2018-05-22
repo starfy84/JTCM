@@ -1,43 +1,61 @@
-/**
- * 
- */
 package screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import java.util.Stack;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 
 /**
- * This class contains a blueprint of a screen in our game </br>
+ * This is the main class of our game, it starts the Main Menu screen. </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
- * Time spent: 0:30</br>
+ * Time Spent: 0:30 </br>
  * @version 0.1
  * @author Dereck
  */
-public abstract class Screen {
-	protected OrthographicCamera cam;
-	protected Vector3 pointer;
-	protected ScreenManager sm;
+public class ScreenManager {
+	private Stack<Screen> screens;
 
 	/**
-	 * {@link Screen} Constructor
-	 * 
-	 * @param sm
-	 *            Screen manager.
+	 * {@link ScreenManager} Constructor
 	 */
-	public Screen(ScreenManager sm) {
-		this.sm = sm;
-		cam = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-		cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		pointer = new Vector3();
+	public ScreenManager() {
+		screens = new Stack<Screen>();
 	}
 
 	/**
-	 * This method handles input.
+	 * @return Our screens stack
 	 */
-	public abstract void getInput();
+	public Stack<Screen> getScreens() {
+		return screens;
+	}
+
+	/**
+	 * This method pops and disposes a screen.
+	 */
+	public void pop() {
+		screens.pop().dispose();
+	}
+
+	/**
+	 * This method pushes a screen to the stack.
+	 * 
+	 * @param scr
+	 *            Screen.
+	 */
+	public void push(Screen scr) {
+		screens.push(scr);
+	}
+
+	/**
+	 * This method replaces a screen with another screen.
+	 * 
+	 * @param scr
+	 *            Screen.
+	 */
+	public void set(Screen scr) {
+		screens.pop().dispose();
+		screens.push(scr);
+	}
 
 	/**
 	 * This method will be run on a loop.
@@ -45,7 +63,9 @@ public abstract class Screen {
 	 * @param t
 	 *            Delta time.
 	 */
-	public abstract void update(double t);
+	public void update(double t) {
+		screens.peek().update(t);
+	}
 
 	/**
 	 * This method draws my graphics
@@ -53,10 +73,7 @@ public abstract class Screen {
 	 * @param s
 	 *            The needed sprite batch.
 	 */
-	public abstract void render(SpriteBatch s);
-
-	/**
-	 * This method disposes uneeded resources.
-	 */
-	public abstract void dispose();
+	public void render(SpriteBatch s) {
+		screens.peek().render(s);
+	}
 }
