@@ -11,8 +11,9 @@ import com.main.game.JTCM;
  * This is the main class of our game, it starts the Main Menu screen. </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
- * 
- * @author Dereck
+ * Dereck's Time spent: 1:00 </br>
+ * @version 0.2
+ * @author Dereck 
  */
 public class LevelSelectScreen extends Screen {
 	Texture bg,tutI,oneI,twoI,threeI,bonusI,tutA,oneA,twoA,threeA,bonusA;
