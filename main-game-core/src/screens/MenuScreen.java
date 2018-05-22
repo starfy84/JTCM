@@ -1,79 +1,67 @@
 package screens;
 
-import java.util.Stack;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.main.game.JTCM;
 
 /**
- * This is the main class of our game, it starts the Main Menu screen. </br>
+ * This class runs the tutorial of the game </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * Time Spent: 0:30 </br>
- * @version 0.1
- * @author Dereck
+ * Date: 5/18/18 </br>
+ * Time spent: 0:15 (Reused from levelOne)
+ * @author Rohit
  */
-public class ScreenManager {
-	private Stack<Screen> screens;
 
-	/**
-	 * {@link ScreenManager} Constructor
-	 */
-	public ScreenManager() {
-		screens = new Stack<Screen>();
+public class Tutorial extends Screen {
+	BitmapFont font;
+	Texture map, person;
+	double xCoord = -2500, yCoord = -700;
+	public Tutorial(ScreenManager sm) {
+		super(sm);
+		map = new Texture("map.png");
+		person = new Texture("person.png");
 	}
 
 	/**
-	 * @return Our screens stack
+	 * This method handles input.
 	 */
-	public Stack<Screen> getScreens() {
-		return screens;
+	@Override
+	public void getInput() {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT))
+			xCoord -= 3.5;
+		else if (Gdx.input.isKeyPressed(Keys.LEFT))
+			xCoord += 3.5;
+		else if (Gdx.input.isKeyPressed(Keys.UP))
+			yCoord -= 3.5;
+		else if (Gdx.input.isKeyPressed(Keys.DOWN))
+		{
+			yCoord += 3.5;
+		}
 	}
 
-	/**
-	 * This method pops and disposes a screen.
-	 */
-	public void pop() {
-		screens.pop().dispose();
-	}
-
-	/**
-	 * This method pushes a screen to the stack.
-	 * 
-	 * @param scr
-	 *            Screen.
-	 */
-	public void push(Screen scr) {
-		screens.push(scr);
-	}
-
-	/**
-	 * This method replaces a screen with another screen.
-	 * 
-	 * @param scr
-	 *            Screen.
-	 */
-	public void set(Screen scr) {
-		screens.pop().dispose();
-		screens.push(scr);
-	}
-
-	/**
-	 * This method will be run on a loop.
-	 * 
-	 * @param t
-	 *            Delta time.
-	 */
+	@Override
 	public void update(double t) {
-		screens.peek().update(t);
+		getInput();
+
 	}
 
-	/**
-	 * This method draws my graphics
-	 * 
-	 * @param s
-	 *            The needed sprite batch.
-	 */
+	@Override
 	public void render(SpriteBatch s) {
-		screens.peek().render(s);
+		s.begin();
+		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+		s.draw(person, JTCM.WIDTH/2-90, JTCM.HEIGHT/2-100, person.getWidth()*2, person.getHeight()*2);
+		s.end();
+
 	}
+
+	@Override
+	public void dispose() {
+		map.dispose();
+		person.dispose();
+	}
+
 }
