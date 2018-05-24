@@ -3,6 +3,7 @@
  */
 package screens;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,8 +26,8 @@ public class HighScoresScreen extends Screen {
 	 * @param sm
 	 *            Screen manager.
 	 */
-	public HighScoresScreen(ScreenManager sm) {
-		super(sm);
+	public HighScoresScreen(ScreenManager sm, AssetManager man) {
+		super(sm,man);
 		font = new BitmapFont();
 		font.setColor(Color.BLACK);
 		font.getData().setScale(2);

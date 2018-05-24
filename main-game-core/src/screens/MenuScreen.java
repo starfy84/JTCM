@@ -5,6 +5,7 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
@@ -27,9 +28,9 @@ public class MenuScreen extends Screen {
 	 * @param sm
 	 *            Screen manager.
 	 */
-	public MenuScreen(ScreenManager sm) {
-		super(sm);
-		menu = new Texture("menu.png");
+	public MenuScreen(ScreenManager sm, AssetManager man) {
+		super(sm,man);
+		menu = man.get("menu.png",Texture.class);
 	}
 
 	/**
@@ -38,11 +39,11 @@ public class MenuScreen extends Screen {
 	@Override
 	public void getInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.NUM_1))
-			sm.set(new LevelSelectScreen(sm));
+			sm.set(new LevelSelectScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_2))
-			sm.set(new HighScoresScreen(sm));
+			sm.set(new HighScoresScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_3))
-			sm.set(new InstructionsScreen(sm));
+			sm.set(new InstructionsScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_4))
 		{
 			Gdx.app.exit();

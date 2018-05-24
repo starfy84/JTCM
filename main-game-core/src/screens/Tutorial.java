@@ -2,6 +2,7 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -20,10 +21,10 @@ public class Tutorial extends Screen {
 	BitmapFont font;
 	Texture map, person;
 	double xCoord = -2500, yCoord = -700;
-	public Tutorial(ScreenManager sm) {
-		super(sm);
-		map = new Texture("map.png");
-		person = new Texture("person.png");
+	public Tutorial(ScreenManager sm, AssetManager man) {
+		super(sm,man);
+		map = man.get("map.png",Texture.class);
+		person = man.get("person.png",Texture.class);
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.main.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +28,7 @@ public class JTCM extends ApplicationAdapter {
 
 	private ScreenManager sm;
 	private SpriteBatch batch;
-
+	private AssetManager man;
 	
 	
 	/**
@@ -36,10 +37,29 @@ public class JTCM extends ApplicationAdapter {
 	 */
 	@Override
 	public void create() {
+		man = new AssetManager();
 		batch = new SpriteBatch();
 		sm = new ScreenManager();
 		Gdx.gl.glClearColor(1, 2, 1, 1);
-		sm.push(new MenuScreen(sm));
+		man.load("collisionDetection.png",Texture.class);
+		man.load("map.png",Texture.class);
+		man.load("menu.png",Texture.class);
+		man.load("person.png",Texture.class);
+		man.load("bonusActive.jpg",Texture.class);
+		man.load("bonusIdle.jpg",Texture.class);
+		man.load("lvl1Active.jpg",Texture.class);
+		man.load("lvl1Idle.jpg",Texture.class);
+		man.load("lvl2Active.jpg",Texture.class);
+		man.load("lvl2Idle.jpg",Texture.class);
+		man.load("lvl3Active.jpg",Texture.class);
+		man.load("lvl3Idle.jpg",Texture.class);
+		man.load("lvlslct.jpg",Texture.class);
+		man.load("TutActive.jpg",Texture.class);
+		man.load("TutIdle.jpg",Texture.class);
+		
+		while(!man.update());
+		sm.push(new MenuScreen(sm,man));
+		
 	}
 
 	/**

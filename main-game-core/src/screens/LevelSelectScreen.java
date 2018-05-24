@@ -1,6 +1,7 @@
 package screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -24,19 +25,19 @@ public class LevelSelectScreen extends Screen {
 	 * @param sm
 	 *            Screen manager.
 	 */
-	public LevelSelectScreen(ScreenManager sm) {
-		super(sm);
-		bg = new Texture("lvlslct.jpg");
-		tutI = new Texture("TutIdle.jpg");
-		tutA = new Texture("TutActive.jpg");
-		oneI = new Texture("lvl1Idle.jpg");
-		oneA = new Texture("lvl1Active.jpg");
-		twoI = new Texture("lvl2Idle.jpg");
-		twoA = new Texture("lvl2Active.jpg");
-		threeI = new Texture("lvl3Idle.jpg");
-		threeA = new Texture("lvl3Active.jpg");
-		bonusI = new Texture("bonusIdle.jpg");
-		bonusA = new Texture("bonusActive.jpg");
+	public LevelSelectScreen(ScreenManager sm, AssetManager man) {
+		super(sm,man);
+		bg = man.get("lvlslct.jpg",Texture.class);
+		tutI = man.get("TutIdle.jpg",Texture.class);
+		tutA = man.get("TutActive.jpg",Texture.class);
+		oneI = man.get("lvl1Idle.jpg",Texture.class);
+		oneA = man.get("lvl1Active.jpg",Texture.class);
+		twoI = man.get("lvl2Idle.jpg",Texture.class);
+		twoA = man.get("lvl2Active.jpg",Texture.class);
+		threeI = man.get("lvl3Idle.jpg",Texture.class);
+		threeA = man.get("lvl3Active.jpg",Texture.class);
+		bonusI = man.get("bonusIdle.jpg",Texture.class);
+		bonusA = man.get("bonusActive.jpg",Texture.class);
 		
 		
 	}
@@ -47,15 +48,15 @@ public class LevelSelectScreen extends Screen {
 	@Override
 	public void getInput() {
 		if(Gdx.input.isTouched()&& Gdx.input.getX()>=JTCM.WIDTH/2-tutI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+tutI.getWidth()/2 && Gdx.input.getY()<=Gdx.graphics.getHeight()-500 && Gdx.input.getY()>=Gdx.graphics.getHeight()-500-tutI.getHeight())
-			sm.set(new Tutorial(sm));
+			sm.set(new Tutorial(sm,man));
 		else if(Gdx.input.isTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-oneI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+oneI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-400 && Gdx.input.getY()>=Gdx.graphics.getHeight()-400-oneI.getHeight())
-			sm.set(new LevelOne(sm));
+			sm.set(new LevelOne(sm,man));
 		else if(Gdx.input.isTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-twoI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+twoI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-twoI.getHeight())
-			sm.set(new LevelTwo(sm));
+			sm.set(new LevelTwo(sm,man));
 		else if(Gdx.input.isTouched()&& Gdx.input.getX()>=JTCM.WIDTH/2-threeI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+threeI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-threeI.getHeight())
-			sm.set(new LevelThree(sm));
+			sm.set(new LevelThree(sm,man));
 		else if(Gdx.input.isTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-bonusI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+bonusI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-bonusI.getHeight())
-			sm.set(new BonusLevel(sm));
+			sm.set(new BonusLevel(sm,man));
 	}
 
 	/**
