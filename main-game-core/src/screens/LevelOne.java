@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.main.game.JTCM;
 
 import java.awt.Color;
-import java.awt.image.BufferedImage;
+import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 
@@ -29,60 +29,80 @@ public class LevelOne extends Screen {
  * This class runs level one of the game </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/18/18 </br>
- * Rohit's Time spent: 4:00 (including associated graphics)</br>
- * Dereck's Time spent: 6:00 (Attempted unit collision)</br>
+ * Rohit's Time spent: 10:00 (finally successfully implemented unit collision)
  * @version 0.3
  * @author Rohit
  */
 	private Texture map;
-	private Sprite person/*,detection,box*/;
-	private double xCoord = -2500, yCoord = -700;
-	private	BufferedImage img;
+	private Sprite person;
+	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
+	private double charX, charY;
+	private	BufferedImage collisionPic;
 	private Color[][] collisionArr;
-	
 	public LevelOne(ScreenManager sm) {
 		super(sm);
 		map = new Texture("map.png");
-		
+
 		try {
-		    img = ImageIO.read(new File("collisionDetection.png"));
+		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
 		}
-		
-		collisionArr = new Color[img.getHeight()][img.getWidth()];
-		for (int row = 0; row < img.getHeight(); row++) {
-			for (int col = 0; col < img.getWidth(); col++) {
-				collisionArr[row][col] = new Color(img.getRGB(col, row));
-				System.out.print(collisionArr[row][col]);
+		collisionArr = new Color [collisionPic.getHeight()][collisionPic.getWidth()];
+		for (int row = 0; row < collisionPic.getHeight(); row++ ) {
+			for (int col = 0; col < collisionPic.getWidth(); col++) {
+				collisionArr[row][col]= new Color(collisionPic.getRGB(col, row));
 			}
-			System.out.println();
 		}
+		charX = collisionPic.getWidth()/2;
+		charY = collisionPic.getHeight()/2;
+		
+		/*final byte[] pixels = ((DataBufferByte) collisionPic.getRaster().getDataBuffer()).getData();
+		collisionArr = new int[JTCM.HEIGHT*5][JTCM.WIDTH*5];
+		int pixelCounter = 1;
+		for (int row = 0; row < collisionArr.length; row++) {
+			for (int col = 0; col < collisionArr[row].length; col++) {
+				collisionArr[row][col] = pixels[pixelCounter];
+				if ((row + 1) % ((int)(JTCM.HEIGHT*5/map.getHeight()+1)) == 0 && (col + 1) % ((int)(JTCM.WIDTH*5/map.getWidth()+1)) == 0)
+				{
+					pixelCounter += 4;
+				}
+				if (col == collisionArr[row].length - 1)
+					System.out.print(col);
+			}
+			System.out.println(row);
+		}*/
+
 		person = new Sprite(new Texture("person.png"));
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
-		person.setPosition(JTCM.WIDTH/2-12, JTCM.HEIGHT/2-29);
+		person.setPosition(JTCM.WIDTH/2-12, JTCM.HEIGHT/2);
 	}
 
 	/**
 	 * This method handles input.
 	 */
 	@Override
-	public void getInput() {
-		int originalX = (int)Math.round(Math.abs(xCoord)/(JTCM.WIDTH*5/img.getWidth()));
-		int originalY = (int)Math.round(Math.abs(yCoord)/(JTCM.HEIGHT*5/img.getHeight()));
-		if (Gdx.input.isKeyPressed(Keys.RIGHT) && collisionArr[originalX+1][originalY] != Color.BLACK)
-			xCoord -= 5.5;
-		if (Gdx.input.isKeyPressed(Keys.LEFT) && collisionArr[originalX-1][originalY] != Color.BLACK)
-			xCoord += 5.5;
-		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[originalX][originalY+1] != Color.BLACK)
-			yCoord -= 5.5;
-		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[originalX][originalY-1] != Color.BLACK)
-			yCoord += 5.5;
+	public void getInput()  {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX+1)].equals(Color.WHITE)) {
+			xCoord -= JTCM.WIDTH*5/map.getWidth();
+			charX += 1;
+		}
+		if (Gdx.input.isKeyPressed(Keys.LEFT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX-1)].equals(Color.WHITE)) {
+			xCoord += JTCM.WIDTH*5/map.getWidth();
+			charX -= 1;
+		}
+		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[(int)Math.round(charY-1)][(int)Math.round(charX)].equals(Color.WHITE)) {
+			yCoord -= JTCM.HEIGHT*5/map.getHeight();
+			charY -= 1;
+		}
+		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[(int)Math.round(charY+1)][(int)Math.round(charX)].equals(Color.WHITE)) {
+			yCoord += JTCM.HEIGHT*5/map.getHeight();
+			charY += 1;
+		}
 	}
 
 	@Override
 	public void update(double t) {
 		getInput();
-		System.out.println(JTCM.WIDTH);
 	}
 
 	@Override
