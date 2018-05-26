@@ -74,7 +74,7 @@ public class LevelOne extends Screen {
 
 		person = new Sprite(new Texture("person.png"));
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
-		person.setPosition(JTCM.WIDTH/2-12, JTCM.HEIGHT/2);
+		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
 	}
 
 	/**
@@ -83,19 +83,19 @@ public class LevelOne extends Screen {
 	@Override
 	public void getInput()  {
 		if (Gdx.input.isKeyPressed(Keys.RIGHT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX+1)].equals(Color.WHITE)) {
-			xCoord -= JTCM.WIDTH*5/map.getWidth();
+			xCoord -= JTCM.WIDTH*5.0/map.getWidth();
 			charX += 1;
 		}
-		if (Gdx.input.isKeyPressed(Keys.LEFT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX-1)].equals(Color.WHITE)) {
-			xCoord += JTCM.WIDTH*5/map.getWidth();
+		if (Gdx.input.isKeyPressed(Keys.LEFT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX-2)].equals(Color.WHITE)) {
+			xCoord += JTCM.WIDTH*5.0/map.getWidth();
 			charX -= 1;
 		}
 		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[(int)Math.round(charY-1)][(int)Math.round(charX)].equals(Color.WHITE)) {
-			yCoord -= JTCM.HEIGHT*5/map.getHeight();
+			yCoord -= JTCM.HEIGHT*5.0/map.getHeight();
 			charY -= 1;
 		}
 		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[(int)Math.round(charY+1)][(int)Math.round(charX)].equals(Color.WHITE)) {
-			yCoord += JTCM.HEIGHT*5/map.getHeight();
+			yCoord += JTCM.HEIGHT*5.0/map.getHeight();
 			charY += 1;
 		}
 	}
