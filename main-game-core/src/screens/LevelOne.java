@@ -18,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Disposable;
 import com.main.game.JTCM;
-
+import com.badlogic.gdx.assets.AssetManager;
 import java.awt.Color;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
@@ -41,10 +41,10 @@ public class LevelOne extends Screen {
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
 	private double charX, charY;
 	
-	public LevelOne(ScreenManager sm) {
-		super(sm);
-		map = new Texture("map.png");
-		minimap = new Texture("map.png");
+        public LevelOne(ScreenManager sm,AssetManager man) {
+                super(sm, man);
+                map = man.get("map.png",Texture.class);
+		minimap = man.get("map.png",Texture.class);
 
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
@@ -59,7 +59,7 @@ public class LevelOne extends Screen {
 		charX = collisionPic.getWidth()/2;
 		charY = collisionPic.getHeight()/2;
 		
-		person = new Sprite(new Texture("person.png"));
+		person = new Sprite(man.get("person.png",Texture.class));
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
 	}
