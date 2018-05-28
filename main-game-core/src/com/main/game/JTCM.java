@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+import com.badlogic.gdx.assets.AssetManager;
 import screens.*;
 
 /**
@@ -24,7 +24,7 @@ public class JTCM extends ApplicationAdapter {
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public static final String TITLE = "Journey to Channelenmajour";
-
+        private AssetManager man;
 	private ScreenManager sm;
 	private SpriteBatch batch;
 
@@ -35,12 +35,31 @@ public class JTCM extends ApplicationAdapter {
 	 * screen manager.
 	 */
 	@Override
-	public void create() {
-		batch = new SpriteBatch();
-		sm = new ScreenManager();
-		Gdx.gl.glClearColor(1, 2, 1, 1);
-		sm.push(new MenuScreen(sm));
-	}
+        public void create() {
+                man = new AssetManager();
+                batch = new SpriteBatch();
+                sm = new ScreenManager();
+                Gdx.gl.glClearColor(1, 2, 1, 1);
+                man.load("collisionDetection.png",Texture.class);
+                man.load("map.png",Texture.class);
+                man.load("menu.png",Texture.class);
+                man.load("person.png",Texture.class);
+                man.load("bonusActive.jpg",Texture.class);
+                man.load("bonusIdle.jpg",Texture.class);
+                man.load("lvl1Active.jpg",Texture.class);
+                man.load("lvl1Idle.jpg",Texture.class);
+                man.load("lvl2Active.jpg",Texture.class);
+                man.load("lvl2Idle.jpg",Texture.class);
+                man.load("lvl3Active.jpg",Texture.class);
+                man.load("lvl3Idle.jpg",Texture.class);
+                man.load("lvlslct.jpg",Texture.class);
+                man.load("TutActive.jpg",Texture.class);
+                man.load("TutIdle.jpg",Texture.class);
+                
+                while(!man.update());
+                sm.push(new MenuScreen(sm,man));
+                
+        }
 
 	/**
 	 * This method draws my graphics
