@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-
+import com.badlogic.gdx.assets.AssetManager;
 /**
  * This class runs the tutorial of the game </br>
  * Teacher: Ms. Krasteva </br>
@@ -20,11 +20,11 @@ public class Tutorial extends Screen {
 	BitmapFont font;
 	Texture map, person;
 	double xCoord = -2500, yCoord = -700;
-	public Tutorial(ScreenManager sm) {
-		super(sm);
-		map = new Texture("map.png");
-		person = new Texture("person.png");
-	}
+        public Tutorial(ScreenManager sm, AssetManager man) {
+                super(sm,man);
+                map = man.get("map.png",Texture.class);
+                person = man.get("person.png",Texture.class);
+        }
 
 	/**
 	 * This method handles input.
