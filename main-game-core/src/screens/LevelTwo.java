@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-
+import com.badlogic.gdx.assets.AssetManager;
 /**
  * This class runs level two of the game </br>
  * Teacher: Ms. Krasteva </br>
@@ -21,10 +21,10 @@ public class LevelTwo extends Screen {
 	BitmapFont font;
 	Texture map, person;
 	double xCoord = -2500, yCoord = -700;
-	public LevelTwo(ScreenManager sm) {
-		super(sm);
-		map = new Texture("map.png");
-		person = new Texture("person.png");
+        public LevelTwo(ScreenManager sm, AssetManager man) {
+                super(sm,man);
+                map = man.get("map.png",Texture.class);
+                person = man.get("person.png",Texture.class);
 	}
 
 	/**
