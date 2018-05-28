@@ -3,7 +3,7 @@ package screens;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+import com.badlogic.gdx.assets.AssetManager;
 /**
  * This class shows an instructions screen ---UNIMPLEMENTED--- </br>
  * Teacher: Ms. Krasteva </br>
@@ -21,8 +21,8 @@ public class InstructionsScreen extends Screen {
 	 * @param sm
 	 *            Screen manager.
 	 */
-	public InstructionsScreen(ScreenManager sm) {
-		super(sm);
+        public InstructionsScreen(ScreenManager sm, AssetManager man) {
+                super(sm,man);
 		font = new BitmapFont();
 		font.setColor(Color.BLACK);
 		font.getData().setScale(2);
