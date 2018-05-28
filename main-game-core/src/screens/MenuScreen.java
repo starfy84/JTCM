@@ -8,7 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-
+import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the menu screen.</br>
  * Teacher: Ms. Krasteva </br>
@@ -27,9 +27,9 @@ public class MenuScreen extends Screen {
 	 * @param sm
 	 *            Screen manager.
 	 */
-	public MenuScreen(ScreenManager sm) {
-		super(sm);
-		menu = new Texture("menu.png");
+        public MenuScreen(ScreenManager sm, AssetManager man) {
+                super(sm,man);
+                menu = man.get("menu.png",Texture.class);
 	}
 
 	/**
