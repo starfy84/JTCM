@@ -33,15 +33,18 @@ public class LevelOne extends Screen {
  * @version 0.3
  * @author Rohit
  */
-	private Texture map;
+	private Texture map, minimap;
+	private	BufferedImage collisionPic;
 	private Sprite person;
+	private Color[][] collisionArr;
+	
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
 	private double charX, charY;
-	private	BufferedImage collisionPic;
-	private Color[][] collisionArr;
+	
 	public LevelOne(ScreenManager sm) {
 		super(sm);
 		map = new Texture("map.png");
+		minimap = new Texture("map.png");
 
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
@@ -56,22 +59,6 @@ public class LevelOne extends Screen {
 		charX = collisionPic.getWidth()/2;
 		charY = collisionPic.getHeight()/2;
 		
-		/*final byte[] pixels = ((DataBufferByte) collisionPic.getRaster().getDataBuffer()).getData();
-		collisionArr = new int[JTCM.HEIGHT*5][JTCM.WIDTH*5];
-		int pixelCounter = 1;
-		for (int row = 0; row < collisionArr.length; row++) {
-			for (int col = 0; col < collisionArr[row].length; col++) {
-				collisionArr[row][col] = pixels[pixelCounter];
-				if ((row + 1) % ((int)(JTCM.HEIGHT*5/map.getHeight()+1)) == 0 && (col + 1) % ((int)(JTCM.WIDTH*5/map.getWidth()+1)) == 0)
-				{
-					pixelCounter += 4;
-				}
-				if (col == collisionArr[row].length - 1)
-					System.out.print(col);
-			}
-			System.out.println(row);
-		}*/
-
 		person = new Sprite(new Texture("person.png"));
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
@@ -108,6 +95,7 @@ public class LevelOne extends Screen {
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
+		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
 		s.end();
