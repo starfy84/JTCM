@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-
+import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the main class of our game, it starts the Main Menu screen. </br>
  * Teacher: Ms. Krasteva </br>
@@ -24,19 +24,19 @@ public class LevelSelectScreen extends Screen {
 	 * @param sm
 	 *            Screen manager.
 	 */
-	public LevelSelectScreen(ScreenManager sm) {
-		super(sm);
-		bg = new Texture("lvlslct.jpg");
-		tutI = new Texture("TutIdle.jpg");
-		tutA = new Texture("TutActive.jpg");
-		oneI = new Texture("lvl1Idle.jpg");
-		oneA = new Texture("lvl1Active.jpg");
-		twoI = new Texture("lvl2Idle.jpg");
-		twoA = new Texture("lvl2Active.jpg");
-		threeI = new Texture("lvl3Idle.jpg");
-		threeA = new Texture("lvl3Active.jpg");
-		bonusI = new Texture("bonusIdle.jpg");
-		bonusA = new Texture("bonusActive.jpg");
+        public LevelSelectScreen(ScreenManager sm, AssetManager man) {
+                super(sm,man);
+                bg = man.get("lvlslct.jpg",Texture.class);
+                tutI = man.get("TutIdle.jpg",Texture.class);
+                tutA = man.get("TutActive.jpg",Texture.class);
+                oneI = man.get("lvl1Idle.jpg",Texture.class);
+                oneA = man.get("lvl1Active.jpg",Texture.class);
+                twoI = man.get("lvl2Idle.jpg",Texture.class);
+                twoA = man.get("lvl2Active.jpg",Texture.class);
+                threeI = man.get("lvl3Idle.jpg",Texture.class);
+                threeA = man.get("lvl3Active.jpg",Texture.class);
+                bonusI = man.get("bonusIdle.jpg",Texture.class);
+                bonusA = man.get("bonusActive.jpg",Texture.class);
 		
 		
 	}
