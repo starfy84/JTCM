@@ -38,11 +38,11 @@ public class MenuScreen extends Screen {
 	@Override
 	public void getInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.NUM_1))
-			sm.set(new LevelSelectScreen(sm));
+			sm.set(new LevelSelectScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_2))
-			sm.set(new HighScoresScreen(sm));
+			sm.set(new HighScoresScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_3))
-			sm.set(new InstructionsScreen(sm));
+			sm.set(new InstructionsScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_4))
 		{
 			Gdx.app.exit();

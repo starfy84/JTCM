@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
 /**
  * This class contains a blueprint of a screen in our game </br>
@@ -19,7 +20,8 @@ public abstract class Screen {
 	protected OrthographicCamera cam;
 	protected Vector3 pointer;
 	protected ScreenManager sm;
-        protected AssetManager man;
+    protected AssetManager man;
+    
 	/**
 	 * {@link Screen} Constructor
 	 * 
