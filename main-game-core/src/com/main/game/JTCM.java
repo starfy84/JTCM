@@ -26,8 +26,8 @@ public class JTCM extends ApplicationAdapter {
 	public static final String TITLE = "Journey to Channelenmajour";
     private AssetManager man;
 	private ScreenManager sm;
-	private SpriteBatch batch;
-
+	private ShaderBatch batch;
+	private ShaderBatch sBatch;
 	
 	
 	/**
@@ -37,7 +37,7 @@ public class JTCM extends ApplicationAdapter {
 	@Override
         public void create() {
                 man = new AssetManager();
-                batch = new SpriteBatch();
+                batch = new ShaderBatch(100);
                 sm = new ScreenManager();
                 Gdx.gl.glClearColor(1, 2, 1, 1);
                 man.load("collisionDetection.png",Texture.class);
@@ -70,9 +70,6 @@ public class JTCM extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sm.update(Gdx.graphics.getDeltaTime());
 		sm.render(batch);
-		batch.begin();
-
-		batch.end();
 	}
 
 	/**

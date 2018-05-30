@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
+import com.main.game.ShaderBatch;
 import com.badlogic.gdx.assets.AssetManager;
 /**
  * This class runs level three of the game </br>
@@ -51,7 +52,7 @@ public class LevelThree extends Screen {
 	}
 
 	@Override
-	public void render(SpriteBatch s) {
+	public void render(ShaderBatch s) {
 		s.begin();
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		s.draw(person, JTCM.WIDTH/2-90, JTCM.HEIGHT/2-100, person.getWidth()*2, person.getHeight()*2);

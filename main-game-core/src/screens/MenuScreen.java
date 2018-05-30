@@ -8,6 +8,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
+import com.main.game.ShaderBatch;
 import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the menu screen.</br>
@@ -44,9 +45,9 @@ public class MenuScreen extends Screen {
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_3))
 			sm.set(new InstructionsScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_4))
-		{
 			Gdx.app.exit();
-		}
+		else if (Gdx.input.isKeyJustPressed(Keys.NUM_5))
+			sm.push(new SettingsScreen(sm,man));
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class MenuScreen extends Screen {
 	 *            The needed sprite batch.
 	 */
 	@Override
-	public void render(SpriteBatch s) {
+	public void render(ShaderBatch s) {
 		s.begin();
 		s.draw(menu, 0, 0, JTCM.WIDTH, JTCM.HEIGHT);
 		s.end();

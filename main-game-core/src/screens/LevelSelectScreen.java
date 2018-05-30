@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
+import com.main.game.ShaderBatch;
 import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the main class of our game, it starts the Main Menu screen. </br>
@@ -77,7 +78,7 @@ public class LevelSelectScreen extends Screen {
 	 *            The needed sprite batch.
 	 */
 	@Override
-	public void render(SpriteBatch s) {
+	public void render(ShaderBatch s) {
 		s.begin();
 		s.draw(bg, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-tutI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+tutI.getWidth()/2 && Gdx.input.getY()<=Gdx.graphics.getHeight()-500 && Gdx.input.getY()>=Gdx.graphics.getHeight()-500-tutI.getHeight()?tutA:tutI,JTCM.WIDTH/2-tutI.getWidth()/2,500);

@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.main.game.ShaderBatch;
 
 /**
  * This is the main class of our game, it shows a list of highscores. If there arent any highscores, then there will be an error.+
@@ -58,7 +59,7 @@ public class HighScoresScreen extends Screen {
 	 *            The needed sprite batch.
 	 */
 	@Override
-	public void render(SpriteBatch s) {
+	public void render(ShaderBatch s) {
 		s.begin();
 		font.draw(s, "High Scores",50, 50);
 		s.end();
