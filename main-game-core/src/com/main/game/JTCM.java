@@ -2,12 +2,8 @@ package com.main.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import screens.*;
 
@@ -27,7 +23,6 @@ public class JTCM extends ApplicationAdapter {
     private AssetManager man;
 	private ScreenManager sm;
 	private ShaderBatch batch;
-	private ShaderBatch sBatch;
 	private static SettingsScreen sc;
 	
 	/**

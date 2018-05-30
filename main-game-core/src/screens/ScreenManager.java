@@ -2,7 +2,6 @@ package screens;
 
 import java.util.Stack;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.ShaderBatch;
 
 /**

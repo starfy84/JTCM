@@ -3,9 +3,7 @@
  */
 package screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.main.game.JTCM;
 import com.main.game.ShaderBatch;
