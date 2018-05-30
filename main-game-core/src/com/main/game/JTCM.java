@@ -24,7 +24,7 @@ public class JTCM extends ApplicationAdapter {
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public static final String TITLE = "Journey to Channelenmajour";
-        private AssetManager man;
+    private AssetManager man;
 	private ScreenManager sm;
 	private SpriteBatch batch;
 
@@ -43,6 +43,7 @@ public class JTCM extends ApplicationAdapter {
                 man.load("collisionDetection.png",Texture.class);
                 man.load("map.png",Texture.class);
                 man.load("menu.png",Texture.class);
+                man.load("blackdot.png",Texture.class);
                 man.load("person.png",Texture.class);
                 man.load("bonusActive.jpg",Texture.class);
                 man.load("bonusIdle.jpg",Texture.class);
@@ -55,7 +56,6 @@ public class JTCM extends ApplicationAdapter {
                 man.load("lvlslct.jpg",Texture.class);
                 man.load("TutActive.jpg",Texture.class);
                 man.load("TutIdle.jpg",Texture.class);
-                
                 while(!man.update());
                 sm.push(new MenuScreen(sm,man));
                 

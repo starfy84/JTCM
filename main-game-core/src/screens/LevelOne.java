@@ -33,7 +33,7 @@ public class LevelOne extends Screen {
  * @version 0.3
  * @author Rohit
  */
-	private Texture map, minimap;
+	private Texture map, minimap, blackdot;
 	private	BufferedImage collisionPic;
 	private Sprite person;
 	private Color[][] collisionArr;
@@ -41,10 +41,11 @@ public class LevelOne extends Screen {
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
 	private double charX, charY;
 	
-        public LevelOne(ScreenManager sm,AssetManager man) {
-                super(sm, man);
-                map = man.get("map.png",Texture.class);
+    public LevelOne(ScreenManager sm,AssetManager man) {
+        super(sm, man);
+        map = man.get("map.png",Texture.class);
 		minimap = man.get("map.png",Texture.class);
+		blackdot = man.get("blackdot.png",Texture.class);
 
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
@@ -70,20 +71,20 @@ public class LevelOne extends Screen {
 	@Override
 	public void getInput()  {
 		if (Gdx.input.isKeyPressed(Keys.RIGHT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX+1)].equals(Color.WHITE)) {
-			xCoord -= JTCM.WIDTH*5.0/map.getWidth();
-			charX += 1;
+			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2;
+			charX += 0.5;
 		}
 		if (Gdx.input.isKeyPressed(Keys.LEFT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX-2)].equals(Color.WHITE)) {
-			xCoord += JTCM.WIDTH*5.0/map.getWidth();
-			charX -= 1;
+			xCoord += JTCM.WIDTH*5.0/map.getWidth()/2;
+			charX -= 0.5;
 		}
 		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[(int)Math.round(charY-1)][(int)Math.round(charX)].equals(Color.WHITE)) {
-			yCoord -= JTCM.HEIGHT*5.0/map.getHeight();
-			charY -= 1;
+			yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2;
+			charY -= 0.5;
 		}
 		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[(int)Math.round(charY+1)][(int)Math.round(charX)].equals(Color.WHITE)) {
-			yCoord += JTCM.HEIGHT*5.0/map.getHeight();
-			charY += 1;
+			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2;
+			charY += 0.5;
 		}
 	}
 
@@ -96,7 +97,9 @@ public class LevelOne extends Screen {
 	public void render(SpriteBatch s) {
 		s.begin();
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
-		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+		s.draw(blackdot,0,0,minimap.getWidth()+5,minimap.getHeight()+5);
+		s.draw(minimap, 0, 0);
+		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
 		s.end();
 
