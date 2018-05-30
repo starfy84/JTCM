@@ -70,19 +70,19 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void getInput()  {
-		if (Gdx.input.isKeyPressed(Keys.RIGHT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX+1)].equals(Color.WHITE)) {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE))) {
 			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2;
 			charX += 0.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.LEFT) && collisionArr[(int)Math.round(charY)][(int)Math.round(charX-2)].equals(Color.WHITE)) {
+		if (Gdx.input.isKeyPressed(Keys.LEFT) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-2)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-2)].equals(Color.WHITE))) {
 			xCoord += JTCM.WIDTH*5.0/map.getWidth()/2;
 			charX -= 0.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[(int)Math.round(charY-1)][(int)Math.round(charX)].equals(Color.WHITE)) {
+		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[(int)Math.ceil(charY-0.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-1.5)].equals(Color.WHITE)) {
 			yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2;
 			charY -= 0.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[(int)Math.round(charY+1)][(int)Math.round(charX)].equals(Color.WHITE)) {
+		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[(int)Math.floor(charY+0.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-1.5)].equals(Color.WHITE)) {
 			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2;
 			charY += 0.5;
 		}
