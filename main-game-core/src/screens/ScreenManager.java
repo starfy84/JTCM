@@ -2,7 +2,7 @@ package screens;
 
 import java.util.Stack;
 
-import com.main.game.ShaderBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * This is the main class of our game, it starts the Main Menu screen. </br>
@@ -72,7 +72,7 @@ public class ScreenManager {
 	 * @param s
 	 *            The needed sprite batch.
 	 */
-	public void render(ShaderBatch s) {
+	public void render(SpriteBatch s) {
 		screens.peek().render(s);
 	}
 }

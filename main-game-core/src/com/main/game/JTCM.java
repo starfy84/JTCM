@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import screens.*;
 
@@ -22,7 +23,7 @@ public class JTCM extends ApplicationAdapter {
 	public static final String TITLE = "Journey to Channelenmajour";
     private AssetManager man;
 	private ScreenManager sm;
-	private ShaderBatch batch;
+	private SpriteBatch batch;
 	private static SettingsScreen sc;
 	
 	/**
@@ -32,7 +33,7 @@ public class JTCM extends ApplicationAdapter {
 	@Override
         public void create() {
                 man = new AssetManager();
-                batch = new ShaderBatch(100);
+                batch = new SpriteBatch(100);
                 sm = new ScreenManager();
                 Gdx.gl.glClearColor(1, 2, 1, 1);
                 man.load("collisionDetection.png",Texture.class);

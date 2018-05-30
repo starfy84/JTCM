@@ -2,7 +2,7 @@ package screens;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.main.game.ShaderBatch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 /**
  * This class shows an instructions screen ---UNIMPLEMENTED--- </br>
@@ -54,7 +54,7 @@ public class InstructionsScreen extends Screen {
 	 *            The needed sprite batch.
 	 */
 	@Override
-	public void render(ShaderBatch s) {
+	public void render(SpriteBatch s) {
 		s.begin();
 		font.draw(s, "Intructions", 500, 50);
 		s.end();

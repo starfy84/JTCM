@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-import com.main.game.ShaderBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import java.awt.Color;
 import java.awt.image.*;
@@ -92,7 +92,7 @@ public class LevelOne extends Screen {
 	}
 
 	@Override
-	public void render(ShaderBatch s) {
+	public void render(SpriteBatch s) {
 		s.begin();
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		s.draw(blackdot,0,0,minimap.getWidth()+5,minimap.getHeight()+5);

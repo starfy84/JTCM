@@ -4,9 +4,9 @@
 package screens;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.main.game.JTCM;
-import com.main.game.ShaderBatch;
 import com.badlogic.gdx.assets.AssetManager;
 /**
  * This class contains a blueprint of a screen in our game </br>
@@ -56,7 +56,7 @@ public abstract class Screen {
 	 * @param s
 	 *            The needed sprite batch.
 	 */
-	public abstract void render(ShaderBatch s);
+	public abstract void render(SpriteBatch s);
 
 	/**
 	 * This method disposes uneeded resources.

@@ -6,8 +6,8 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-import com.main.game.ShaderBatch;
 import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the menu screen.</br>
@@ -68,7 +68,7 @@ public class MenuScreen extends Screen {
 	 *            The needed sprite batch.
 	 */
 	@Override
-	public void render(ShaderBatch s) {
+	public void render(SpriteBatch s) {
 		s.begin();
 		s.draw(menu, 0, 0, JTCM.WIDTH, JTCM.HEIGHT);
 		s.end();
