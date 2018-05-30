@@ -86,6 +86,10 @@ public class LevelOne extends Screen {
 			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2;
 			charY += 0.5;
 		}
+		if(Gdx.input.isTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=minimap.getWidth()+5 && Gdx.input.getY()<=JTCM.HEIGHT && Gdx.input.getY()>=(JTCM.HEIGHT-minimap.getHeight()+5))
+		{
+			//Open minimap screen
+		}
 	}
 
 	@Override
