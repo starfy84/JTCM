@@ -20,7 +20,8 @@ public abstract class Screen {
 	protected OrthographicCamera cam;
 	protected Vector3 pointer;
 	protected ScreenManager sm;
-        protected AssetManager man;
+    protected AssetManager man;
+    
 	/**
 	 * {@link Screen} Constructor
 	 * 
