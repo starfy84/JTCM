@@ -44,9 +44,9 @@ public class MenuScreen extends Screen {
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_3))
 			sm.set(new InstructionsScreen(sm,man));
 		else if (Gdx.input.isKeyJustPressed(Keys.NUM_4))
-		{
 			Gdx.app.exit();
-		}
+		else if (Gdx.input.isKeyJustPressed(Keys.NUM_5))
+			sm.push(JTCM.getSettingsScreen());
 	}
 
 	/**

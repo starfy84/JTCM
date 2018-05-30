@@ -1,22 +1,10 @@
 package screens;
 
-import org.w3c.dom.css.Rect;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.Map;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.utils.Disposable;
 import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
 import java.awt.Color;
@@ -92,9 +80,15 @@ public class LevelOne extends Screen {
 		}
 	}
 
+	public void checkSetting()
+	{
+		if (Gdx.input.isKeyJustPressed(Keys.S))
+			sm.push(JTCM.getSettingsScreen());
+	}
 	@Override
 	public void update(double t) {
 		getInput();
+		checkSetting();
 	}
 
 	@Override

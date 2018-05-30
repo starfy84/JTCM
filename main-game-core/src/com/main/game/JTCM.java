@@ -2,11 +2,8 @@ package com.main.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 import screens.*;
@@ -27,8 +24,7 @@ public class JTCM extends ApplicationAdapter {
     private AssetManager man;
 	private ScreenManager sm;
 	private SpriteBatch batch;
-
-	
+	private static SettingsScreen sc;
 	
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the
@@ -37,7 +33,7 @@ public class JTCM extends ApplicationAdapter {
 	@Override
         public void create() {
                 man = new AssetManager();
-                batch = new SpriteBatch();
+                batch = new SpriteBatch(100);
                 sm = new ScreenManager();
                 Gdx.gl.glClearColor(1, 2, 1, 1);
                 man.load("collisionDetection.png",Texture.class);
@@ -58,9 +54,12 @@ public class JTCM extends ApplicationAdapter {
                 man.load("TutIdle.jpg",Texture.class);
                 while(!man.update());
                 sm.push(new MenuScreen(sm,man));
-                
+                sc = new SettingsScreen(sm, man);
         }
 
+	public static SettingsScreen getSettingsScreen() {
+		return sc;
+	}
 	/**
 	 * This method draws my graphics
 	 */
@@ -70,9 +69,6 @@ public class JTCM extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		sm.update(Gdx.graphics.getDeltaTime());
 		sm.render(batch);
-		batch.begin();
-
-		batch.end();
 	}
 
 	/**
