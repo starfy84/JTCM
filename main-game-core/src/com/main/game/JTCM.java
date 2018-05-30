@@ -28,7 +28,7 @@ public class JTCM extends ApplicationAdapter {
 	private ScreenManager sm;
 	private ShaderBatch batch;
 	private ShaderBatch sBatch;
-	
+	private static SettingsScreen sc;
 	
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the
@@ -58,9 +58,12 @@ public class JTCM extends ApplicationAdapter {
                 man.load("TutIdle.jpg",Texture.class);
                 while(!man.update());
                 sm.push(new MenuScreen(sm,man));
-                
+                sc = new SettingsScreen(sm, man);
         }
 
+	public static SettingsScreen getSettingsScreen() {
+		return sc;
+	}
 	/**
 	 * This method draws my graphics
 	 */

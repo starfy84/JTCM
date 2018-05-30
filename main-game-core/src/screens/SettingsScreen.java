@@ -26,12 +26,9 @@ public class SettingsScreen extends Screen {
 	private Table t;
 	private Map<String,Slider> sliders;
 	private int pos;
-	public static int bright,sound,res;
+	public static int bright=100,sound=100,res=100;
 	public SettingsScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
-		bright = 100;
-		sound = 100;
-		res = 100;
 		pos = 0;
 		sliderNames = new String[]{"brightness","sound","resolution"};
 		sliders = new HashMap<String,Slider>();
@@ -46,12 +43,14 @@ public class SettingsScreen extends Screen {
 		makeSlider(JTCM.HEIGHT-JTCM.HEIGHT/4,sliderNames[0]);
 		makeSlider(JTCM.HEIGHT-JTCM.HEIGHT/2,sliderNames[1]);
 		makeSlider(JTCM.HEIGHT-JTCM.HEIGHT*3/4,sliderNames[2]);
+		sliders.get("brightness").setValue(bright);
+		sliders.get("sound").setValue(sound);
+		sliders.get("resolution").setValue(res);
 	}
 
 	private void makeSlider(float yPos,String name) {
 		Slider tempSlider=new Slider(1,100,1,false,skin);
 		t = new Table();
-		tempSlider.setValue(1);
 		tempSlider.setAnimateDuration(0.1f);
 		tempSlider.setStyle(style);
 		t.setPosition(JTCM.WIDTH-JTCM.WIDTH/2f, yPos);

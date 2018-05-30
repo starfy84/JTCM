@@ -93,9 +93,15 @@ public class LevelOne extends Screen {
 		}
 	}
 
+	public void checkSetting()
+	{
+		if (Gdx.input.isKeyJustPressed(Keys.S))
+			sm.push(JTCM.getSettingsScreen());
+	}
 	@Override
 	public void update(double t) {
 		getInput();
+		checkSetting();
 	}
 
 	@Override
