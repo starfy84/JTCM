@@ -5,7 +5,13 @@ package screens;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
 /**
@@ -20,7 +26,11 @@ public abstract class Screen {
 	protected Vector3 pointer;
 	protected ScreenManager sm;
     protected AssetManager man;
-    
+    protected TmxMapLoader ml;
+    protected TiledMap tm;
+    protected OrthogonalTiledMapRenderer otmr;
+    protected Viewport vp;
+    protected World world;
 	/**
 	 * {@link Screen} Constructor
 	 * 
@@ -31,8 +41,7 @@ public abstract class Screen {
                 this.sm = sm;
                 this.man = man;
                 cam = new OrthographicCamera(JTCM.WIDTH,JTCM.HEIGHT);
-                cam.translate(JTCM.WIDTH/2-12, JTCM.HEIGHT/2-29);
-                cam.update();
+                vp = new FitViewport(JTCM.WIDTH,JTCM.HEIGHT,cam);
                 //cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 pointer = new Vector3();
         }
