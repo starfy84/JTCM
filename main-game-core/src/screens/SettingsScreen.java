@@ -25,11 +25,15 @@ public class SettingsScreen extends Screen {
 	private Map<String, Slider> sliders;
 	private int pos;
 	public static float bright = 1, sound = 100, res = 100;
-
+	private Texture sI,sA,bI,bA;
 	public SettingsScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
+		bI = man.get("brightIdle.png",Texture.class);
+		bA = man.get("brightActive.png",Texture.class);
+		sI = man.get("soundIdle.png",Texture.class);
+		sA = man.get("soundActive.png",Texture.class);
 		pos = 0;
-		sliderNames = new String[] { "brightness", "sound", "resolution" };
+		sliderNames = new String[] { "brightness", "sound"/*, "resolution" */};
 		sliders = new HashMap<String, Slider>();
 		st = new Stage();
 		// Gdx.input.setInputProcessor(s);
@@ -41,10 +45,10 @@ public class SettingsScreen extends Screen {
 		style = skin.get("default-horizontal", SliderStyle.class);
 		makeBright(JTCM.HEIGHT - JTCM.HEIGHT / 4, sliderNames[0]);
 		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 2, sliderNames[1]);
-		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT * 3 / 4, sliderNames[2]);
+		//makeSlider(JTCM.HEIGHT - JTCM.HEIGHT * 3 / 4, sliderNames[2]);
 		sliders.get("brightness").setValue(bright);
 		sliders.get("sound").setValue(sound);
-		sliders.get("resolution").setValue(res);
+		//sliders.get("resolution").setValue(res);
 	}
 
 	private void makeBright(float yPos, String name) {
@@ -76,9 +80,8 @@ public class SettingsScreen extends Screen {
 		else if (Gdx.input.isKeyJustPressed(Keys.DOWN))
 			pos = (pos + 1) % sliderNames.length;
 		else if (Gdx.input.isKeyJustPressed(Keys.X)) {
-
+			pos = 0;
 			sm.pop();
-
 		}
 	}
 
@@ -97,7 +100,7 @@ public class SettingsScreen extends Screen {
 
 		bright = sliders.get("brightness").getValue();
 		sound =  sliders.get("sound").getValue();
-		res = sliders.get("resolution").getValue();
+		//res = sliders.get("resolution").getValue();
 	}
 
 	@Override
@@ -113,6 +116,10 @@ public class SettingsScreen extends Screen {
 		//Gdx.gl.glClearColor(0, 0, 0, 0);
 		st.act(Gdx.graphics.getDeltaTime());
 		st.draw();
+		s.begin();
+		s.draw(pos==0?bA:bI,0, JTCM.HEIGHT - JTCM.HEIGHT / 4,JTCM.WIDTH,JTCM.HEIGHT/10);
+		s.draw(pos==1?sA:sI,0,JTCM.HEIGHT - JTCM.HEIGHT / 2,JTCM.WIDTH,JTCM.HEIGHT/10);
+		s.end();
 
 	}
 
