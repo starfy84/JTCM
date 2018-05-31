@@ -1,5 +1,7 @@
 package com.main.game;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -25,7 +27,9 @@ public class JTCM extends ApplicationAdapter {
 	private ScreenManager sm;
 	private SpriteBatch batch;
 	private static SettingsScreen sc;
-	
+	public static final float PPM = 100;
+	private static final String[] buttons=new String[] {"bonus","lvl1","lvl2","lvl3","Tut","lvlslct","highscores","instructions","exit","setting"};
+	private static final String[] text = new String[] {"bright","sound"};
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the
 	 * screen manager.
@@ -33,7 +37,7 @@ public class JTCM extends ApplicationAdapter {
 	@Override
         public void create() {
                 man = new AssetManager();
-                batch = new SpriteBatch(100);
+                batch = new SpriteBatch();
                 sm = new ScreenManager();
                 Gdx.gl.glClearColor(1, 2, 1, 1);
                 man.load("collisionDetection.png",Texture.class);
@@ -41,19 +45,18 @@ public class JTCM extends ApplicationAdapter {
                 man.load("menu.png",Texture.class);
                 man.load("blackdot.png",Texture.class);
                 man.load("person.png",Texture.class);
-                man.load("bonusActive.jpg",Texture.class);
-                man.load("bonusIdle.jpg",Texture.class);
-                man.load("lvl1Active.jpg",Texture.class);
-                man.load("lvl1Idle.jpg",Texture.class);
-                man.load("lvl2Active.jpg",Texture.class);
-                man.load("lvl2Idle.jpg",Texture.class);
-                man.load("lvl3Active.jpg",Texture.class);
-                man.load("lvl3Idle.jpg",Texture.class);
                 man.load("lvlslct.jpg",Texture.class);
-                man.load("TutActive.jpg",Texture.class);
-                man.load("TutIdle.jpg",Texture.class);
+                man.load("newMenu.png",Texture.class);
+                for(String x : buttons) {
+                	man.load(x+"Active.jpg",Texture.class);
+                	man.load(x+"Idle.jpg",Texture.class);
+                }
+                for(String x : text) {
+                	man.load(x+"Active.png",Texture.class);
+                	man.load(x+"Idle.png",Texture.class);
+                }
                 while(!man.update());
-                sm.push(new MenuScreen(sm,man));
+               sm.push(new MenuScreen(sm,man));
                 sc = new SettingsScreen(sm, man);
         }
 
