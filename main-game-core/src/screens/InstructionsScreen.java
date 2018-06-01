@@ -9,6 +9,7 @@ import com.badlogic.gdx.assets.AssetManager;
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
  * @version 0.1
+ * Time spent: 00:15 </br>
  * @author Dereck
  */
 public class InstructionsScreen extends Screen {

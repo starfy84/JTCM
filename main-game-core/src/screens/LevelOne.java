@@ -21,8 +21,7 @@ public class LevelOne extends Screen {
  * This class runs level one of the game </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 6/1/18 </br>
- * Rohit's Time spent: 10:00 (finally successfully implemented unit collision) </br>
- * Dereck's Time spent: 1:00 (Implemented music and route to settings) </br>
+ * Dereck's Time spent: 1:30 (Implemented music and route to settings) </br>
  * 
  * @version 0.4
  * @author Rohit & Dereck
@@ -34,8 +33,9 @@ public class LevelOne extends Screen {
 	
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
 	private double charX, charY;
-	private float health;
+	private float health,health2,health3,health4;
 	public static Music music;
+	private long currentT,lastT;
 	
     /**
      * {@link LevelOne} constructor
@@ -45,6 +45,9 @@ public class LevelOne extends Screen {
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
         health = 1;
+        health2 = 1;
+        health3 = 1;
+        health4 = 1;
         music = Gdx.audio.newMusic(Gdx.files.internal("BTS - DNA.mp3"));
         music.setVolume(SettingsScreen.sound);
         music.setLooping(true);
@@ -72,6 +75,7 @@ public class LevelOne extends Screen {
 		person = new Sprite(man.get("person.png",Texture.class));
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
+		lastT = System.currentTimeMillis();
 	}
 
 	/**
@@ -95,14 +99,27 @@ public class LevelOne extends Screen {
 			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 			charY += 0.5;
 		}
-		if(Gdx.input.isTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=minimap.getWidth()+5 && Gdx.input.getY()<=JTCM.HEIGHT && Gdx.input.getY()>=(JTCM.HEIGHT-minimap.getHeight()+5))
+		if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=minimap.getWidth()+5 && Gdx.input.getY()<=JTCM.HEIGHT && Gdx.input.getY()>=(JTCM.HEIGHT-minimap.getHeight()+5))
 		{
-			//Open minimap screen
+			sm.push(new MinimapScreen(sm,man));
 		}
-		if(Gdx.input.isKeyPressed(Keys.D))
+		if(Gdx.input.isKeyPressed(Keys.NUM_1))
 			health = Math.max(0,health-0.01f);
-		if(Gdx.input.isKeyJustPressed(Keys.R))
+		if(Gdx.input.isKeyPressed(Keys.NUM_2))
+			health2 = Math.max(0,health2-0.01f);
+		if(Gdx.input.isKeyPressed(Keys.NUM_3))
+			health3 = Math.max(0,health3-0.01f);
+		if(Gdx.input.isKeyPressed(Keys.NUM_4))
+			health4 = Math.max(0,health4-0.01f);
+		
+		if(Gdx.input.isKeyJustPressed(Keys.Q))
 			health =1;
+		if(Gdx.input.isKeyJustPressed(Keys.W))
+			health2 =1;
+		if(Gdx.input.isKeyJustPressed(Keys.E))
+			health3 =1;
+		if(Gdx.input.isKeyJustPressed(Keys.R))
+			health4 =1;
 		if(Gdx.input.isKeyJustPressed(Keys.X))
 			sm.pop();
 	}
@@ -128,6 +145,18 @@ public class LevelOne extends Screen {
 	public void update(double t) {
 		getInput();
 		checkSetting();
+		
+		currentT = System.currentTimeMillis();
+		if(currentT-lastT>=1000)
+		{
+			health = Math.max(0,health-0.01f);
+			health2 = Math.max(0,health2-0.01f);
+			health3 = Math.max(0,health3-0.01f);
+			health4 = Math.max(0,health4-0.01f);
+			lastT = System.currentTimeMillis();
+		}
+		
+		
 		if(health<=0)
 			System.out.println("Dead!");
 	}
@@ -147,7 +176,13 @@ public class LevelOne extends Screen {
 		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
 		s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
-		s.draw(bar, JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2+person.getHeight()+20,person.getWidth()* health,10);
+		s.draw(bar, 10, JTCM.HEIGHT-20,JTCM.WIDTH/4* health,10);
+		s.setColor(health2>0.7f?Color.GREEN:health2>0.3f?Color.YELLOW:Color.RED);
+		s.draw(bar2, 10, JTCM.HEIGHT-35,JTCM.WIDTH/4*health2,10);
+		s.setColor(health3>0.7f?Color.GREEN:health3>0.3f?Color.YELLOW:Color.RED);
+		s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*health3,10);
+		s.setColor(health4>0.7f?Color.GREEN:health4>0.3f?Color.YELLOW:Color.RED);
+		s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
 		
 		s.setColor(Color.WHITE);
 		s.end();
