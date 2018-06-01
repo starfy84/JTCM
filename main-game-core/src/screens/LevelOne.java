@@ -67,19 +67,19 @@ public class LevelOne extends Screen {
 	@Override
 	public void getInput()  {
 		if (Gdx.input.isKeyPressed(Keys.RIGHT) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE))) {
-			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2;
+			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
 			charX += 0.5;
 		}
 		if (Gdx.input.isKeyPressed(Keys.LEFT) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-2)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-2)].equals(Color.WHITE))) {
-			xCoord += JTCM.WIDTH*5.0/map.getWidth()/2;
+			xCoord += JTCM.WIDTH*5.0/map.getWidth()/2*5;
 			charX -= 0.5;
 		}
 		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[(int)Math.ceil(charY-0.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-1.5)].equals(Color.WHITE)) {
-			yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2;
+			yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 			charY -= 0.5;
 		}
 		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[(int)Math.floor(charY+0.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-1.5)].equals(Color.WHITE)) {
-			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2;
+			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 			charY += 0.5;
 		}
 		if(Gdx.input.isTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=minimap.getWidth()+5 && Gdx.input.getY()<=JTCM.HEIGHT && Gdx.input.getY()>=(JTCM.HEIGHT-minimap.getHeight()+5))
@@ -107,8 +107,8 @@ public class LevelOne extends Screen {
 	public void render(SpriteBatch s) {
 		s.begin();
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
-		s.draw(blackdot,0,0,minimap.getWidth()+5,minimap.getHeight()+5);
-		s.draw(minimap, 0, 0);
+		s.draw(blackdot,0,0,minimap.getWidth()/5+5, minimap.getHeight()/5+5);
+		s.draw(minimap, 0, 0, minimap.getWidth()/5, minimap.getHeight()/5);
 		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
 		s.end();
