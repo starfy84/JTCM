@@ -25,6 +25,7 @@ public class DesktopLauncher {
 		conf.width = JTCM.WIDTH;
 		conf.height = JTCM.HEIGHT;
 		conf.forceExit = false;
+		conf.resizable = false;
 		new LwjglApplication(new JTCM(), conf);
 	}
 }
