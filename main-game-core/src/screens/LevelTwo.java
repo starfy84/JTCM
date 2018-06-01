@@ -155,7 +155,7 @@ public class LevelTwo extends Screen {
 			}
 			
 		});
-		music = Gdx.audio.newMusic(Gdx.files.internal("Pomf - Pomf.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("Ocean - Man.mp3"));
 		music.setLooping(true);
 		music.setVolume(SettingsScreen.sound);
 		music.play();

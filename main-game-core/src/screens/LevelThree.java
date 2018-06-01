@@ -34,7 +34,7 @@ public class LevelThree extends Screen {
 		super(sm, man);
 		map = man.get("map.png", Texture.class);
 		person = man.get("person.png", Texture.class);
-		music = Gdx.audio.newMusic(Gdx.files.internal("Pomf - Pomf.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("Mii - Channel.mp3"));
 		music.setLooping(true);
 		music.setVolume(SettingsScreen.sound);
 		music.play();

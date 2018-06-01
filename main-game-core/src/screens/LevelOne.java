@@ -26,7 +26,7 @@ public class LevelOne extends Screen {
  * @version 0.4
  * @author Rohit & Dereck
  */
-	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4;
+	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4,act1,act2,act3,act4;
 	private	BufferedImage collisionPic;
 	private Sprite person;
 	private Color[][] collisionArr;
@@ -59,6 +59,10 @@ public class LevelOne extends Screen {
 		bar2 = man.get("blank.jpg",Texture.class);
 		bar3 = man.get("blank.jpg",Texture.class);
 		bar4 = man.get("blank.jpg",Texture.class);
+		act1 = man.get("settingIdle.jpg",Texture.class);
+		act2 = man.get("settingIdle.jpg",Texture.class);
+		act3 = man.get("settingIdle.jpg",Texture.class);
+		act4 = man.get("settingIdle.jpg",Texture.class);
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -183,7 +187,10 @@ public class LevelOne extends Screen {
 		s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*health3,10);
 		s.setColor(health4>0.7f?Color.GREEN:health4>0.3f?Color.YELLOW:Color.RED);
 		s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
-		
+		s.draw(act1,JTCM.WIDTH-act1.getWidth()-5,100);
+		s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,100);
+		s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,100);
+		s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,100);
 		s.setColor(Color.WHITE);
 		s.end();
 
