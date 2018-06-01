@@ -144,7 +144,7 @@ public class LevelOne extends Screen {
 		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
 		s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
-		s.draw(bar, 0, JTCM.HEIGHT-10,JTCM.WIDTH * health,30);
+		s.draw(bar, JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2+person.getHeight()+20,person.getWidth()* health,30);
 		s.setColor(Color.WHITE);
 		s.end();
 
