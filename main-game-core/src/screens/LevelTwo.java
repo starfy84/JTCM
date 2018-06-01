@@ -24,17 +24,19 @@ import com.main.game.JTCM;
 import collisionItem.Player;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 
 /**
  * This class runs level two of the game </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/18/18 </br>
- * Time spent: 0:15 (Reused from levelOne)
+ * Date: 6/1/18 </br>
+ * Time spent: 5:30 (Tried implementing new way to detect collision) </br>
  * 
- * @version 0.2
- * @author Rohit
+ * @version 0.4
+ * @author Dereck
+ * 
+ * NOT WORKING
  */
-
 public class LevelTwo extends Screen {
 	BitmapFont font;
 	Texture map, person;
@@ -43,6 +45,12 @@ public class LevelTwo extends Screen {
 	Player player;
 	float speed =1000000;
 	private Vector2 movement  = new Vector2(0,0);
+	Music music;
+	/**
+	 * {@link LevelTwo} constructor
+	 * @param sm screen manager to determine current screen
+	 * @param man asset manager to load images
+	 */
 	public LevelTwo(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		
@@ -147,7 +155,10 @@ public class LevelTwo extends Screen {
 			}
 			
 		});
-		
+		music = Gdx.audio.newMusic(Gdx.files.internal("Pomf - Pomf.mp3"));
+		music.setLooping(true);
+		music.setVolume(SettingsScreen.sound);
+		music.play();
 		player = new Player(world);
 	}
 
@@ -178,14 +189,26 @@ public class LevelTwo extends Screen {
 //		if (Gdx.input.isKeyPressed(Keys.D))
 //			movement.x = speed;
 			//player.bdy.applyLinearImpulse(new Vector2(5.5f, 0), player.bdy.getWorldCenter(), true);
-		if (Gdx.input.isKeyJustPressed(Keys.X))
-			sm.set(new MenuScreen(sm, man));
+		if (Gdx.input.isKeyJustPressed(Keys.X)) {
+			sm.pop();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.S))
+		{
+			JTCM.getSettingsScreen().setMusic(music);
+			sm.push(JTCM.getSettingsScreen());
+		}
 		if(movement.x==0 && movement.y==0)
 			player.bdy.setLinearVelocity(0, 0);
 		cam.position.x = player.bdy.getPosition().x;
 		cam.position.y = player.bdy.getPosition().y;
 	}
 
+	/**
+	 * This method will be run on a loop.
+	 * 
+	 * @param t
+	 *            Delta time.
+	 */
 	@Override
 	public void update(double t) {
 		getInput();
@@ -196,6 +219,12 @@ public class LevelTwo extends Screen {
 
 	}
 
+	/**
+	 * This method draws my graphics
+	 * 
+	 * @param s
+	 *            The needed sprite batch.
+	 */
 	@Override
 	public void render(SpriteBatch s) {
 		// s.begin();
@@ -214,10 +243,20 @@ public class LevelTwo extends Screen {
 		System.out.println(movement);
 	}
 
+	/**
+	 * This method disposes unneeded resources.
+	 */
 	@Override
 	public void dispose() {
-		map.dispose();
-		person.dispose();
+//		map.dispose();
+//		person.dispose();
+//		this.bdr.dispose();
+//		this.font.dispose();
+//		this.map.dispose();
+//		this.music.dispose();
+//		this.world.dispose();
+		music.dispose();
+
 	}
 
 }

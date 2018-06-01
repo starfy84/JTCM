@@ -1,10 +1,12 @@
 package screens;
 
+import java.io.IOException;
 import java.util.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,7 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.main.game.JTCM;
-
+/**
+ * This class allows adjustments of the settings </br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/1/18 </br>
+ * Time spent: 5:00 (Implemented sliders that listen for keyboard input)</br>
+ * @version 0.4
+ * @author Dereck
+ */
 public class SettingsScreen extends Screen {
 	private Skin skin;
 	private Stage st;
@@ -24,14 +33,23 @@ public class SettingsScreen extends Screen {
 	private Table t;
 	private Map<String, Slider> sliders;
 	private int pos;
-	public static float bright = 1, sound = 100, res = 100;
+	public static float bright = 1, sound = 0.5f, res = 100;
 	private Texture sI,sA,bI,bA;
-	public SettingsScreen(ScreenManager sm, AssetManager man) {
+	private Music m;
+	/**
+	 * {@link SettingsScreen} constructor
+	 * @param sm screen manager to determine current screen
+	 * @param man asset manager to load images
+	 * @param m current music
+	 */
+	public SettingsScreen(ScreenManager sm, AssetManager man,Music m) {
 		super(sm, man);
+		Gdx.gl.glClearColor(1, 2, 1, 1);
 		bI = man.get("brightIdle.png",Texture.class);
 		bA = man.get("brightActive.png",Texture.class);
 		sI = man.get("soundIdle.png",Texture.class);
 		sA = man.get("soundActive.png",Texture.class);
+		this.m = m;
 		pos = 0;
 		sliderNames = new String[] { "brightness", "sound"/*, "resolution" */};
 		sliders = new HashMap<String, Slider>();
@@ -43,7 +61,7 @@ public class SettingsScreen extends Screen {
 		// t.top();
 
 		style = skin.get("default-horizontal", SliderStyle.class);
-		makeBright(JTCM.HEIGHT - JTCM.HEIGHT / 4, sliderNames[0]);
+		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 4, sliderNames[0]);
 		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 2, sliderNames[1]);
 		//makeSlider(JTCM.HEIGHT - JTCM.HEIGHT * 3 / 4, sliderNames[2]);
 		sliders.get("brightness").setValue(bright);
@@ -51,7 +69,12 @@ public class SettingsScreen extends Screen {
 		//sliders.get("resolution").setValue(res);
 	}
 
-	private void makeBright(float yPos, String name) {
+	/**
+	 * This method makes sliders
+	 * @param yPos y position
+	 * @param name name
+	 */
+	private void makeSlider(float yPos, String name) {
 		Slider tempSlider = new Slider(0, 1, 0.01f, false, skin);
 		t = new Table();
 		tempSlider.setAnimateDuration(0.1f);
@@ -62,17 +85,9 @@ public class SettingsScreen extends Screen {
 		sliders.put(name, tempSlider);
 	}
 
-	private void makeSlider(float yPos, String name) {
-		Slider tempSlider = new Slider(1, 100, 1, false, skin);
-		t = new Table();
-		tempSlider.setAnimateDuration(0.1f);
-		tempSlider.setStyle(style);
-		t.setPosition(JTCM.WIDTH - JTCM.WIDTH / 2f, yPos);
-		t.add(tempSlider).width(JTCM.WIDTH / 2f);
-		st.addActor(t);
-		sliders.put(name, tempSlider);
-	}
-
+	/**
+	 * This method handles input.
+	 */
 	@Override
 	public void getInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.UP))
@@ -85,24 +100,35 @@ public class SettingsScreen extends Screen {
 		}
 	}
 
+	/**
+	 * This method handles input for sliders.
+	 * @param name slider
+	 */
 	public void getInput(String name) {
-		if (!name.equals("brightness")) {
-			if (Gdx.input.isKeyPressed(Keys.LEFT))
-				sliders.get(name).setValue(Math.max(1, sliders.get(name).getValue() - 1));
-			else if (Gdx.input.isKeyPressed(Keys.RIGHT))
-				sliders.get(name).setValue(Math.min(100, sliders.get(name).getValue() + 1));
-		} else {
-			if (Gdx.input.isKeyPressed(Keys.LEFT))
-				sliders.get(name).setValue(Math.max(0, sliders.get(name).getValue() - 0.01f));
-			else if (Gdx.input.isKeyPressed(Keys.RIGHT))
-				sliders.get(name).setValue(Math.min(1, sliders.get(name).getValue() + 0.01f));
-		}
-
+		if (Gdx.input.isKeyPressed(Keys.LEFT))
+			sliders.get(name).setValue(Math.max(0, sliders.get(name).getValue() - 0.01f));
+		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
+			sliders.get(name).setValue(Math.min(1, sliders.get(name).getValue() + 0.01f));
 		bright = sliders.get("brightness").getValue();
 		sound =  sliders.get("sound").getValue();
+		if(m!=null)
+			m.setVolume(sound);
 		//res = sliders.get("resolution").getValue();
 	}
 
+	/**
+	 * @param m music
+	 */
+	public void setMusic(Music m) {
+		this.m = m;
+	}
+	
+	/**
+	 * This method will be run on a loop.
+	 * 
+	 * @param t
+	 *            Delta time.
+	 */
 	@Override
 	public void update(double t) {
 		// TODO Auto-generated method stub
@@ -110,6 +136,12 @@ public class SettingsScreen extends Screen {
 		getInput(sliderNames[pos]);
 	}
 
+	/**
+	 * This method draws my graphics
+	 * 
+	 * @param s
+	 *            The needed sprite batch.
+	 */
 	@Override
 	public void render(SpriteBatch s) {
 		// TODO Auto-generated method stub
@@ -123,9 +155,19 @@ public class SettingsScreen extends Screen {
 
 	}
 
+	/**
+	 * This method disposes unneeded resources.
+	 */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+//		skin.dispose();;
+//		st.dispose();
+//		sI.dispose();
+//		sA.dispose();
+//		bI.dispose();
+//		bA.dispose()	;
+//		m.dispose();
 
 	}
 

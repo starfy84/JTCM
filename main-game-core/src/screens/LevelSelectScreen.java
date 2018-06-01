@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
 /**
- * This is the main class of our game, it starts the Main Menu screen. </br>
+ * This is the level selection screen which lets the user choose which level to play </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
+ * Date: 6/1/18 </br>
  * Dereck's Time spent: 1:00 </br>
  * @version 0.2
  * @author Dereck 
@@ -24,6 +24,7 @@ public class LevelSelectScreen extends Screen {
 	 */
         public LevelSelectScreen(ScreenManager sm, AssetManager man) {
                 super(sm,man);
+                
                 bg = man.get("lvlslct.jpg",Texture.class);
                 tutI = man.get("TutIdle.jpg",Texture.class);
                 tutA = man.get("TutActive.jpg",Texture.class);
@@ -92,17 +93,17 @@ public class LevelSelectScreen extends Screen {
 	 */
 	@Override
 	public void dispose() {
-		bg.dispose();
-		tutI.dispose();
-		tutA.dispose();
-		oneI.dispose();
-		oneA.dispose();
-		twoI.dispose();
-		twoA.dispose();
-		threeI.dispose();
-		threeA.dispose();
-		bonusI.dispose();
-		bonusA.dispose();
+//		bg.dispose();
+//		tutI.dispose();
+//		tutA.dispose();
+//		oneI.dispose();
+//		oneA.dispose();
+//		twoI.dispose();
+//		twoA.dispose();
+//		threeI.dispose();
+//		threeA.dispose();
+//		bonusI.dispose();
+//		bonusA.dispose();
 	}
 
 }

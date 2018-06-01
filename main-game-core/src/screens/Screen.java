@@ -68,7 +68,7 @@ public abstract class Screen {
 	public abstract void render(SpriteBatch s);
 
 	/**
-	 * This method disposes uneeded resources.
+	 * This method disposes unneeded resources.
 	 */
 	public abstract void dispose();
 }

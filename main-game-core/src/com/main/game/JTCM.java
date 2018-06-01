@@ -13,9 +13,9 @@ import screens.*;
 /**
  * This is the main class of our game, it starts the Main Menu screen. </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * Time Spent: 1:45</br>
- * @version 0.1
+ * Date: 6/1/18 </br>
+ * Time Spent: 0:30 (Optimized asset loading)</br>
+ * @version 0.4
  * @author Dereck
  */
 public class JTCM extends ApplicationAdapter {
@@ -47,6 +47,7 @@ public class JTCM extends ApplicationAdapter {
                 man.load("person.png",Texture.class);
                 man.load("lvlslct.jpg",Texture.class);
                 man.load("newMenu.png",Texture.class);
+                man.load("blank.jpg",Texture.class);
                 for(String x : buttons) {
                 	man.load(x+"Active.jpg",Texture.class);
                 	man.load(x+"Idle.jpg",Texture.class);
@@ -57,9 +58,12 @@ public class JTCM extends ApplicationAdapter {
                 }
                 while(!man.update());
                sm.push(new MenuScreen(sm,man));
-                sc = new SettingsScreen(sm, man);
+                sc = new SettingsScreen(sm, man,null);
         }
 
+	/**
+	 * @return SettingsScreen
+	 */
 	public static SettingsScreen getSettingsScreen() {
 		return sc;
 	}

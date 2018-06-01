@@ -13,25 +13,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * This is the main class of our game, it shows a list of highscores. If there
- * arent any highscores, then there will be an error.+ </br>
+ * arent any highscores, then there will be an error. </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * 
- * @version 0.1
+ * Date: 6/1/18 </br>
+ * Time Spent: 1:00 (Wrote methods to handle scores)
+ * @version 0.4
  * @author Dereck
  */
 public class HighScoresScreen extends Screen {
 
 	BitmapFont font;
-
-	/**
-	 * {@link MenuScreen} Constructor
-	 * 
-	 * @param sm
-	 *            Screen manager.
-	 */
 	List<Object[]> scores = new ArrayList<Object[]>();
 
+	/**
+	 * {@link HighScoresScreen} constructor
+	 * @param sm Screen manager to determine current screen
+	 * @param man Asset manager to load images
+	 */
 	public HighScoresScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		font = new BitmapFont();
@@ -39,6 +37,10 @@ public class HighScoresScreen extends Screen {
 		font.getData().setScale(2);
 	}
 
+	/**
+	 * This method inserts the score into the array
+	 * @param score Player score
+	 */
 	public void insertScore(Object[] score) {
 		if(scores.size()==0) {
 			scores.add(score);
@@ -52,6 +54,9 @@ public class HighScoresScreen extends Screen {
 		scores.add(0,score);
 	}
 	
+	/**
+	 * This saves the highscores
+	 */
 	public void write() {
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscores/scores.txt")));
@@ -64,6 +69,9 @@ public class HighScoresScreen extends Screen {
 		}
 	}
 
+	/**
+	 * This reads in the highscores.
+	 */
 	public void read() {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("highscores/scores.txt"));
@@ -119,7 +127,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	@Override
 	public void dispose() {
-		font.dispose();
+//		font.dispose();
 
 	}
 

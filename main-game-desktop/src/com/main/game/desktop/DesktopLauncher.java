@@ -9,6 +9,7 @@ import com.main.game.JTCM;
  * Teacher: Ms. Krasteva </br>
  * Date: 5/14/18 </br>
  * 
+ * @version 0.1
  * @author Dereck
  */
 public class DesktopLauncher {
@@ -24,6 +25,7 @@ public class DesktopLauncher {
 		conf.width = JTCM.WIDTH;
 		conf.height = JTCM.HEIGHT;
 		conf.forceExit = false;
+		conf.resizable = false;
 		new LwjglApplication(new JTCM(), conf);
 	}
 }

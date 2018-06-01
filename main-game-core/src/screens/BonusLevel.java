@@ -44,12 +44,24 @@ public class BonusLevel extends Screen {
 		}
 	}
 
+	/**
+	 * This method will be run on a loop.
+	 * 
+	 * @param t
+	 *            Delta time.
+	 */
 	@Override
 	public void update(double t) {
 		getInput();
 
 	}
 
+	/**
+	 * This method draws my graphics
+	 * 
+	 * @param s
+	 *            The needed sprite batch.
+	 */
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
@@ -59,10 +71,13 @@ public class BonusLevel extends Screen {
 
 	}
 
+	/**
+	 * This method disposes uneeded resources.
+	 */
 	@Override
 	public void dispose() {
-		map.dispose();
-		person.dispose();
+//		map.dispose();
+//		person.dispose();
 	}
 
 }
