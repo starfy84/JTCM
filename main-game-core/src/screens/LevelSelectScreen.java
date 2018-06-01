@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
 /**
- * This is the main class of our game, it starts the Main Menu screen. </br>
+ * This is the level selection screen which lets the user choose which level to play </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
+ * Date: 6/1/18 </br>
  * Dereck's Time spent: 1:00 </br>
  * @version 0.2
  * @author Dereck 

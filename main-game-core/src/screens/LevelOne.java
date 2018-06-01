@@ -2,6 +2,7 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,10 +20,12 @@ public class LevelOne extends Screen {
 /**
  * This class runs level one of the game </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/18/18 </br>
- * Rohit's Time spent: 10:00 (finally successfully implemented unit collision)
- * @version 0.3
- * @author Rohit
+ * Date: 6/1/18 </br>
+ * Rohit's Time spent: 10:00 (finally successfully implemented unit collision) </br>
+ * Dereck's Time spent: 1:00 (Implemented music and route to settings) </br>
+ * 
+ * @version 0.4
+ * @author Rohit & Dereck
  */
 	private Texture map, minimap, blackdot;
 	private	BufferedImage collisionPic;
@@ -33,6 +36,12 @@ public class LevelOne extends Screen {
 	private double charX, charY;
 	
 	public static Music music;
+	
+    /**
+     * {@link LevelOne} constructor
+     * @param sm screen manager to determine current screen
+     * @param man asset manager to load images
+     */
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
         music = Gdx.audio.newMusic(Gdx.files.internal("BTS - DNA.mp3"));
@@ -42,7 +51,6 @@ public class LevelOne extends Screen {
         map = man.get("map.png",Texture.class);
 		minimap = man.get("map.png",Texture.class);
 		blackdot = man.get("blackdot.png",Texture.class);
-
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -90,6 +98,9 @@ public class LevelOne extends Screen {
 			sm.pop();
 	}
 
+	/**
+	 * Handles input for settings.
+	 */
 	public void checkSetting()
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.S)) {
@@ -97,12 +108,25 @@ public class LevelOne extends Screen {
 			sm.push(JTCM.getSettingsScreen());
 		}
 	}
+	
+	/**
+	 * This method will be run on a loop.
+	 * 
+	 * @param t
+	 *            Delta time.
+	 */
 	@Override
 	public void update(double t) {
 		getInput();
 		checkSetting();
 	}
 
+	/**
+	 * This method draws my graphics
+	 * 
+	 * @param s
+	 *            The needed sprite batch.
+	 */
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
@@ -115,6 +139,9 @@ public class LevelOne extends Screen {
 
 	}
 
+	/**
+	 * This method disposes uneeded resources.
+	 */
 	@Override
 	public void dispose() {
 //		map.dispose();

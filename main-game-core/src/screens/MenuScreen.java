@@ -14,9 +14,9 @@ import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the menu screen.</br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * Time Spent: 15 mins </br>
- * @version 0.1
+ * Date: 6/1/18 </br>
+ * Time Spent: 2:30 (Listened for mouse button clicks and positions. Added active and idle states for each button.) </br>
+ * @version 0.4
  * @author Dereck
  */
 public class MenuScreen extends Screen {

@@ -17,7 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.main.game.JTCM;
-
+/**
+ * This class allows adjustments of the settings </br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/1/18 </br>
+ * Time spent: 5:00 (Implemented sliders that listen for keyboard input)</br>
+ * @version 0.4
+ * @author Dereck
+ */
 public class SettingsScreen extends Screen {
 	private Skin skin;
 	private Stage st;
@@ -29,6 +36,12 @@ public class SettingsScreen extends Screen {
 	public static float bright = 1, sound = 0.5f, res = 100;
 	private Texture sI,sA,bI,bA;
 	private Music m;
+	/**
+	 * {@link SettingsScreen} constructor
+	 * @param sm screen manager to determine current screen
+	 * @param man asset manager to load images
+	 * @param m current music
+	 */
 	public SettingsScreen(ScreenManager sm, AssetManager man,Music m) {
 		super(sm, man);
 		Gdx.gl.glClearColor(1, 2, 1, 1);
@@ -56,6 +69,11 @@ public class SettingsScreen extends Screen {
 		//sliders.get("resolution").setValue(res);
 	}
 
+	/**
+	 * This method makes sliders
+	 * @param yPos y position
+	 * @param name name
+	 */
 	private void makeSlider(float yPos, String name) {
 		Slider tempSlider = new Slider(0, 1, 0.01f, false, skin);
 		t = new Table();
@@ -67,6 +85,9 @@ public class SettingsScreen extends Screen {
 		sliders.put(name, tempSlider);
 	}
 
+	/**
+	 * This method handles input.
+	 */
 	@Override
 	public void getInput() {
 		if (Gdx.input.isKeyJustPressed(Keys.UP))
@@ -79,6 +100,10 @@ public class SettingsScreen extends Screen {
 		}
 	}
 
+	/**
+	 * This method handles input for sliders.
+	 * @param name slider
+	 */
 	public void getInput(String name) {
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
 			sliders.get(name).setValue(Math.max(0, sliders.get(name).getValue() - 0.01f));
@@ -91,10 +116,19 @@ public class SettingsScreen extends Screen {
 		//res = sliders.get("resolution").getValue();
 	}
 
+	/**
+	 * @param m music
+	 */
 	public void setMusic(Music m) {
 		this.m = m;
 	}
 	
+	/**
+	 * This method will be run on a loop.
+	 * 
+	 * @param t
+	 *            Delta time.
+	 */
 	@Override
 	public void update(double t) {
 		// TODO Auto-generated method stub
@@ -102,6 +136,12 @@ public class SettingsScreen extends Screen {
 		getInput(sliderNames[pos]);
 	}
 
+	/**
+	 * This method draws my graphics
+	 * 
+	 * @param s
+	 *            The needed sprite batch.
+	 */
 	@Override
 	public void render(SpriteBatch s) {
 		// TODO Auto-generated method stub
@@ -115,6 +155,9 @@ public class SettingsScreen extends Screen {
 
 	}
 
+	/**
+	 * This method disposes unneeded resources.
+	 */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub

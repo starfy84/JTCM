@@ -4,10 +4,22 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-
+/**
+ * This class displays the loading screen --UNIMPLEMENTED-- </br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/1/18 </br>
+ * Time spent: 0:15 </br>
+ * @version 0.4
+ * @author Dereck
+ */
 public class LoadingScreen extends Screen {
 
 	private Texture load;
+	/**
+	 * {@link LoadingScreen} constructor
+	 * @param sm screen manager to determine current screen
+	 * @param man asset manager to load images
+	 */
 	public LoadingScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		load = man.get("loading.png",Texture.class);
@@ -15,18 +27,33 @@ public class LoadingScreen extends Screen {
 		
 	}
 
+	/**
+	 * This method handles input.
+	 */
 	@Override
 	public void getInput() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * This method will be run on a loop.
+	 * 
+	 * @param t
+	 *            Delta time.
+	 */
 	@Override
 	public void update(double t) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * This method draws my graphics
+	 * 
+	 * @param s
+	 *            The needed sprite batch.
+	 */
 	@Override
 	public void render(SpriteBatch s) {
 		// TODO Auto-generated method stub
@@ -44,6 +71,9 @@ public class LoadingScreen extends Screen {
         sm.pop();
 	}
 
+	/**
+	 * This method disposes unneeded resources.
+	 */
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
