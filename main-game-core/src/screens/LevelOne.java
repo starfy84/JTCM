@@ -11,7 +11,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
-import java.awt.Color;
+import com.badlogic.gdx.graphics.Color;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -27,14 +27,14 @@ public class LevelOne extends Screen {
  * @version 0.4
  * @author Rohit & Dereck
  */
-	private Texture map, minimap, blackdot;
+	private Texture map, minimap, blackdot,bar;
 	private	BufferedImage collisionPic;
 	private Sprite person;
 	private Color[][] collisionArr;
 	
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
 	private double charX, charY;
-	
+	private float health;
 	public static Music music;
 	
     /**
@@ -44,6 +44,7 @@ public class LevelOne extends Screen {
      */
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
+        health = 1;
         music = Gdx.audio.newMusic(Gdx.files.internal("BTS - DNA.mp3"));
         music.setVolume(SettingsScreen.sound);
         music.setLooping(true);
@@ -51,6 +52,7 @@ public class LevelOne extends Screen {
         map = man.get("map.png",Texture.class);
 		minimap = man.get("map.png",Texture.class);
 		blackdot = man.get("blackdot.png",Texture.class);
+		bar = man.get("blank.jpg",Texture.class);
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -94,6 +96,10 @@ public class LevelOne extends Screen {
 		{
 			//Open minimap screen
 		}
+		if(Gdx.input.isKeyPressed(Keys.D))
+			health = Math.max(0,health-0.01f);
+		if(Gdx.input.isKeyJustPressed(Keys.R))
+			health =1;
 		if(Gdx.input.isKeyJustPressed(Keys.X))
 			sm.pop();
 	}
@@ -119,6 +125,8 @@ public class LevelOne extends Screen {
 	public void update(double t) {
 		getInput();
 		checkSetting();
+		if(health<=0)
+			System.out.println("Dead!");
 	}
 
 	/**
@@ -135,6 +143,9 @@ public class LevelOne extends Screen {
 		s.draw(minimap, 0, 0, minimap.getWidth()/5, minimap.getHeight()/5);
 		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
+		s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
+		s.draw(bar, 0, JTCM.HEIGHT-10,JTCM.WIDTH * health,30);
+		s.setColor(Color.WHITE);
 		s.end();
 
 	}
