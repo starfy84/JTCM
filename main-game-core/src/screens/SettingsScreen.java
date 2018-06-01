@@ -1,10 +1,12 @@
 package screens;
 
+import java.io.IOException;
 import java.util.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,14 +26,17 @@ public class SettingsScreen extends Screen {
 	private Table t;
 	private Map<String, Slider> sliders;
 	private int pos;
-	public static float bright = 1, sound = 100, res = 100;
+	public static float bright = 1, sound = 0.5f, res = 100;
 	private Texture sI,sA,bI,bA;
-	public SettingsScreen(ScreenManager sm, AssetManager man) {
+	private Music m;
+	public SettingsScreen(ScreenManager sm, AssetManager man,Music m) {
 		super(sm, man);
+		Gdx.gl.glClearColor(1, 2, 1, 1);
 		bI = man.get("brightIdle.png",Texture.class);
 		bA = man.get("brightActive.png",Texture.class);
 		sI = man.get("soundIdle.png",Texture.class);
 		sA = man.get("soundActive.png",Texture.class);
+		this.m = m;
 		pos = 0;
 		sliderNames = new String[] { "brightness", "sound"/*, "resolution" */};
 		sliders = new HashMap<String, Slider>();
@@ -43,7 +48,7 @@ public class SettingsScreen extends Screen {
 		// t.top();
 
 		style = skin.get("default-horizontal", SliderStyle.class);
-		makeBright(JTCM.HEIGHT - JTCM.HEIGHT / 4, sliderNames[0]);
+		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 4, sliderNames[0]);
 		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 2, sliderNames[1]);
 		//makeSlider(JTCM.HEIGHT - JTCM.HEIGHT * 3 / 4, sliderNames[2]);
 		sliders.get("brightness").setValue(bright);
@@ -51,19 +56,8 @@ public class SettingsScreen extends Screen {
 		//sliders.get("resolution").setValue(res);
 	}
 
-	private void makeBright(float yPos, String name) {
-		Slider tempSlider = new Slider(0, 1, 0.01f, false, skin);
-		t = new Table();
-		tempSlider.setAnimateDuration(0.1f);
-		tempSlider.setStyle(style);
-		t.setPosition(JTCM.WIDTH - JTCM.WIDTH / 2f, yPos);
-		t.add(tempSlider).width(JTCM.WIDTH / 2f);
-		st.addActor(t);
-		sliders.put(name, tempSlider);
-	}
-
 	private void makeSlider(float yPos, String name) {
-		Slider tempSlider = new Slider(1, 100, 1, false, skin);
+		Slider tempSlider = new Slider(0, 1, 0.01f, false, skin);
 		t = new Table();
 		tempSlider.setAnimateDuration(0.1f);
 		tempSlider.setStyle(style);
@@ -86,23 +80,21 @@ public class SettingsScreen extends Screen {
 	}
 
 	public void getInput(String name) {
-		if (!name.equals("brightness")) {
-			if (Gdx.input.isKeyPressed(Keys.LEFT))
-				sliders.get(name).setValue(Math.max(1, sliders.get(name).getValue() - 1));
-			else if (Gdx.input.isKeyPressed(Keys.RIGHT))
-				sliders.get(name).setValue(Math.min(100, sliders.get(name).getValue() + 1));
-		} else {
-			if (Gdx.input.isKeyPressed(Keys.LEFT))
-				sliders.get(name).setValue(Math.max(0, sliders.get(name).getValue() - 0.01f));
-			else if (Gdx.input.isKeyPressed(Keys.RIGHT))
-				sliders.get(name).setValue(Math.min(1, sliders.get(name).getValue() + 0.01f));
-		}
-
+		if (Gdx.input.isKeyPressed(Keys.LEFT))
+			sliders.get(name).setValue(Math.max(0, sliders.get(name).getValue() - 0.01f));
+		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
+			sliders.get(name).setValue(Math.min(1, sliders.get(name).getValue() + 0.01f));
 		bright = sliders.get("brightness").getValue();
 		sound =  sliders.get("sound").getValue();
+		if(m!=null)
+			m.setVolume(sound);
 		//res = sliders.get("resolution").getValue();
 	}
 
+	public void setMusic(Music m) {
+		this.m = m;
+	}
+	
 	@Override
 	public void update(double t) {
 		// TODO Auto-generated method stub
@@ -126,6 +118,13 @@ public class SettingsScreen extends Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+//		skin.dispose();;
+//		st.dispose();
+//		sI.dispose();
+//		sA.dispose();
+//		bI.dispose();
+//		bA.dispose()	;
+//		m.dispose();
 
 	}
 

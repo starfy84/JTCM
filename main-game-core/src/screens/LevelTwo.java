@@ -24,6 +24,7 @@ import com.main.game.JTCM;
 import collisionItem.Player;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 
 /**
  * This class runs level two of the game </br>
@@ -43,6 +44,7 @@ public class LevelTwo extends Screen {
 	Player player;
 	float speed =1000000;
 	private Vector2 movement  = new Vector2(0,0);
+	Music music;
 	public LevelTwo(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		
@@ -147,7 +149,10 @@ public class LevelTwo extends Screen {
 			}
 			
 		});
-		
+		music = Gdx.audio.newMusic(Gdx.files.internal("Pomf - Pomf.mp3"));
+		music.setLooping(true);
+		music.setVolume(SettingsScreen.sound);
+		music.play();
 		player = new Player(world);
 	}
 
@@ -178,8 +183,14 @@ public class LevelTwo extends Screen {
 //		if (Gdx.input.isKeyPressed(Keys.D))
 //			movement.x = speed;
 			//player.bdy.applyLinearImpulse(new Vector2(5.5f, 0), player.bdy.getWorldCenter(), true);
-		if (Gdx.input.isKeyJustPressed(Keys.X))
-			sm.set(new MenuScreen(sm, man));
+		if (Gdx.input.isKeyJustPressed(Keys.X)) {
+			sm.pop();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.S))
+		{
+			JTCM.getSettingsScreen().setMusic(music);
+			sm.push(JTCM.getSettingsScreen());
+		}
 		if(movement.x==0 && movement.y==0)
 			player.bdy.setLinearVelocity(0, 0);
 		cam.position.x = player.bdy.getPosition().x;
@@ -216,8 +227,15 @@ public class LevelTwo extends Screen {
 
 	@Override
 	public void dispose() {
-		map.dispose();
-		person.dispose();
+//		map.dispose();
+//		person.dispose();
+//		this.bdr.dispose();
+//		this.font.dispose();
+//		this.map.dispose();
+//		this.music.dispose();
+//		this.world.dispose();
+		music.dispose();
+
 	}
 
 }

@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+
 import java.awt.Color;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
@@ -29,8 +32,13 @@ public class LevelOne extends Screen {
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
 	private double charX, charY;
 	
+	public static Music music;
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
+        music = Gdx.audio.newMusic(Gdx.files.internal("BTS - DNA.mp3"));
+        music.setVolume(SettingsScreen.sound);
+        music.setLooping(true);
+        music.play();
         map = man.get("map.png",Texture.class);
 		minimap = man.get("map.png",Texture.class);
 		blackdot = man.get("blackdot.png",Texture.class);
@@ -78,12 +86,16 @@ public class LevelOne extends Screen {
 		{
 			//Open minimap screen
 		}
+		if(Gdx.input.isKeyJustPressed(Keys.X))
+			sm.pop();
 	}
 
 	public void checkSetting()
 	{
-		if (Gdx.input.isKeyJustPressed(Keys.S))
+		if (Gdx.input.isKeyJustPressed(Keys.S)) {
+			JTCM.getSettingsScreen().setMusic(music);
 			sm.push(JTCM.getSettingsScreen());
+		}
 	}
 	@Override
 	public void update(double t) {
@@ -105,7 +117,8 @@ public class LevelOne extends Screen {
 
 	@Override
 	public void dispose() {
-		map.dispose();
+//		map.dispose();
+		music.dispose();
 	}
 
 }

@@ -65,7 +65,7 @@ public class InstructionsScreen extends Screen {
 	 */
 	@Override
 	public void dispose() {
-		font.dispose();
+//		font.dispose();
 	}
 
 }

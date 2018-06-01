@@ -24,6 +24,7 @@ public class LevelSelectScreen extends Screen {
 	 */
         public LevelSelectScreen(ScreenManager sm, AssetManager man) {
                 super(sm,man);
+                
                 bg = man.get("lvlslct.jpg",Texture.class);
                 tutI = man.get("TutIdle.jpg",Texture.class);
                 tutA = man.get("TutActive.jpg",Texture.class);
@@ -92,17 +93,17 @@ public class LevelSelectScreen extends Screen {
 	 */
 	@Override
 	public void dispose() {
-		bg.dispose();
-		tutI.dispose();
-		tutA.dispose();
-		oneI.dispose();
-		oneA.dispose();
-		twoI.dispose();
-		twoA.dispose();
-		threeI.dispose();
-		threeA.dispose();
-		bonusI.dispose();
-		bonusA.dispose();
+//		bg.dispose();
+//		tutI.dispose();
+//		tutA.dispose();
+//		oneI.dispose();
+//		oneA.dispose();
+//		twoI.dispose();
+//		twoA.dispose();
+//		threeI.dispose();
+//		threeA.dispose();
+//		bonusI.dispose();
+//		bonusA.dispose();
 	}
 
 }

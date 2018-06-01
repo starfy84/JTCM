@@ -57,7 +57,7 @@ public class JTCM extends ApplicationAdapter {
                 }
                 while(!man.update());
                sm.push(new MenuScreen(sm,man));
-                sc = new SettingsScreen(sm, man);
+                sc = new SettingsScreen(sm, man,null);
         }
 
 	public static SettingsScreen getSettingsScreen() {

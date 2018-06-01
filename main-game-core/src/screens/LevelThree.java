@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 /**
  * This class runs level three of the game </br>
  * Teacher: Ms. Krasteva </br>
@@ -19,11 +20,16 @@ import com.badlogic.gdx.assets.AssetManager;
 public class LevelThree extends Screen {
 	BitmapFont font;
 	Texture map, person;
+	Music music;
 	double xCoord = -2500, yCoord = -700;
         public LevelThree(ScreenManager sm, AssetManager man) {
                 super(sm,man);
                 map = man.get("map.png",Texture.class);
                 person = man.get("person.png",Texture.class);
+        		music = Gdx.audio.newMusic(Gdx.files.internal("Pomf - Pomf.mp3"));
+        		music.setLooping(true);
+        		music.setVolume(SettingsScreen.sound);
+        		music.play();
 	}
 
 	/**
@@ -38,9 +44,14 @@ public class LevelThree extends Screen {
 		else if (Gdx.input.isKeyPressed(Keys.UP))
 			yCoord -= 3.5;
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))
-		{
 			yCoord += 3.5;
+		
+		if(Gdx.input.isKeyJustPressed(Keys.S)) {
+			JTCM.getSettingsScreen().setMusic(music);
+			sm.push(JTCM.getSettingsScreen());
 		}
+		else if(Gdx.input.isKeyJustPressed(Keys.X))
+			sm.pop();
 	}
 
 	@Override
@@ -60,8 +71,11 @@ public class LevelThree extends Screen {
 
 	@Override
 	public void dispose() {
-		map.dispose();
-		person.dispose();
+//		map.dispose();
+//		person.dispose();
+//		font.dispose();
+		music.dispose();
+		
 	}
 
 }

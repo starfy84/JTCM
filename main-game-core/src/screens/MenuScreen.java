@@ -55,11 +55,11 @@ public class MenuScreen extends Screen {
 	@Override
 	public void getInput() {
 		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2 && Gdx.input.getY()<=Gdx.graphics.getHeight()-500 && Gdx.input.getY()>=Gdx.graphics.getHeight()-500-lI.getHeight())
-			sm.set(new LevelSelectScreen(sm,man));
+			sm.push(new LevelSelectScreen(sm,man));
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-hI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+hI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-400 && Gdx.input.getY()>=Gdx.graphics.getHeight()-400-hI.getHeight())
-			sm.set(new HighScoresScreen(sm,man));
+			sm.push(new HighScoresScreen(sm,man));
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-iI.getHeight())
-			sm.set(new InstructionsScreen(sm,man));
+			sm.push(new InstructionsScreen(sm,man));
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-eI.getHeight())
 			Gdx.app.exit();
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-sI.getHeight())
@@ -103,6 +103,16 @@ public class MenuScreen extends Screen {
 	@Override
 	public void dispose() {
 		menu.dispose();
+		lI.dispose();
+		lA.dispose();
+		hI.dispose();
+		hA.dispose();
+		iI.dispose();
+		iA.dispose();
+		eI.dispose();
+		eA.dispose();
+		sI.dispose();
+		sA.dispose();
 	}
 
 }

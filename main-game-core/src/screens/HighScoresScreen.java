@@ -119,7 +119,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	@Override
 	public void dispose() {
-		font.dispose();
+//		font.dispose();
 
 	}
 

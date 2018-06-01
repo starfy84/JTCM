@@ -61,8 +61,8 @@ public class BonusLevel extends Screen {
 
 	@Override
 	public void dispose() {
-		map.dispose();
-		person.dispose();
+//		map.dispose();
+//		person.dispose();
 	}
 
 }
