@@ -27,7 +27,7 @@ public class LevelOne extends Screen {
  * @version 0.4
  * @author Rohit & Dereck
  */
-	private Texture map, minimap, blackdot,bar;
+	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4;
 	private	BufferedImage collisionPic;
 	private Sprite person;
 	private Color[][] collisionArr;
@@ -53,6 +53,9 @@ public class LevelOne extends Screen {
 		minimap = man.get("map.png",Texture.class);
 		blackdot = man.get("blackdot.png",Texture.class);
 		bar = man.get("blank.jpg",Texture.class);
+		bar2 = man.get("blank.jpg",Texture.class);
+		bar3 = man.get("blank.jpg",Texture.class);
+		bar4 = man.get("blank.jpg",Texture.class);
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -144,7 +147,8 @@ public class LevelOne extends Screen {
 		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
 		s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
-		s.draw(bar, JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2+person.getHeight()+20,person.getWidth()* health,30);
+		s.draw(bar, JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2+person.getHeight()+20,person.getWidth()* health,10);
+		
 		s.setColor(Color.WHITE);
 		s.end();
 
