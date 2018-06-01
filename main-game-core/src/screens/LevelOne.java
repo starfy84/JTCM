@@ -187,11 +187,11 @@ public class LevelOne extends Screen {
 		s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*health3,10);
 		s.setColor(health4>0.7f?Color.GREEN:health4>0.3f?Color.YELLOW:Color.RED);
 		s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
+		s.setColor(Color.WHITE);
 		s.draw(act1,JTCM.WIDTH-act1.getWidth()-5,100);
 		s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,100);
 		s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,100);
 		s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,100);
-		s.setColor(Color.WHITE);
 		s.end();
 
 	}
