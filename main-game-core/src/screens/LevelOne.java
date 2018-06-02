@@ -103,10 +103,22 @@ public class LevelOne extends Screen {
 			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 			charY += 0.5;
 		}
-		if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=minimap.getWidth()+5 && Gdx.input.getY()<=JTCM.HEIGHT && Gdx.input.getY()>=(JTCM.HEIGHT-minimap.getHeight()+5))
+		if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=(minimap.getWidth()/5)+5 && Gdx.input.getY()>=JTCM.HEIGHT-minimap.getHeight()/5 && Gdx.input.getY()<=JTCM.HEIGHT)
 		{
+			System.out.println(Gdx.input.getX()+">=0 && "+ Gdx.input.getX()+"<="+(minimap.getWidth()/5+5) +"&&"+ Gdx.input.getY()+"<="+minimap.getHeight()/5+"&&"+Gdx.input.getY()+">=0");
+			System.out.println("hit!");
 			sm.push(new MinimapScreen(sm,man));
 		}
+		
+		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-100 && Gdx.input.getY()>=JTCM.HEIGHT-100-act1.getHeight())
+			health = Math.min(1, health4+0.05f);
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-200 && Gdx.input.getY()>=JTCM.HEIGHT-200-act2.getHeight())
+			health2 = Math.min(1, health3+0.05f);
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-300 && Gdx.input.getY()>=JTCM.HEIGHT-300-act3.getHeight())
+			health3 = Math.min(1, health2+0.05f);
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-400 && Gdx.input.getY()>=JTCM.HEIGHT-400-act4.getHeight())
+			health4 = Math.min(1, health+0.05f);
+		
 		if(Gdx.input.isKeyPressed(Keys.NUM_1))
 			health = Math.max(0,health-0.01f);
 		if(Gdx.input.isKeyPressed(Keys.NUM_2))
@@ -189,9 +201,9 @@ public class LevelOne extends Screen {
 		s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
 		s.setColor(Color.WHITE);
 		s.draw(act1,JTCM.WIDTH-act1.getWidth()-5,100);
-		s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,100);
-		s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,100);
-		s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,100);
+		s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
+		s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
+		s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
 		s.end();
 
 	}
