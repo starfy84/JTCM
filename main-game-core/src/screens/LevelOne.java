@@ -31,7 +31,7 @@ public class LevelOne extends Screen {
 	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4,act1,act2,act3,act4;
 	
 	
-	//Temportary font drawer
+	//Temporary font drawer
 	private BitmapFont font;
 	
 	//Collision Picture
@@ -144,11 +144,7 @@ public class LevelOne extends Screen {
 			charY += 0.5;
 		}
 		if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=(minimap.getWidth()/5)+5 && Gdx.input.getY()>=JTCM.HEIGHT-minimap.getHeight()/5 && Gdx.input.getY()<=JTCM.HEIGHT)
-		{
-			System.out.println(Gdx.input.getX()+">=0 && "+ Gdx.input.getX()+"<="+(minimap.getWidth()/5+5) +"&&"+ Gdx.input.getY()+"<="+minimap.getHeight()/5+"&&"+Gdx.input.getY()+">=0");
-			System.out.println("hit!");
 			sm.push(new MinimapScreen(sm,man));
-		}
 		//END OF INPUT FOR CHARACTER MOVEMENT
 		
 		//START OF INPUT FOR ACTION-BAR CLICKING
@@ -198,12 +194,25 @@ public class LevelOne extends Screen {
 		}
 	}
 	
+	/**
+	 * Handles input for exiting the game
+	 */
 	private void checkExit()
 	{
 		if(Gdx.input.isKeyJustPressed(Keys.X)) {
 			sm.pop();
 		}
 	}
+	
+	/**
+	 * Debugger method, prints the current score.
+	 */
+	private void printScore()
+	{
+		if(Gdx.input.isKeyJustPressed(Keys.L))
+			System.out.println((health + health2 + health3 + health4)*100);
+	}
+	
 	/**
 	 * This method will be run on a loop.
 	 * 
@@ -226,13 +235,14 @@ public class LevelOne extends Screen {
 				health3 = Math.max(0,health3-rate);
 				health4 = Math.max(0,health4-rate);
 				lastT = System.currentTimeMillis();
-				System.out.println(rate);
 			}
 			if(health <=0 || health2<=0 || health3<=0 || health4<=0)
 				alive = false;
 		}
 		checkSetting();
 		checkExit();
+		if(DEBUG)
+			printScore();
 
 	}
 	

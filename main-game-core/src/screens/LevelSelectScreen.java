@@ -66,7 +66,6 @@ public class LevelSelectScreen extends Screen {
 	@Override
 	public void update(double t) {
 		getInput();
-		System.out.printf("x: %d\ny: %d\n\n",Gdx.input.getX(),Gdx.input.getY());
 	}
 
 	/**
