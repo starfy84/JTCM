@@ -165,16 +165,32 @@ public class LevelOne extends Screen {
 		currentT = System.currentTimeMillis();
 		if(currentT-lastT>=1000)
 		{
-			health = Math.max(0,health-0.01f);
-			health2 = Math.max(0,health2-0.01f);
-			health3 = Math.max(0,health3-0.01f);
-			health4 = Math.max(0,health4-0.01f);
+			float rate = getRate();
+			health = Math.max(0,health-rate);
+			health2 = Math.max(0,health2-rate);
+			health3 = Math.max(0,health3-rate);
+			health4 = Math.max(0,health4-rate);
 			lastT = System.currentTimeMillis();
+			System.out.println(rate);
 		}
-		
-		
-		if(health<=0)
-			System.out.println("Dead!");
+	}
+	
+	/**
+	 * This method finds out how fast each bar should deplete
+	 * @return rate
+	 */
+	private float getRate() {
+		int countGreen=0,countYellow=0,countRed=0;
+		float[] arr = {health,health2,health3,health4};
+		for(float x : arr) {
+			if (x>0.7f)
+				countGreen++;
+			else if (x>0.3f)
+				countYellow++;
+			else
+				countRed++;
+		}
+		return (countGreen>0?0.01f:0)+ 0.015f*countYellow + 0.02f*countRed;
 	}
 
 	/**
