@@ -26,17 +26,35 @@ public class LevelOne extends Screen {
  * @version 0.4
  * @author Rohit & Dereck
  */
+	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
 	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4,act1,act2,act3,act4;
+	
+	//Collision Picture
 	private	BufferedImage collisionPic;
+	
+	//Player --PLEASE CHANGE SPRITE--
 	private Sprite person;
+	
+	//Array for collision
 	private Color[][] collisionArr;
 	
+	//X and Y of map
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
+	
+	//Character's x and y on the array
 	private double charX, charY;
+	
+	//Health values 1,2,3 and 4
 	private float health,health2,health3,health4;
+	
+	//Song
 	public static Music music;
+	
+	//Time for health depletion 
 	private long currentT,lastT;
 	
+	//Debugging mode
+	private final boolean DEBUG = true;
     /**
      * {@link LevelOne} constructor
      * @param sm screen manager to determine current screen
@@ -67,17 +85,25 @@ public class LevelOne extends Screen {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
 		}
+		
+		//Transpose map to an array of colours
 		collisionArr = new Color [collisionPic.getHeight()][collisionPic.getWidth()];
 		for (int row = 0; row < collisionPic.getHeight(); row++ ) {
 			for (int col = 0; col < collisionPic.getWidth(); col++) {
 				collisionArr[row][col]= new Color(collisionPic.getRGB(col, row));
 			}
 		}
+		
+		//Character is in the centre of the array
 		charX = collisionPic.getWidth()/2;
 		charY = collisionPic.getHeight()/2;
 		
 		person = new Sprite(man.get("person.png",Texture.class));
+		
+		//Scale character
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
+		
+		//Character is in the centre of the screen
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
 		lastT = System.currentTimeMillis();
 	}
@@ -87,6 +113,8 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void getInput()  {
+		
+		//START OF INPUT FOR CHARACTER MOVEMENT
 		if (Gdx.input.isKeyPressed(Keys.RIGHT) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE))) {
 			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
 			charX += 0.5;
@@ -109,7 +137,9 @@ public class LevelOne extends Screen {
 			System.out.println("hit!");
 			sm.push(new MinimapScreen(sm,man));
 		}
+		//END OF INPUT FOR CHARACTER MOVEMENT
 		
+		//START OF INPUT FOR ACTION-BAR CLICKING
 		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-100 && Gdx.input.getY()>=JTCM.HEIGHT-100-act1.getHeight())
 			health4 = Math.min(1, health4+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-200 && Gdx.input.getY()>=JTCM.HEIGHT-200-act2.getHeight())
@@ -118,26 +148,33 @@ public class LevelOne extends Screen {
 			health2 = Math.min(1, health2+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-400 && Gdx.input.getY()>=JTCM.HEIGHT-400-act4.getHeight())
 			health = Math.min(1, health+0.05f);
+		//END OF INPUT FOR ACTION-BAR CLICKING
 		
-		if(Gdx.input.isKeyPressed(Keys.NUM_1))
-			health = Math.max(0,health-0.01f);
-		if(Gdx.input.isKeyPressed(Keys.NUM_2))
-			health2 = Math.max(0,health2-0.01f);
-		if(Gdx.input.isKeyPressed(Keys.NUM_3))
-			health3 = Math.max(0,health3-0.01f);
-		if(Gdx.input.isKeyPressed(Keys.NUM_4))
-			health4 = Math.max(0,health4-0.01f);
-		
-		if(Gdx.input.isKeyJustPressed(Keys.Q))
-			health =1;
-		if(Gdx.input.isKeyJustPressed(Keys.W))
-			health2 =1;
-		if(Gdx.input.isKeyJustPressed(Keys.E))
-			health3 =1;
-		if(Gdx.input.isKeyJustPressed(Keys.R))
-			health4 =1;
-		if(Gdx.input.isKeyJustPressed(Keys.X))
-			sm.pop();
+		//START OF DEBUG TOOLS
+		if(DEBUG) {
+			//Brings health down
+			if(Gdx.input.isKeyPressed(Keys.NUM_1))
+				health = Math.max(0,health-0.01f);
+			if(Gdx.input.isKeyPressed(Keys.NUM_2))
+				health2 = Math.max(0,health2-0.01f);
+			if(Gdx.input.isKeyPressed(Keys.NUM_3))
+				health3 = Math.max(0,health3-0.01f);
+			if(Gdx.input.isKeyPressed(Keys.NUM_4))
+				health4 = Math.max(0,health4-0.01f);
+			
+			//Resets health
+			if(Gdx.input.isKeyJustPressed(Keys.Q))
+				health =1;
+			if(Gdx.input.isKeyJustPressed(Keys.W))
+				health2 =1;
+			if(Gdx.input.isKeyJustPressed(Keys.E))
+				health3 =1;
+			if(Gdx.input.isKeyJustPressed(Keys.R))
+				health4 =1;
+			if(Gdx.input.isKeyJustPressed(Keys.X))
+				sm.pop();
+		}
+		//END OF DEBUG TOOLS
 	}
 
 	/**
@@ -146,7 +183,7 @@ public class LevelOne extends Screen {
 	public void checkSetting()
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.S)) {
-			JTCM.getSettingsScreen().setMusic(music);
+			JTCM.getSettingsScreen().setMusic(music); //Change music target
 			sm.push(JTCM.getSettingsScreen());
 		}
 	}
@@ -163,6 +200,8 @@ public class LevelOne extends Screen {
 		checkSetting();
 		
 		currentT = System.currentTimeMillis();
+		
+		//Checks if 1 second has passed
 		if(currentT-lastT>=1000)
 		{
 			float rate = getRate();
@@ -201,12 +240,24 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void render(SpriteBatch s) {
-		s.begin();
+		s.begin(); //Begins sprite batch
+		
+		//Map
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+		
+		//Rectangular border
 		s.draw(blackdot,0,0,minimap.getWidth()/5+5, minimap.getHeight()/5+5);
+		
+		//Minimap
 		s.draw(minimap, 0, 0, minimap.getWidth()/5, minimap.getHeight()/5);
+		
+		//Dot on minimap
 		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
+		
+		//Person
 		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
+		
+		//Changes colours of health bar and draws bars 1,2,3 and 4
 		s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
 		s.draw(bar, 10, JTCM.HEIGHT-20,JTCM.WIDTH/4* health,10);
 		s.setColor(health2>0.7f?Color.GREEN:health2>0.3f?Color.YELLOW:Color.RED);
@@ -215,12 +266,17 @@ public class LevelOne extends Screen {
 		s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*health3,10);
 		s.setColor(health4>0.7f?Color.GREEN:health4>0.3f?Color.YELLOW:Color.RED);
 		s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
+		
+		//Reset tint
 		s.setColor(Color.WHITE);
+		
+		//Action bars 1,2,3 and 4
 		s.draw(act1,JTCM.WIDTH-act1.getWidth()-5,100);
 		s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
 		s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
 		s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
-		s.end();
+		
+		s.end(); //Ends sprite batch
 
 	}
 
@@ -229,7 +285,6 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void dispose() {
-//		map.dispose();
 		music.dispose();
 	}
 

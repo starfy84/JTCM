@@ -20,16 +20,34 @@ import screens.*;
  */
 public class JTCM extends ApplicationAdapter {
 
+	//Width of screen
 	public static final int WIDTH = 1280;
+	
+	//Height of screen
 	public static final int HEIGHT = 720;
+	
+	//Title of game
 	public static final String TITLE = "Journey to Channelenmajour";
+	
+	//Image manager
     private AssetManager man;
+    
+    //Screen manager
 	private ScreenManager sm;
+	
+	//Graphics drawer
 	private SpriteBatch batch;
+	
+	//Settings screen
 	private static SettingsScreen sc;
-	public static final float PPM = 100;
+	
+	//Clickable buttons
 	private static final String[] buttons=new String[] {"bonus","lvl1","lvl2","lvl3","Tut","lvlslct","highscores","instructions","exit","setting"};
+	
+	//Selectable text
 	private static final String[] text = new String[] {"bright","sound"};
+	
+	
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the
 	 * screen manager.
@@ -40,6 +58,8 @@ public class JTCM extends ApplicationAdapter {
                 batch = new SpriteBatch();
                 sm = new ScreenManager();
                 Gdx.gl.glClearColor(1, 2, 1, 1);
+                
+                //Loading assets
                 man.load("collisionDetection.png",Texture.class);
                 man.load("map.png",Texture.class);
                 man.load("menu.png",Texture.class);
@@ -57,6 +77,8 @@ public class JTCM extends ApplicationAdapter {
                 	man.load(x+"Idle.png",Texture.class);
                 }
                 while(!man.update());
+                
+               //Starting menu screen
                sm.push(new MenuScreen(sm,man));
                 sc = new SettingsScreen(sm, man,null);
         }

@@ -1,5 +1,7 @@
 package com.main.game.desktop;
 
+import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.main.game.JTCM;
@@ -26,6 +28,10 @@ public class DesktopLauncher {
 		conf.height = JTCM.HEIGHT;
 		conf.forceExit = false;
 		conf.resizable = false;
+		
+		conf.addIcon("icon-128.png", FileType.Internal);
+		conf.addIcon("icon-32.png", FileType.Internal);
+		conf.addIcon("icon-16.png", FileType.Internal);
 		new LwjglApplication(new JTCM(), conf);
 	}
 }
