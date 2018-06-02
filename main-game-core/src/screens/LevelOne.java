@@ -120,7 +120,7 @@ public class LevelOne extends Screen {
 			health4 = Math.min(1, health+0.05f);
 		
 		if(Gdx.input.isKeyPressed(Keys.NUM_1))
-			healt4 = Math.max(0,health-0.01f);
+			health4 = Math.max(0,health-0.01f);
 		if(Gdx.input.isKeyPressed(Keys.NUM_2))
 			health3 = Math.max(0,health2-0.01f);
 		if(Gdx.input.isKeyPressed(Keys.NUM_3))
