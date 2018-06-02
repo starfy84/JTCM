@@ -111,22 +111,22 @@ public class LevelOne extends Screen {
 		}
 		
 		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-100 && Gdx.input.getY()>=JTCM.HEIGHT-100-act1.getHeight())
-			health = Math.min(1, health4+0.05f);
+			health4 = Math.min(1, health4+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-200 && Gdx.input.getY()>=JTCM.HEIGHT-200-act2.getHeight())
-			health2 = Math.min(1, health3+0.05f);
+			health3 = Math.min(1, health3+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-300 && Gdx.input.getY()>=JTCM.HEIGHT-300-act3.getHeight())
-			health3 = Math.min(1, health2+0.05f);
+			health2 = Math.min(1, health2+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-400 && Gdx.input.getY()>=JTCM.HEIGHT-400-act4.getHeight())
-			health4 = Math.min(1, health+0.05f);
+			health = Math.min(1, health+0.05f);
 		
 		if(Gdx.input.isKeyPressed(Keys.NUM_1))
-			health4 = Math.max(0,health-0.01f);
+			health = Math.max(0,health-0.01f);
 		if(Gdx.input.isKeyPressed(Keys.NUM_2))
-			health3 = Math.max(0,health2-0.01f);
+			health2 = Math.max(0,health2-0.01f);
 		if(Gdx.input.isKeyPressed(Keys.NUM_3))
-			health2 = Math.max(0,health3-0.01f);
+			health3 = Math.max(0,health3-0.01f);
 		if(Gdx.input.isKeyPressed(Keys.NUM_4))
-			health = Math.max(0,health4-0.01f);
+			health4 = Math.max(0,health4-0.01f);
 		
 		if(Gdx.input.isKeyJustPressed(Keys.Q))
 			health =1;
