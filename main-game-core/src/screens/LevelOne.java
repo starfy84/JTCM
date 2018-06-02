@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
@@ -29,6 +30,10 @@ public class LevelOne extends Screen {
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
 	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4,act1,act2,act3,act4;
 	
+	
+	//Temportary font drawer
+	private BitmapFont font;
+	
 	//Collision Picture
 	private	BufferedImage collisionPic;
 	
@@ -53,6 +58,8 @@ public class LevelOne extends Screen {
 	//Time for health depletion 
 	private long currentT,lastT;
 	
+	private boolean alive;
+	
 	//Debugging mode
 	private final boolean DEBUG = true;
     /**
@@ -62,6 +69,7 @@ public class LevelOne extends Screen {
      */
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
+        alive = true;
         health = 1;
         health2 = 1;
         health3 = 1;
@@ -102,6 +110,10 @@ public class LevelOne extends Screen {
 		
 		//Scale character
 		person.setSize(person.getWidth()*2, person.getHeight()*2);
+		
+		font = new BitmapFont();
+		font.setColor(Color.RED);
+		font.getData().setScale(2);
 		
 		//Character is in the centre of the screen
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
@@ -171,8 +183,6 @@ public class LevelOne extends Screen {
 				health3 =1;
 			if(Gdx.input.isKeyJustPressed(Keys.R))
 				health4 =1;
-			if(Gdx.input.isKeyJustPressed(Keys.X))
-				sm.pop();
 		}
 		//END OF DEBUG TOOLS
 	}
@@ -180,7 +190,7 @@ public class LevelOne extends Screen {
 	/**
 	 * Handles input for settings.
 	 */
-	public void checkSetting()
+	private void checkSetting()
 	{
 		if (Gdx.input.isKeyJustPressed(Keys.S)) {
 			JTCM.getSettingsScreen().setMusic(music); //Change music target
@@ -188,6 +198,12 @@ public class LevelOne extends Screen {
 		}
 	}
 	
+	private void checkExit()
+	{
+		if(Gdx.input.isKeyJustPressed(Keys.X)) {
+			sm.pop();
+		}
+	}
 	/**
 	 * This method will be run on a loop.
 	 * 
@@ -196,22 +212,28 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void update(double t) {
-		getInput();
-		checkSetting();
-		
-		currentT = System.currentTimeMillis();
-		
-		//Checks if 1 second has passed
-		if(currentT-lastT>=1000)
-		{
-			float rate = getRate();
-			health = Math.max(0,health-rate);
-			health2 = Math.max(0,health2-rate);
-			health3 = Math.max(0,health3-rate);
-			health4 = Math.max(0,health4-rate);
-			lastT = System.currentTimeMillis();
-			System.out.println(rate);
+		if(alive) {
+			getInput();
+			currentT = System.currentTimeMillis();
+			
+			
+			//Checks if 1 second has passed
+			if(currentT-lastT>=1000)
+			{
+				float rate = getRate();
+				health = Math.max(0,health-rate);
+				health2 = Math.max(0,health2-rate);
+				health3 = Math.max(0,health3-rate);
+				health4 = Math.max(0,health4-rate);
+				lastT = System.currentTimeMillis();
+				System.out.println(rate);
+			}
+			if(health <=0 || health2<=0 || health3<=0 || health4<=0)
+				alive = false;
 		}
+		checkSetting();
+		checkExit();
+
 	}
 	
 	/**
@@ -241,41 +263,47 @@ public class LevelOne extends Screen {
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin(); //Begins sprite batch
-		
-		//Map
-		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
-		
-		//Rectangular border
-		s.draw(blackdot,0,0,minimap.getWidth()/5+5, minimap.getHeight()/5+5);
-		
-		//Minimap
-		s.draw(minimap, 0, 0, minimap.getWidth()/5, minimap.getHeight()/5);
-		
-		//Dot on minimap
-		s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
-		
-		//Person
-		s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
-		
-		//Changes colours of health bar and draws bars 1,2,3 and 4
-		s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
-		s.draw(bar, 10, JTCM.HEIGHT-20,JTCM.WIDTH/4* health,10);
-		s.setColor(health2>0.7f?Color.GREEN:health2>0.3f?Color.YELLOW:Color.RED);
-		s.draw(bar2, 10, JTCM.HEIGHT-35,JTCM.WIDTH/4*health2,10);
-		s.setColor(health3>0.7f?Color.GREEN:health3>0.3f?Color.YELLOW:Color.RED);
-		s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*health3,10);
-		s.setColor(health4>0.7f?Color.GREEN:health4>0.3f?Color.YELLOW:Color.RED);
-		s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
-		
-		//Reset tint
-		s.setColor(Color.WHITE);
-		
-		//Action bars 1,2,3 and 4
-		s.draw(act1,JTCM.WIDTH-act1.getWidth()-5,100);
-		s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
-		s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
-		s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
-		
+		if(alive) {
+			//Map
+			s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+			
+			//Rectangular border
+			s.draw(blackdot,0,0,minimap.getWidth()/5+5, minimap.getHeight()/5+5);
+			
+			//Minimap
+			s.draw(minimap, 0, 0, minimap.getWidth()/5, minimap.getHeight()/5);
+			
+			//Dot on minimap
+			s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
+			
+			//Person
+			s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
+			
+			//Changes colours of health bar and draws bars 1,2,3 and 4
+			s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar, 10, JTCM.HEIGHT-20,JTCM.WIDTH/4* health,10);
+			s.setColor(health2>0.7f?Color.GREEN:health2>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar2, 10, JTCM.HEIGHT-35,JTCM.WIDTH/4*health2,10);
+			s.setColor(health3>0.7f?Color.GREEN:health3>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*health3,10);
+			s.setColor(health4>0.7f?Color.GREEN:health4>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
+			
+			//Reset tint
+			s.setColor(Color.WHITE);
+			
+			//Action bars 1,2,3 and 4
+			s.draw(act1,JTCM.WIDTH-act1.getWidth()-5,100);
+			s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
+			s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
+			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
+		}
+		else
+		{
+			s.setColor(Color.BLACK);
+			font.draw(s, "You died.", JTCM.WIDTH/2, JTCM.HEIGHT/2);
+			s.setColor(Color.WHITE);
+		}
 		s.end(); //Ends sprite batch
 
 	}
