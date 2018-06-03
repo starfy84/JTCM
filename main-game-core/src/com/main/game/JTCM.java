@@ -104,7 +104,9 @@ public class JTCM extends ApplicationAdapter {
 	 */
 	@Override
 	public void dispose() {
+		man.dispose();
 		batch.dispose();
+		sc.dispose();
 	}
 
 	/**
