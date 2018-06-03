@@ -179,6 +179,7 @@ public class LevelOne extends Screen {
 				health3 =1;
 			if(Gdx.input.isKeyJustPressed(Keys.R))
 				health4 =1;
+
 		}
 		//END OF DEBUG TOOLS
 	}
@@ -245,6 +246,7 @@ public class LevelOne extends Screen {
 			printScore();
 
 	}
+
 	
 	/**
 	 * This method finds out how fast each bar should deplete
