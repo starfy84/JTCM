@@ -110,7 +110,7 @@ public class LevelOne extends Screen {
 		person = new Sprite(man.get("person.png",Texture.class));
 		
 		//Scale character
-		person.setSize(person.getWidth()*2, person.getHeight()*2);
+		person.setSize((int)(person.getWidth()*1.5), (int)(person.getHeight()*1.5));
 		
 		font = new BitmapFont();
 		font.setColor(Color.RED);
