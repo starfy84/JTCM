@@ -1,6 +1,7 @@
 package text;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,6 +21,8 @@ public class Text {
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private Texture blackdot;
+	private String str;
+	private boolean done;
 	public Text(int fontSize,Color c,AssetManager man) {
 		blackdot = man.get("blackdot.png",Texture.class);
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
@@ -33,8 +36,15 @@ public class Text {
 		lastT = System.currentTimeMillis();
 	}
 	public void printText(String str, SpriteBatch s,float x,float y,long time) {
+		long rate=time;
+		if(Gdx.input.isKeyPressed(Keys.SPACE))
+		{
+			rate = time/3;
+		}
+		else
+			rate = time; 
 		currT = System.currentTimeMillis();
-		if(currT - lastT >=time)
+		if(currT - lastT >=rate)
 		{
 			glyph.setText(font, str.substring(0, Math.min(str.length(), i++)));
 			lastT = currT;
@@ -43,8 +53,18 @@ public class Text {
 		s.draw(blackdot,350,10,830,200);
 		s.setColor(Color.WHITE);
 		font.draw(s, glyph, x, y);
+		if (i == str.length()) {
+			done = true;
+		}
+	}
+	private void resetPrint(int a) {
+		i = 0;
 	}
 	public void resetPrint() {
-		i = 0;
+		resetPrint(1);
+		done = false;
+	}
+	public boolean done() {
+		return done;
 	}
 }

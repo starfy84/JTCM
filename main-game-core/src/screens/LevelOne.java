@@ -254,10 +254,7 @@ public class LevelOne extends Screen {
 			if(health <=0 || health2<=0 || health3<=0 || health4<=0)
 				alive = false;
 		}
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-			text.resetPrint();
-			runDialogue = !runDialogue;
-		}
+		checkDialogue();
 		checkSetting();
 		checkExit();
 		if(DEBUG)
@@ -265,6 +262,19 @@ public class LevelOne extends Screen {
 
 	}
 
+	private void checkDialogue() {
+		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+			if(text.done()) {
+				text.resetPrint();
+				runDialogue = false;
+			}
+			else if (!text.done() && !runDialogue){
+				text.resetPrint();
+				runDialogue = true;
+			}
+			
+		}
+	}
 	
 	/**
 	 * This method finds out how fast each bar should deplete
@@ -328,7 +338,7 @@ public class LevelOne extends Screen {
 			s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
 			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
 			if(runDialogue)
-				text.printText("Fakur, wassup", s, 360,200,85);
+				text.printText("Eyy Fakur wassup, it's me, Wakanda forever mbaku, leader of\nthe beyblade club.", s, 360,200,85);
 			SettingsScreen.applyBrightness(s);
 
 		}
