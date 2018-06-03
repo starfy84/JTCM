@@ -241,6 +241,9 @@ public class LevelTwo extends Screen {
 		s.setProjectionMatrix(cam.combined);
 		player.bdy.applyForceToCenter(movement, true);
 		System.out.println(movement);
+		s.begin();
+		SettingsScreen.applyBrightness(s);
+		s.end();
 	}
 
 	/**

@@ -153,6 +153,7 @@ public class HighScoresScreen extends Screen {
 			glyph.setText(font45, scores.get(x)[1]+"");
 			font45.draw(s, glyph, posb, JTCM.HEIGHT-45*(x+3));
 		}
+		SettingsScreen.applyBrightness(s);
 		s.end();
 
 	}

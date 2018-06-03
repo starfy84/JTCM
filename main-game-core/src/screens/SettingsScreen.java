@@ -33,8 +33,9 @@ public class SettingsScreen extends Screen {
 	private Table t;
 	private Map<String, Slider> sliders;
 	private int pos;
-	public static float bright = 1, sound = 0.5f, res = 100;
+	public static float bright = 0.5f, sound = 0.5f, res = 100;
 	private Texture sI,sA,bI,bA;
+	private static Texture blackdot;
 	private Music m;
 	/**
 	 * {@link SettingsScreen} constructor
@@ -49,6 +50,7 @@ public class SettingsScreen extends Screen {
 		bA = man.get("brightActive.png",Texture.class);
 		sI = man.get("soundIdle.png",Texture.class);
 		sA = man.get("soundActive.png",Texture.class);
+		blackdot = man.get("blackdot.png",Texture.class);
 		this.m = m;
 		pos = 0;
 		sliderNames = new String[] { "brightness", "sound"/*, "resolution" */};
@@ -85,6 +87,12 @@ public class SettingsScreen extends Screen {
 		sliders.put(name, tempSlider);
 	}
 
+	public static void applyBrightness(SpriteBatch s) {
+		s.setColor(new Color(1,1,1,1-SettingsScreen.bright));
+		s.draw(blackdot,0,0,JTCM.WIDTH,JTCM.HEIGHT);
+		s.setColor(Color.WHITE);
+	}
+	
 	/**
 	 * This method handles input.
 	 */
@@ -151,6 +159,7 @@ public class SettingsScreen extends Screen {
 		s.begin();
 		s.draw(pos==0?bA:bI,0, JTCM.HEIGHT - JTCM.HEIGHT / 4,JTCM.WIDTH,JTCM.HEIGHT/10);
 		s.draw(pos==1?sA:sI,0,JTCM.HEIGHT - JTCM.HEIGHT / 2,JTCM.WIDTH,JTCM.HEIGHT/10);
+		applyBrightness(s);
 		s.end();
 
 	}
