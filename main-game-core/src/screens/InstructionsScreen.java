@@ -1,9 +1,9 @@
 package screens;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import text.Text;
 /**
  * This class shows an instructions screen ---UNIMPLEMENTED--- </br>
  * Teacher: Ms. Krasteva </br>
@@ -14,8 +14,8 @@ import com.badlogic.gdx.assets.AssetManager;
  */
 public class InstructionsScreen extends Screen {
 
-	BitmapFont font;
-
+	private Text text;
+	
 	/**
 	 * {@link MenuScreen} Constructor
 	 * 
@@ -23,10 +23,8 @@ public class InstructionsScreen extends Screen {
 	 *            Screen manager.
 	 */
         public InstructionsScreen(ScreenManager sm, AssetManager man) {
-                super(sm,man);
-		font = new BitmapFont();
-		font.setColor(Color.BLACK);
-		font.getData().setScale(2);
+        	super(sm,man);
+        	text = new Text();
 	}
 
 	/**
@@ -57,7 +55,7 @@ public class InstructionsScreen extends Screen {
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
-		font.draw(s, "Intructions", 500, 50);
+		text.printText("This is some scrolling text :D", s, 500, 150);
 		s.end();
 	}
 
