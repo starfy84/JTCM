@@ -1,21 +1,23 @@
 package screens;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 
-import com.badlogic.gdx.graphics.Color;
-import java.awt.image.*;
-import javax.imageio.ImageIO;
-import java.io.*;
+import text.Text;
 
 public class LevelOne extends Screen {
 /**
@@ -30,6 +32,8 @@ public class LevelOne extends Screen {
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
 	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4,act1,act2,act3,act4;
 	
+	//Our text drawer
+	private Text text;
 	
 	//Temporary font drawer
 	private BitmapFont font;
@@ -58,7 +62,7 @@ public class LevelOne extends Screen {
 	//Time for health depletion 
 	private long currentT,lastT;
 	
-	private boolean alive,paused;
+	private boolean alive,paused,runDialogue;
 	
 	//Debugging mode
 	private final boolean DEBUG = true;
@@ -70,7 +74,7 @@ public class LevelOne extends Screen {
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
         alive = true;
-        paused = false;
+        paused = runDialogue=false;
         health = 1;
         health2 = 1;
         health3 = 1;
@@ -160,10 +164,12 @@ public class LevelOne extends Screen {
 		//END OF INPUT FOR ACTION-BAR CLICKING
 		
 		//PAUSE FUNCTION
-		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE))
+		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			paused = !paused;
+			System.out.println("Paused button was pressed: "+paused);
+		}
 		
-		
+
 		
 		//START OF DEBUG TOOLS
 		if(DEBUG) {
@@ -229,7 +235,7 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void update(double t) {
-		if(alive) {
+		if(alive && !runDialogue) {
 			getInput();
 			currentT = System.currentTimeMillis();
 			
@@ -246,6 +252,10 @@ public class LevelOne extends Screen {
 			}
 			if(health <=0 || health2<=0 || health3<=0 || health4<=0)
 				alive = false;
+		}
+		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+			text = new Text(45,Color.WHITE,man);
+			runDialogue = !runDialogue;
 		}
 		checkSetting();
 		checkExit();
@@ -316,7 +326,10 @@ public class LevelOne extends Screen {
 			s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
 			s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
 			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
+			if(runDialogue)
+				text.printText("Fakur, wassup", s, 360,200,85);
 			SettingsScreen.applyBrightness(s);
+
 		}
 		else
 		{
