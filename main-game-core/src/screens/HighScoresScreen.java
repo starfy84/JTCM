@@ -3,13 +3,25 @@
  */
 package screens;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.main.game.JTCM;
 
 /**
  * This is the main class of our game, it shows a list of highscores. If there
@@ -22,9 +34,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class HighScoresScreen extends Screen {
 
-	BitmapFont font;
+	BitmapFont font85;
+	BitmapFont font45;
+	GlyphLayout glyph;
 	List<Object[]> scores = new ArrayList<Object[]>();
-
+	float posa;
+	int posb;
 	/**
 	 * {@link HighScoresScreen} constructor
 	 * @param sm Screen manager to determine current screen
@@ -32,9 +47,21 @@ public class HighScoresScreen extends Screen {
 	 */
 	public HighScoresScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
-		font = new BitmapFont();
-		font.setColor(Color.BLACK);
-		font.getData().setScale(2);
+		posa=341;
+		posb=900;
+		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
+		FreeTypeFontParameter param = new FreeTypeFontParameter();
+		param.size = 85;
+		font85 = gen.generateFont(param);
+		font85.setColor(Color.BLACK);
+		font85.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		param.size = 45;
+		font45 = gen.generateFont(param);
+		font45.setColor(Color.BLACK);
+		font45.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		glyph = new GlyphLayout();
+		read();
+
 	}
 
 	/**
@@ -47,7 +74,7 @@ public class HighScoresScreen extends Screen {
 			return;
 		}
 		for(int x = scores.size()-1;x>=0;x--)
-			if((Integer)(score[1]) < (Integer)(scores.get(x)[1])) {
+			if((Integer)(score[1]) <= (Integer)(scores.get(x)[1])) {
 				scores.add(x+1, score);
 				return;
 			}
@@ -61,7 +88,7 @@ public class HighScoresScreen extends Screen {
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscores/scores.txt")));
 			for(Object[] x : scores)
-				out.println("{"+x[0]+"}"+" {"+x[1]+"}");
+				out.println(x[0]+" "+x[1]);
 			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -75,12 +102,11 @@ public class HighScoresScreen extends Screen {
 	public void read() {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("highscores/scores.txt"));
-			String[] tokens;
+			String[] tokens= new String[2];
 			String inp="";
 			while((inp=in.readLine())!=null) {
-				tokens = inp.split("} {");
-				tokens[0] = tokens[0].substring(1);
-				tokens[1] = tokens[1].substring(0, tokens[1].length()-1);
+				tokens[0] = inp.substring(0, inp.lastIndexOf(" "));
+				tokens[1] = inp.substring(inp.lastIndexOf(" ")+1);
 				scores.add(new Object[] {tokens[0],Integer.parseInt(tokens[1])});
 			}
 			
@@ -117,7 +143,16 @@ public class HighScoresScreen extends Screen {
 	@Override
 	public void render(SpriteBatch s) {
 		s.begin();
-		font.draw(s, "High Scores", 50, 50);
+		glyph.setText(font85, "Name");
+		font85.draw(s,glyph, posa, JTCM.HEIGHT-10);
+		glyph.setText(font85, "Score");
+		font85.draw(s, glyph,posb,JTCM.HEIGHT-10);
+		for(int x = 0 ;x < Math.min(10, scores.size());x++) {
+			glyph.setText(font45,scores.get(x)[0]+"");
+			font45.draw(s, glyph, posa,JTCM.HEIGHT-45*(x+3));
+			glyph.setText(font45, scores.get(x)[1]+"");
+			font45.draw(s, glyph, posb, JTCM.HEIGHT-45*(x+3));
+		}
 		s.end();
 
 	}
