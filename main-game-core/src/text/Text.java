@@ -44,4 +44,7 @@ public class Text {
 		s.setColor(Color.WHITE);
 		font.draw(s, glyph, x, y);
 	}
+	public void resetPrint() {
+		i = 0;
+	}
 }

@@ -74,6 +74,7 @@ public class LevelOne extends Screen {
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
         alive = true;
+        text = new Text(45,Color.WHITE,man);
         paused = runDialogue=false;
         health = 1;
         health2 = 1;
@@ -254,7 +255,7 @@ public class LevelOne extends Screen {
 				alive = false;
 		}
 		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-			text = new Text(45,Color.WHITE,man);
+			text.resetPrint();
 			runDialogue = !runDialogue;
 		}
 		checkSetting();
