@@ -116,7 +116,7 @@ public class SettingsScreen extends Screen {
 		Slider slider = sliders.get(name);
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
 			sliders.get(name).setValue(Math.max(slider.getMinValue(), slider.getValue() - slider.getStepSize()));
-		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
+		if (Gdx.input.isKeyPressed(Keys.RIGHT))
 			sliders.get(name).setValue(Math.min(slider.getMaxValue(), slider.getValue() + slider.getStepSize()));
 		bright = sliders.get("brightness").getValue();
 		sound =  sliders.get("sound").getValue();
