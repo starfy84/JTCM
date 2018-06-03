@@ -329,7 +329,7 @@ public class LevelOne extends Screen {
 	}
 
 	/**
-	 * This method disposes uneeded resources.
+	 * This method disposes unneeded resources.
 	 */
 	@Override
 	public void dispose() {
