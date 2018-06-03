@@ -39,7 +39,7 @@ public class Text {
 		long rate=time;
 		if(Gdx.input.isKeyPressed(Keys.SPACE))
 		{
-			rate = time/3;
+			rate = time/5;
 		}
 		else
 			rate = time; 
