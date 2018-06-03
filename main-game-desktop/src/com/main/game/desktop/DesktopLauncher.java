@@ -28,7 +28,6 @@ public class DesktopLauncher {
 		conf.height = JTCM.HEIGHT;
 		conf.forceExit = false;
 		conf.resizable = false;
-		
 		conf.addIcon("icon-128.png", FileType.Internal);
 		conf.addIcon("icon-32.png", FileType.Internal);
 		conf.addIcon("icon-16.png", FileType.Internal);

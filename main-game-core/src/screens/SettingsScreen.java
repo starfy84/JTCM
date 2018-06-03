@@ -33,7 +33,7 @@ public class SettingsScreen extends Screen {
 	private Table t;
 	private Map<String, Slider> sliders;
 	private int pos;
-	public static float bright = 0.5f, sound = 0.5f, res = 100;
+	public static float bright = 0.75f, sound = 0.65f, res = 100;
 	private Texture sI,sA,bI,bA;
 	private static Texture blackdot;
 	private Music m;
@@ -63,8 +63,8 @@ public class SettingsScreen extends Screen {
 		// t.top();
 
 		style = skin.get("default-horizontal", SliderStyle.class);
-		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 4, sliderNames[0]);
-		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 2, sliderNames[1]);
+		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 4, sliderNames[0],0.25f,1,0.01f);
+		makeSlider(JTCM.HEIGHT - JTCM.HEIGHT / 2, sliderNames[1],0,1,0.01f);
 		//makeSlider(JTCM.HEIGHT - JTCM.HEIGHT * 3 / 4, sliderNames[2]);
 		sliders.get("brightness").setValue(bright);
 		sliders.get("sound").setValue(sound);
@@ -76,8 +76,8 @@ public class SettingsScreen extends Screen {
 	 * @param yPos y position
 	 * @param name name
 	 */
-	private void makeSlider(float yPos, String name) {
-		Slider tempSlider = new Slider(0, 1, 0.01f, false, skin);
+	private void makeSlider(float yPos, String name,float start, float end, float step) {
+		Slider tempSlider = new Slider(start, end, step, false, skin);
 		t = new Table();
 		tempSlider.setAnimateDuration(0.1f);
 		tempSlider.setStyle(style);
@@ -113,10 +113,11 @@ public class SettingsScreen extends Screen {
 	 * @param name slider
 	 */
 	public void getInput(String name) {
+		Slider slider = sliders.get(name);
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
-			sliders.get(name).setValue(Math.max(0, sliders.get(name).getValue() - 0.01f));
+			sliders.get(name).setValue(Math.max(slider.getMinValue(), slider.getValue() - slider.getStepSize()));
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
-			sliders.get(name).setValue(Math.min(1, sliders.get(name).getValue() + 0.01f));
+			sliders.get(name).setValue(Math.min(slider.getMaxValue(), slider.getValue() + slider.getStepSize()));
 		bright = sliders.get("brightness").getValue();
 		sound =  sliders.get("sound").getValue();
 		if(m!=null)
