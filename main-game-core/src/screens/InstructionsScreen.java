@@ -56,6 +56,7 @@ public class InstructionsScreen extends Screen {
 	public void render(SpriteBatch s) {
 		s.begin();
 		text.printText("This is some scrolling text :D", s, 500, 150);
+		SettingsScreen.applyBrightness(s);
 		s.end();
 	}
 

@@ -60,6 +60,7 @@ public class LoadingScreen extends Screen {
 		System.out.println("pong");
 		s.begin();
 		s.draw(load, 0,0,JTCM.WIDTH,JTCM.HEIGHT);
+		SettingsScreen.applyBrightness(s);
 		s.end();
 		try {
 			Thread.sleep(1000);

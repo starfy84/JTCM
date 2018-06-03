@@ -65,6 +65,7 @@ public class MinimapScreen extends Screen {
 		// TODO Auto-generated method stub
 		s.begin();
 		s.draw(map, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
+		SettingsScreen.applyBrightness(s);
 		s.end();
 	}
 

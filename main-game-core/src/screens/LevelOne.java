@@ -58,7 +58,7 @@ public class LevelOne extends Screen {
 	//Time for health depletion 
 	private long currentT,lastT;
 	
-	private boolean alive;
+	private boolean alive,paused;
 	
 	//Debugging mode
 	private final boolean DEBUG = true;
@@ -70,6 +70,7 @@ public class LevelOne extends Screen {
     public LevelOne(ScreenManager sm,AssetManager man) {
         super(sm, man);
         alive = true;
+        paused = false;
         health = 1;
         health2 = 1;
         health3 = 1;
@@ -157,6 +158,12 @@ public class LevelOne extends Screen {
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-400 && Gdx.input.getY()>=JTCM.HEIGHT-400-act4.getHeight())
 			health = Math.min(1, health+0.05f);
 		//END OF INPUT FOR ACTION-BAR CLICKING
+		
+		//PAUSE FUNCTION
+		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE))
+			paused = !paused;
+		
+		
 		
 		//START OF DEBUG TOOLS
 		if(DEBUG) {
@@ -307,6 +314,7 @@ public class LevelOne extends Screen {
 			s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
 			s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
 			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
+			SettingsScreen.applyBrightness(s);
 		}
 		else
 		{

@@ -83,6 +83,7 @@ public class LevelSelectScreen extends Screen {
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-twoI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+twoI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-twoI.getHeight()?twoA:twoI,JTCM.WIDTH/2-twoI.getWidth()/2,300);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-threeI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+threeI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-threeI.getHeight()?threeA:threeI,JTCM.WIDTH/2-threeI.getWidth()/2,200);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-bonusI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+bonusI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-bonusI.getHeight()?bonusA:bonusI,JTCM.WIDTH/2-bonusI.getWidth()/2,100);
+		SettingsScreen.applyBrightness(s);
 		s.end();
 
 	}

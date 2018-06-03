@@ -67,6 +67,7 @@ public class BonusLevel extends Screen {
 		s.begin();
 		s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 		s.draw(person, JTCM.WIDTH/2-90, JTCM.HEIGHT/2-100, person.getWidth()*2, person.getHeight()*2);
+		SettingsScreen.applyBrightness(s);
 		s.end();
 
 	}

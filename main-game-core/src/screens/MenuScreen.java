@@ -93,6 +93,7 @@ public class MenuScreen extends Screen {
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-iI.getHeight()?iA:iI,JTCM.WIDTH/2-iI.getWidth()/2,300);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-eI.getHeight()?eA:eI,JTCM.WIDTH/2-eI.getWidth()/2,200);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-sI.getHeight()?sA:sI,JTCM.WIDTH/4-sI.getWidth()/2,100);
+		SettingsScreen.applyBrightness(s);
 		s.end();
 
 	}
