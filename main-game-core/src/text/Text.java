@@ -35,27 +35,30 @@ public class Text {
 		i = 0;
 		lastT = System.currentTimeMillis();
 	}
-	public void printText(String str, SpriteBatch s,float x,float y,long time) {
+	public void printText(String str, SpriteBatch s,float x,float y,float xBoxPos,float yBoxPos,float w, float h,float dim,long time) {
 		long rate=time;
 		if(Gdx.input.isKeyPressed(Keys.SPACE))
-		{
 			rate = time/5;
-		}
 		else
 			rate = time; 
+//		if(Gdx.input.isKeyJustPressed(Keys.ENTER))
+//			i = str.length();
 		currT = System.currentTimeMillis();
 		if(currT - lastT >=rate)
 		{
 			glyph.setText(font, str.substring(0, Math.min(str.length(), i++)));
 			lastT = currT;
 		}
-		s.setColor(new Color(1,1,1,0.7f));
-		s.draw(blackdot,350,10,830,200);
+		s.setColor(new Color(1,1,1,dim));
+		s.draw(blackdot,xBoxPos,yBoxPos,w,h);
 		s.setColor(Color.WHITE);
 		font.draw(s, glyph, x, y);
-		if (i == str.length()) {
+		if (i >= str.length()) {
 			done = true;
 		}
+	}
+	public void printText(String str,SpriteBatch s,long time) {
+		printText(str,s,360,200,350,10,830,200,0.7f,time);
 	}
 	private void resetPrint(int a) {
 		i = 0;

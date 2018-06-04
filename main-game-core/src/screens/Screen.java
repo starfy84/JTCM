@@ -5,6 +5,7 @@ package screens;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -32,6 +33,7 @@ public abstract class Screen {
     protected OrthogonalTiledMapRenderer otmr;
     protected Viewport vp;
     protected World world;
+    protected TransitionManager tman;
 	/**
 	 * {@link Screen} Constructor
 	 * 
@@ -45,6 +47,7 @@ public abstract class Screen {
                 vp = new FitViewport(JTCM.WIDTH,JTCM.HEIGHT,cam);
                 //cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 pointer = new Vector3();
+                tman = new TransitionManager(JTCM.batch, man.get("blackdot.png",Texture.class));
         }
 
 	/**

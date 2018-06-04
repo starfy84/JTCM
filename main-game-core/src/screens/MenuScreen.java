@@ -65,6 +65,10 @@ public class MenuScreen extends Screen {
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-sI.getHeight())
 			sm.push(JTCM.getSettingsScreen());
 	}
+	
+	private void transition() {
+		
+	}
 
 	/**
 	 * This method will be run on a loop.

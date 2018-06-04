@@ -21,10 +21,10 @@ import screens.*;
 public class JTCM extends ApplicationAdapter {
 
 	//Width of screen
-	public static int WIDTH = 1280;
+	public static final int WIDTH = 1280;
 	
 	//Height of screen
-	public static int HEIGHT = 720;
+	public static final int HEIGHT = 720;
 	
 	//Title of game
 	public static final String TITLE = "Journey to Channelenmajour";
@@ -36,7 +36,7 @@ public class JTCM extends ApplicationAdapter {
 	private ScreenManager sm;
 	
 	//Graphics drawer
-	private SpriteBatch batch;
+	public static SpriteBatch batch;
 	
 	//Settings screen
 	private static SettingsScreen sc;
@@ -79,6 +79,7 @@ public class JTCM extends ApplicationAdapter {
                 }
                 while(!man.update());
                 sc = new SettingsScreen(sm, man,null);
+                
                 //Starting menu screen
                 sm.push(new MenuScreen(sm,man));
         }

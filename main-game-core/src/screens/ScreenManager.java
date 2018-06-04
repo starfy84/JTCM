@@ -52,8 +52,8 @@ public class ScreenManager {
 	 *            Screen.
 	 */
 	public void set(Screen scr) {
-		screens.pop().dispose();
-		screens.push(scr);
+		pop();
+		push(scr);
 	}
 
 	/**
