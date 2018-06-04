@@ -3,7 +3,6 @@ package screens;
 import java.util.Stack;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 /**
  * This is the main class of our game, it starts the Main Menu screen. </br>

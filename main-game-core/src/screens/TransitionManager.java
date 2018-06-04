@@ -6,38 +6,44 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 
 public class TransitionManager {
-	private static SpriteBatch s;
-	private static Texture blackdot;
-	
-	public static void load(SpriteBatch sb,Texture img) {
+	private SpriteBatch s;
+	private Texture blackdot;
+	private float x,y;
+	private boolean in,out;
+	public TransitionManager(SpriteBatch sb,Texture img) {
 		s = sb;
 		blackdot = img;
+		in = out = false;
+		x = 0;
+		y = 1;
 	}
 	
-	public static void fadeOut() {
-		s.begin();
-		for(float x = 0; x <=1 ; x+=0.01f) {
-			s.setColor(new Color(1,1,1,x));
-			s.draw(blackdot, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
-			s.setColor(Color.WHITE);
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		s.end();
+	public void reset() {
+		x =0;
+		y=1;
+		in = out = false;
+	}
+	public void fadeOut() {
+		s.setColor(new Color(1,1,1,Math.min(x+=0.01f, 1)));
+		s.draw(blackdot, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
+		s.setColor(Color.WHITE);
+		if(x>=1)
+			out=true;
 	}
 	
-	public static void fadeIn() {
-		s.begin();
-		for(float x = 1; x >=0 ; x-=0.01f) {
-			s.setColor(new Color(1,1,1,x));
-			s.draw(blackdot, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
-			s.setColor(Color.WHITE);
-		}
-		s.end();
+	public void fadeIn() {
+		s.setColor(new Color(1,1,1,Math.max(0, y-=0.01f)));
+		s.draw(blackdot, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
+		s.setColor(Color.WHITE);
+		if(y<=0)
+			in=true;
+	}
+	
+	public boolean inDone() {
+		return in;
+	}
+	public boolean outDone() {
+		return out;
 	}
 
 }
