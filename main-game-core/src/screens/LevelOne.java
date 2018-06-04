@@ -106,7 +106,6 @@ public class LevelOne extends Screen {
 		for (int row = 0; row < collisionPic.getHeight(); row++ ) {
 			for (int col = 0; col < collisionPic.getWidth(); col++) {
 				collisionArr[row][col]= new java.awt.Color(collisionPic.getRGB(col, row));
-				//if(collisionArr[row][col].equals(Color.WHITE))System.out.println(Color.valueOf(String.valueOf(collisionArr[row][col])));
 			}
 		}
 		
@@ -135,24 +134,26 @@ public class LevelOne extends Screen {
 	public void getInput()  {
 		
 		//START OF INPUT FOR CHARACTER MOVEMENT
-		if (Gdx.input.isKeyPressed(Keys.RIGHT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.WHITE)) || (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.RED)))) {
-			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
-			charX += 2.5;
-		}
-		if (Gdx.input.isKeyPressed(Keys.LEFT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.RED)))) {
-			xCoord += JTCM.WIDTH*5.0/map.getWidth()/2*5;
-			charX -= 2.5;
-		}
-		if (Gdx.input.isKeyPressed(Keys.UP) && ((collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(java.awt.Color.RED) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.RED)))) {
-			yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2*5;
-			charY -= 2.5;
-		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN) && ((collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.RED) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.RED)))) {
-			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
-			charY += 2.5;
-		}
-		if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=(minimap.getWidth()/5)+5 && Gdx.input.getY()>=JTCM.HEIGHT-minimap.getHeight()/5 && Gdx.input.getY()<=JTCM.HEIGHT)
-			sm.push(new MinimapScreen(sm,man));
+		try {
+			if (Gdx.input.isKeyPressed(Keys.RIGHT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.WHITE)) || (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.RED)))) {
+				xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
+				charX += 2.5;
+			}
+			if (Gdx.input.isKeyPressed(Keys.LEFT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.RED)))) {
+				xCoord += JTCM.WIDTH*5.0/map.getWidth()/2*5;
+				charX -= 2.5;
+			}
+			if (Gdx.input.isKeyPressed(Keys.UP) && ((collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(java.awt.Color.RED) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.RED)))) {
+				yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2*5;
+				charY -= 2.5;
+			}
+			if (Gdx.input.isKeyPressed(Keys.DOWN) && ((collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.RED) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.RED)))) {
+				yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
+				charY += 2.5;
+			}
+			if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=(minimap.getWidth()/5)+5 && Gdx.input.getY()>=JTCM.HEIGHT-minimap.getHeight()/5 && Gdx.input.getY()<=JTCM.HEIGHT)
+				sm.push(new MinimapScreen(sm,man));
+		} catch (ArrayIndexOutOfBoundsException e) {}
 		//END OF INPUT FOR CHARACTER MOVEMENT
 		
 		//START OF INPUT FOR ACTION-BAR CLICKING
@@ -308,14 +309,15 @@ public class LevelOne extends Screen {
 		if(alive) {
 			
 			//Check if player is indoors
-			if (collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE)) {
-				//Map
-				s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
-			}
-			else
+			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.RED))
 			{
 				//Indoor Map
 				s.draw(indoorMap, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+			}
+			else
+			{
+				//Map
+				s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 			}
 
 			
@@ -326,7 +328,7 @@ public class LevelOne extends Screen {
 			s.draw(minimap, 0, 0, minimap.getWidth()/5, minimap.getHeight()/5);
 			
 			//Dot on minimap
-			s.draw(blackdot, (float)(charX-5),(float)(179-charY-5), 10, 10);
+			s.draw(blackdot, (float)(charX/5-5),(float)(179-charY/5-5), 10, 10);
 			
 			//Person
 			s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
