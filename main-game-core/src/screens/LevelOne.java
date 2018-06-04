@@ -30,7 +30,7 @@ public class LevelOne extends Screen {
  * @author Rohit & Dereck
  */
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
-	private Texture map, minimap, blackdot,bar,bar2,bar3,bar4,act1,act2,act3,act4;
+	private Texture map, indoorMap, minimap, blackdot, bar, bar2, bar3, bar4, act1, act2, act3, act4;
 	
 	//Our text drawer
 	private Text text;
@@ -54,15 +54,15 @@ public class LevelOne extends Screen {
 	private double charX, charY;
 	
 	//Health values 1,2,3 and 4
-	private float health,health2,health3,health4;
+	private float health, health2, health3, health4;
 	
 	//Song
 	public static Music music;
 	
 	//Time for health depletion 
-	private long currentT,lastT;
+	private long currentT, lastT;
 	
-	private boolean alive,paused,runDialogue;
+	private boolean alive, paused, runDialogue;
 	
 	//Debugging mode
 	private final boolean DEBUG = true;
@@ -75,7 +75,7 @@ public class LevelOne extends Screen {
         super(sm, man);
         alive = true;
         text = new Text(45,Color.WHITE,man);
-        paused = runDialogue=false;
+        paused = runDialogue = false;
         health = 1;
         health2 = 1;
         health3 = 1;
@@ -84,7 +84,8 @@ public class LevelOne extends Screen {
         music.setVolume(SettingsScreen.sound);
         music.setLooping(true);
         music.play();
-        map = man.get("map.png",Texture.class);
+        map = man.get("map.png",Texture.class); 
+        indoorMap = man.get("indoorMap.png",Texture.class);
 		minimap = man.get("map.png",Texture.class);
 		blackdot = man.get("blackdot.png",Texture.class);
 		bar = man.get("blank.jpg",Texture.class);
@@ -105,6 +106,7 @@ public class LevelOne extends Screen {
 		for (int row = 0; row < collisionPic.getHeight(); row++ ) {
 			for (int col = 0; col < collisionPic.getWidth(); col++) {
 				collisionArr[row][col]= new Color(collisionPic.getRGB(col, row));
+				//if(collisionArr[row][col].equals(Color.WHITE))System.out.println(Color.valueOf(String.valueOf(collisionArr[row][col])));
 			}
 		}
 		
@@ -133,21 +135,21 @@ public class LevelOne extends Screen {
 	public void getInput()  {
 		
 		//START OF INPUT FOR CHARACTER MOVEMENT
-		if (Gdx.input.isKeyPressed(Keys.RIGHT) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+0.5)].equals(Color.WHITE))) {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(Color.WHITE)) || (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(Color.RED)))) {
 			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
-			charX += 0.5;
+			charX += 2.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.LEFT) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-2)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-2)].equals(Color.WHITE))) {
+		if (Gdx.input.isKeyPressed(Keys.LEFT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(Color.WHITE))||(collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(Color.RED)))) {
 			xCoord += JTCM.WIDTH*5.0/map.getWidth()/2*5;
-			charX -= 0.5;
+			charX -= 2.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.UP) && collisionArr[(int)Math.ceil(charY-0.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-1.5)].equals(Color.WHITE)) {
+		if (Gdx.input.isKeyPressed(Keys.UP) && ((collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(Color.WHITE))||(collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(Color.RED) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(Color.RED)))) {
 			yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2*5;
-			charY -= 0.5;
+			charY -= 2.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN) && collisionArr[(int)Math.floor(charY+0.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-1.5)].equals(Color.WHITE)) {
+		if (Gdx.input.isKeyPressed(Keys.DOWN) && ((collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(Color.WHITE))||(collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(Color.RED) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(Color.RED)))) {
 			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
-			charY += 0.5;
+			charY += 2.5;
 		}
 		if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=(minimap.getWidth()/5)+5 && Gdx.input.getY()>=JTCM.HEIGHT-minimap.getHeight()/5 && Gdx.input.getY()<=JTCM.HEIGHT)
 			sm.push(new MinimapScreen(sm,man));
@@ -304,8 +306,18 @@ public class LevelOne extends Screen {
 	public void render(SpriteBatch s) {
 		s.begin(); //Begins sprite batch
 		if(alive) {
-			//Map
-			s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+			
+			//Check if player is indoors
+			if (collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(Color.WHITE)) {
+				//Map
+				s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+			}
+			else
+			{
+				//Indoor Map
+				s.draw(indoorMap, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
+			}
+
 			
 			//Rectangular border
 			s.draw(blackdot,0,0,minimap.getWidth()/5+5, minimap.getHeight()/5+5);
