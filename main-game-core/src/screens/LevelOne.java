@@ -45,7 +45,7 @@ public class LevelOne extends Screen {
 	private Sprite person;
 	
 	//Array for collision
-	private Color[][] collisionArr;
+	private java.awt.Color[][] collisionArr;
 	
 	//X and Y of map
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
@@ -102,10 +102,10 @@ public class LevelOne extends Screen {
 		}
 		
 		//Transpose map to an array of colours
-		collisionArr = new Color [collisionPic.getHeight()][collisionPic.getWidth()];
+		collisionArr = new java.awt.Color [collisionPic.getHeight()][collisionPic.getWidth()];
 		for (int row = 0; row < collisionPic.getHeight(); row++ ) {
 			for (int col = 0; col < collisionPic.getWidth(); col++) {
-				collisionArr[row][col]= new Color(collisionPic.getRGB(col, row));
+				collisionArr[row][col]= new java.awt.Color(collisionPic.getRGB(col, row));
 				//if(collisionArr[row][col].equals(Color.WHITE))System.out.println(Color.valueOf(String.valueOf(collisionArr[row][col])));
 			}
 		}
@@ -135,19 +135,19 @@ public class LevelOne extends Screen {
 	public void getInput()  {
 		
 		//START OF INPUT FOR CHARACTER MOVEMENT
-		if (Gdx.input.isKeyPressed(Keys.RIGHT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(Color.WHITE)) || (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(Color.RED)))) {
+		if (Gdx.input.isKeyPressed(Keys.RIGHT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.WHITE)) || (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.RED)))) {
 			xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
 			charX += 2.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.LEFT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(Color.WHITE))||(collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(Color.RED)))) {
+		if (Gdx.input.isKeyPressed(Keys.LEFT) && ((collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.RED)))) {
 			xCoord += JTCM.WIDTH*5.0/map.getWidth()/2*5;
 			charX -= 2.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.UP) && ((collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(Color.WHITE))||(collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(Color.RED) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(Color.RED)))) {
+		if (Gdx.input.isKeyPressed(Keys.UP) && ((collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(java.awt.Color.RED) && collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.RED)))) {
 			yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 			charY -= 2.5;
 		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN) && ((collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(Color.WHITE))||(collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(Color.RED) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(Color.RED)))) {
+		if (Gdx.input.isKeyPressed(Keys.DOWN) && ((collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE))||(collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.RED) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.RED)))) {
 			yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 			charY += 2.5;
 		}
@@ -308,7 +308,7 @@ public class LevelOne extends Screen {
 		if(alive) {
 			
 			//Check if player is indoors
-			if (collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(Color.WHITE)) {
+			if (collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE)) {
 				//Map
 				s.draw(map, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
 			}
