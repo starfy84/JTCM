@@ -78,6 +78,9 @@ public class JTCM extends ApplicationAdapter {
                 }
                 while(!man.update());
                 sc = new SettingsScreen(sm, man,null);
+                
+                TransitionManager.load(batch, man.get("blackdot.png",Texture.class));
+                
                 //Starting menu screen
                 sm.push(new MenuScreen(sm,man));
         }
