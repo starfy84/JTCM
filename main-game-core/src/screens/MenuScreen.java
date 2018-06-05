@@ -28,21 +28,23 @@ public class MenuScreen extends Screen {
 	 */
         public MenuScreen(ScreenManager sm, AssetManager man) {
                 super(sm,man);
-                menu = man.get("newMenu.png",Texture.class);
-                lI = man.get("lvlslctIdle.jpg",Texture.class);
-                lA = man.get("lvlslctActive.jpg",Texture.class);
+                menu = man.get("back.png",Texture.class);
+                lI = man.get("lvlslctIdle.png",Texture.class);
+                lA = man.get("lvlslctActive.png",Texture.class);
                 
-                hI = man.get("highscoresIdle.jpg",Texture.class);
-                hA = man.get("highscoresActive.jpg",Texture.class);
+                hI = man.get("highscoresIdle.png",Texture.class);
+                hA = man.get("highscoresActive.png",Texture.class);
                 
-                iI = man.get("instructionsIdle.jpg",Texture.class);
-                iA = man.get("instructionsActive.jpg",Texture.class);
+                iI = man.get("instructionsIdle.png",Texture.class);
+                iA = man.get("instructionsActive.png",Texture.class);
                 
-                eI = man.get("exitIdle.jpg",Texture.class);
-                eA = man.get("exitActive.jpg",Texture.class);
+                eI = man.get("exitIdle.png",Texture.class);
+                eA = man.get("exitActive.png",Texture.class);
                 
                 sI = man.get("settingIdle.jpg",Texture.class);
                 sA = man.get("settingActive.jpg",Texture.class);
+                
+                
                 
 	}
 
@@ -51,15 +53,15 @@ public class MenuScreen extends Screen {
 	 */
 	@Override
 	public void getInput() {
-		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2 && Gdx.input.getY()<=Gdx.graphics.getHeight()-500 && Gdx.input.getY()>=Gdx.graphics.getHeight()-500-lI.getHeight())
+		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2 && Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-300)&& Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-300)-lI.getHeight())
 			sm.push(new LevelSelectScreen(sm,man));
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-hI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+hI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-400 && Gdx.input.getY()>=Gdx.graphics.getHeight()-400-hI.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-hI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+hI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-400) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-400)-hI.getHeight())
 			sm.push(new HighScoresScreen(sm,man));
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-iI.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-500) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-500)-iI.getHeight())
 			sm.push(new InstructionsScreen(sm,man));
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-eI.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-600) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-600)-eI.getHeight())
 			Gdx.app.exit();
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-sI.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-700) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-700)-sI.getHeight())
 			sm.push(JTCM.getSettingsScreen());
 		else if (Gdx.input.isKeyJustPressed(Keys.K))
 			sm.push(new NameScreen(sm,man));
@@ -87,11 +89,11 @@ public class MenuScreen extends Screen {
 	public void render(SpriteBatch s) {
 		s.begin();
 		s.draw(menu, 0, 0, JTCM.WIDTH, JTCM.HEIGHT);
-		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2 && Gdx.input.getY()<=Gdx.graphics.getHeight()-500 && Gdx.input.getY()>=Gdx.graphics.getHeight()-500-lI.getHeight()?lA:lI,JTCM.WIDTH/2-lI.getWidth()/2,500);
-		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-hI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+hI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-400 && Gdx.input.getY()>=Gdx.graphics.getHeight()-400-hI.getHeight()?hA:hI,JTCM.WIDTH/2-hI.getWidth()/2,400);
-		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-iI.getHeight()?iA:iI,JTCM.WIDTH/2-iI.getWidth()/2,300);
-		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-eI.getHeight()?eA:eI,JTCM.WIDTH/2-eI.getWidth()/2,200);
-		s.draw(Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-sI.getHeight()?sA:sI,JTCM.WIDTH/4-sI.getWidth()/2,100);
+		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-300)&& Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-300)-lI.getHeight()?lA:lI,JTCM.WIDTH/2-lI.getWidth()/2,JTCM.HEIGHT-300);
+		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-hI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+hI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-400) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-400)-hI.getHeight()?hA:hI,JTCM.WIDTH/2-hI.getWidth()/2,JTCM.HEIGHT-400);
+		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-500) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-500)-iI.getHeight()?iA:iI,JTCM.WIDTH/2-iI.getWidth()/2,JTCM.HEIGHT-500);
+		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-600) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-600)-eI.getHeight()?eA:eI,JTCM.WIDTH/2-eI.getWidth()/2,JTCM.HEIGHT-600);
+		s.draw(Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-700) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-700)-sI.getHeight()?sA:sI,JTCM.WIDTH/4-sI.getWidth()/2,JTCM.HEIGHT-700);
 		SettingsScreen.applyBrightness(s);
 		s.end();
 

@@ -1,6 +1,7 @@
 package screens;
 
 import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -19,7 +20,6 @@ import com.main.game.JTCM;
 
 import text.Text;
 
-public class LevelOne extends Screen {
 /**
  * This class runs level one of the game </br>
  * Teacher: Ms. Krasteva </br>
@@ -29,6 +29,8 @@ public class LevelOne extends Screen {
  * @version 0.4
  * @author Rohit & Dereck
  */
+public class LevelOne extends Screen {
+
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
 	private Texture map, indoorMap, minimap, blackdot, bar, bar2, bar3, bar4, act1, act2, act3, act4;
 	

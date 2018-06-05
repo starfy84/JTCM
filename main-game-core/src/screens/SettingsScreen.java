@@ -35,8 +35,8 @@ public class SettingsScreen extends Screen {
 	private Map<String, Slider> sliders;
 	private Map<String,Integer> vals;
 	private int pos;
-	public static float bright = 0.75f, sound = 0.65f, res = 100;
-	private Texture sI,sA,bI,bA;
+	public static float bright = 1f, sound = 0.5f, res = 100;
+	private Texture sI,sA,bI,bA,bg;
 	private static Texture blackdot;
 	private Music m;
 	/**
@@ -48,6 +48,7 @@ public class SettingsScreen extends Screen {
 	public SettingsScreen(ScreenManager sm, AssetManager man,Music m) {
 		super(sm, man);
 		Gdx.gl.glClearColor(1, 2, 1, 1);
+		bg = man.get("back.png",Texture.class);
 		bI = man.get("brightIdle.png",Texture.class);
 		bA = man.get("brightActive.png",Texture.class);
 		sI = man.get("soundIdle.png",Texture.class);
@@ -170,14 +171,19 @@ public class SettingsScreen extends Screen {
 	public void render(SpriteBatch s) {
 		// TODO Auto-generated method stub
 		//Gdx.gl.glClearColor(0, 0, 0, 0);
+		s.begin();
+		s.draw(bg,0,0,JTCM.WIDTH,JTCM.HEIGHT);
+		s.end();
 		st.draw();
 		st.act();
-
 		s.begin();
 		s.draw(pos==0?bA:bI,0, JTCM.HEIGHT - JTCM.HEIGHT / 4,JTCM.WIDTH,JTCM.HEIGHT/10);
 		s.draw(pos==1?sA:sI,0,JTCM.HEIGHT - JTCM.HEIGHT / 2,JTCM.WIDTH,JTCM.HEIGHT/10);
 		applyBrightness(s);
 		s.end();
+
+
+
 
 	}
 

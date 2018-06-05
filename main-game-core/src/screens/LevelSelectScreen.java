@@ -25,17 +25,17 @@ public class LevelSelectScreen extends Screen {
         public LevelSelectScreen(ScreenManager sm, AssetManager man) {
                 super(sm,man);
                 
-                bg = man.get("lvlslct.jpg",Texture.class);
-                tutI = man.get("TutIdle.jpg",Texture.class);
-                tutA = man.get("TutActive.jpg",Texture.class);
-                oneI = man.get("lvl1Idle.jpg",Texture.class);
-                oneA = man.get("lvl1Active.jpg",Texture.class);
-                twoI = man.get("lvl2Idle.jpg",Texture.class);
-                twoA = man.get("lvl2Active.jpg",Texture.class);
-                threeI = man.get("lvl3Idle.jpg",Texture.class);
-                threeA = man.get("lvl3Active.jpg",Texture.class);
-                bonusI = man.get("bonusIdle.jpg",Texture.class);
-                bonusA = man.get("bonusActive.jpg",Texture.class);
+                bg = man.get("back.png",Texture.class);
+                tutI = man.get("TutIdle.png",Texture.class);
+                tutA = man.get("TutActive.png",Texture.class);
+                oneI = man.get("lvl1Idle.png",Texture.class);
+                oneA = man.get("lvl1Active.png",Texture.class);
+                twoI = man.get("lvl2Idle.png",Texture.class);
+                twoA = man.get("lvl2Active.png",Texture.class);
+                threeI = man.get("lvl3Idle.png",Texture.class);
+                threeA = man.get("lvl3Active.png",Texture.class);
+                bonusI = man.get("bonusIdle.png",Texture.class);
+                bonusA = man.get("bonusActive.png",Texture.class);
 		
 		
 	}

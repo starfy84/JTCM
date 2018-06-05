@@ -19,10 +19,10 @@ import screens.*;
 public class JTCM extends ApplicationAdapter {
 
 	//Width of screen
-	public static final int WIDTH = 1280;
+	public static final int WIDTH = 1280/*800*/;
 	
 	//Height of screen
-	public static final int HEIGHT = 720;
+	public static final int HEIGHT = 720/*480*/;
 	
 	//Title of game
 	public static final String TITLE = "Journey to Channelenmajour";
@@ -40,10 +40,10 @@ public class JTCM extends ApplicationAdapter {
 	private static SettingsScreen sc;
 	
 	//Clickable buttons
-	private static final String[] buttons=new String[] {"bonus","lvl1","lvl2","lvl3","Tut","lvlslct","highscores","instructions","exit","setting"};
+	private static final String[] buttons=new String[] {"setting"};
 	
 	//Selectable text
-	private static final String[] text = new String[] {"bright","sound"};
+	private static final String[] text = new String[] {"bright","sound","exit","lvlslct","highscores","instructions","lvl3","bonus","lvl1","lvl2","Tut"};
 	
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the
@@ -65,6 +65,7 @@ public class JTCM extends ApplicationAdapter {
                 man.load("person.png",Texture.class);
                 man.load("lvlslct.jpg",Texture.class);
                 man.load("newMenu.png",Texture.class);
+                man.load("back.png",Texture.class);
                 man.load("blank.jpg",Texture.class);
                 for(String x : buttons) {
                 	man.load(x+"Active.jpg",Texture.class);
