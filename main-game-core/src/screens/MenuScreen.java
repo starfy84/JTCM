@@ -22,7 +22,6 @@ import com.badlogic.gdx.assets.AssetManager;
 public class MenuScreen extends Screen {
 
 	private Texture menu,lI,lA,hI,hA,iI,iA,eI,eA,sI,sA;
-
 	/**
 	 * {@link MenuScreen} Constructor
 	 * 
@@ -64,10 +63,8 @@ public class MenuScreen extends Screen {
 			Gdx.app.exit();
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-sI.getHeight())
 			sm.push(JTCM.getSettingsScreen());
-	}
-	
-	private void transition() {
-		
+		else if (Gdx.input.isKeyJustPressed(Keys.K))
+			sm.push(new NameScreen(sm,man));
 	}
 
 	/**

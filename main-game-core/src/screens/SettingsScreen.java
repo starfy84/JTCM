@@ -11,11 +11,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.main.game.JTCM;
 /**
  * This class allows adjustments of the settings </br>
@@ -32,6 +34,7 @@ public class SettingsScreen extends Screen {
 	private SliderStyle style;
 	private Table t;
 	private Map<String, Slider> sliders;
+	private Map<String,Integer> vals;
 	private int pos;
 	public static float bright = 0.75f, sound = 0.65f, res = 100;
 	private Texture sI,sA,bI,bA;
@@ -55,6 +58,9 @@ public class SettingsScreen extends Screen {
 		pos = 0;
 		sliderNames = new String[] { "brightness", "sound"/*, "resolution" */};
 		sliders = new HashMap<String, Slider>();
+		vals = new HashMap<String,Integer>();
+		vals.put(sliderNames[0], 0);
+		vals.put(sliderNames[1], 1);
 		st = new Stage();
 		// Gdx.input.setInputProcessor(s);
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"),
@@ -69,6 +75,7 @@ public class SettingsScreen extends Screen {
 		sliders.get("brightness").setValue(bright);
 		sliders.get("sound").setValue(sound);
 		//sliders.get("resolution").setValue(res);
+		Gdx.input.setInputProcessor(st);
 	}
 
 	/**
@@ -81,7 +88,22 @@ public class SettingsScreen extends Screen {
 		t = new Table();
 		tempSlider.setAnimateDuration(0.1f);
 		tempSlider.setStyle(style);
+		tempSlider.setName(name);
 		t.setPosition(JTCM.WIDTH - JTCM.WIDTH / 2f, yPos);
+		tempSlider.addListener(new ClickListener() {
+	         @Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				// TODO Auto-generated method stub
+	        	 pos = vals.get(event.getTarget().getName());
+				return super.touchDown(event, x, y, pointer, button);
+			}
+
+			@Override
+	         public void clicked(InputEvent event, float x, float y)
+	          {
+	        	 
+	          }
+		});
 		t.add(tempSlider).width(JTCM.WIDTH / 2f);
 		st.addActor(t);
 		sliders.put(name, tempSlider);
