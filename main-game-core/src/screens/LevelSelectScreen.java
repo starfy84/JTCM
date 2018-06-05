@@ -25,7 +25,7 @@ public class LevelSelectScreen extends Screen {
         public LevelSelectScreen(ScreenManager sm, AssetManager man) {
                 super(sm,man);
                 
-                bg = man.get("back.png",Texture.class);
+                bg = man.get("ChallengerBackground.jpg",Texture.class);
                 tutI = man.get("TutIdle.png",Texture.class);
                 tutA = man.get("TutActive.png",Texture.class);
                 oneI = man.get("lvl1Idle.png",Texture.class);

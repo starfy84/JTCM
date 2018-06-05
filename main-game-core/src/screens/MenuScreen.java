@@ -28,7 +28,7 @@ public class MenuScreen extends Screen {
 	 */
         public MenuScreen(ScreenManager sm, AssetManager man) {
                 super(sm,man);
-                menu = man.get("back.png",Texture.class);
+                menu = man.get("ChallengerBackground.jpg",Texture.class);
                 lI = man.get("lvlslctIdle.png",Texture.class);
                 lA = man.get("lvlslctActive.png",Texture.class);
                 
