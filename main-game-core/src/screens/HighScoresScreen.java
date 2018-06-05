@@ -109,7 +109,7 @@ public class HighScoresScreen extends Screen {
 				tokens[1] = inp.substring(inp.lastIndexOf(" ")+1);
 				scores.add(new Object[] {tokens[0],Integer.parseInt(tokens[1])});
 			}
-			
+			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

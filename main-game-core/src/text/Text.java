@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.main.game.JTCM;
 
 public class Text {
 	private int i;
@@ -21,7 +20,6 @@ public class Text {
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private Texture blackdot;
-	private String str;
 	private boolean done;
 	public Text(int fontSize,Color c,AssetManager man) {
 		blackdot = man.get("blackdot.png",Texture.class);

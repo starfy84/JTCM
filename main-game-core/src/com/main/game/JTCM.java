@@ -1,7 +1,5 @@
 package com.main.game;
 
-import java.io.IOException;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -46,7 +44,6 @@ public class JTCM extends ApplicationAdapter {
 	
 	//Selectable text
 	private static final String[] text = new String[] {"bright","sound"};
-	
 	
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the

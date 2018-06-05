@@ -1,6 +1,5 @@
 package screens;
 
-import java.io.IOException;
 import java.util.*;
 
 import com.badlogic.gdx.Gdx;
@@ -75,7 +74,7 @@ public class SettingsScreen extends Screen {
 		sliders.get("brightness").setValue(bright);
 		sliders.get("sound").setValue(sound);
 		//sliders.get("resolution").setValue(res);
-		Gdx.input.setInputProcessor(st);
+		
 	}
 
 	/**
@@ -93,16 +92,9 @@ public class SettingsScreen extends Screen {
 		tempSlider.addListener(new ClickListener() {
 	         @Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				// TODO Auto-generated method stub
 	        	 pos = vals.get(event.getTarget().getName());
 				return super.touchDown(event, x, y, pointer, button);
 			}
-
-			@Override
-	         public void clicked(InputEvent event, float x, float y)
-	          {
-	        	 
-	          }
 		});
 		t.add(tempSlider).width(JTCM.WIDTH / 2f);
 		st.addActor(t);
@@ -165,6 +157,7 @@ public class SettingsScreen extends Screen {
 		// TODO Auto-generated method stub
 		getInput();
 		getInput(sliderNames[pos]);
+		Gdx.input.setInputProcessor(st);
 	}
 
 	/**
@@ -177,8 +170,9 @@ public class SettingsScreen extends Screen {
 	public void render(SpriteBatch s) {
 		// TODO Auto-generated method stub
 		//Gdx.gl.glClearColor(0, 0, 0, 0);
-		st.act(Gdx.graphics.getDeltaTime());
 		st.draw();
+		st.act();
+
 		s.begin();
 		s.draw(pos==0?bA:bI,0, JTCM.HEIGHT - JTCM.HEIGHT / 4,JTCM.WIDTH,JTCM.HEIGHT/10);
 		s.draw(pos==1?sA:sI,0,JTCM.HEIGHT - JTCM.HEIGHT / 2,JTCM.WIDTH,JTCM.HEIGHT/10);
@@ -200,6 +194,7 @@ public class SettingsScreen extends Screen {
 //		bI.dispose();
 //		bA.dispose()	;
 //		m.dispose();
+
 
 	}
 
