@@ -32,7 +32,7 @@ public class InstructionsScreen extends Screen {
 	private GlyphLayout glyph;
 	private int pos;
 	private String[] text;
-	private Texture bg;
+	private Texture bg,lI,lA,rI,rA;
 
 	/**
 	 * {@link MenuScreen} Constructor
@@ -52,6 +52,10 @@ public class InstructionsScreen extends Screen {
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		font.getData().markupEnabled = true;
 		pos = 0;
+		lI = man.get("leftIdle.png",Texture.class);
+		lA = man.get("leftActive.png",Texture.class);
+		rI = man.get("rightIdle.png",Texture.class);
+		rA = man.get("rightActive.png",Texture.class);
 		text = new String[] { "[ROYAL]Goal[]: Have the highest score at the end of each level.",
 				"You play as a student and try to [ROYAL]keep all of your status bars high[].",
 				"[ROYAL]Status bars degrade consistently[] so you must try your hardest to keep them all high!",
@@ -69,10 +73,10 @@ public class InstructionsScreen extends Screen {
 	 */
 	@Override
 	public void getInput() {
-		if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
+		if ((Gdx.input.isKeyJustPressed(Keys.LEFT))||(Gdx.input.justTouched()&&Gdx.input.getX()>=20 &&Gdx.input.getX()<=20+lI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT-20&& Gdx.input.getY()>=JTCM.HEIGHT-20-lI.getHeight())) {
 			pos = Math.max(0, pos - 1);
 		}
-		if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+		if ((Gdx.input.isKeyJustPressed(Keys.RIGHT))||(Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-rI.getWidth()-20 &&Gdx.input.getX()<=JTCM.WIDTH-20&& Gdx.input.getY()<=JTCM.HEIGHT-20&& Gdx.input.getY()>=JTCM.HEIGHT-20-rI.getHeight())) {
 			pos = Math.min(pos + 1, text.length - 1);
 		}
 	}
@@ -99,6 +103,9 @@ public class InstructionsScreen extends Screen {
 		glyph.setText(font, text[pos]);
 		s.begin();
 		s.draw(bg, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
+		s.draw(Gdx.input.getX()>=20 &&Gdx.input.getX()<=20+lI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT-20&& Gdx.input.getY()>=JTCM.HEIGHT-20-lI.getHeight()&& pos>0?lA:lI,20,20);
+		s.draw(Gdx.input.getX()>=JTCM.WIDTH-rI.getWidth()-20 &&Gdx.input.getX()<=JTCM.WIDTH-20&& Gdx.input.getY()<=JTCM.HEIGHT-20&& Gdx.input.getY()>=JTCM.HEIGHT-20-rI.getHeight()&&pos<text.length-1?rA:rI,JTCM.WIDTH-rI.getWidth()-20,20);
+
 		font.draw(s, glyph, 10, JTCM.HEIGHT - 10);
 		SettingsScreen.applyBrightness(s);
 		s.end();
