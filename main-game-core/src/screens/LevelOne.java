@@ -250,25 +250,28 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void update(double t) {
-		if(alive && !runDialogue&&!paused) {
-			getInput();
-			currentT = System.currentTimeMillis();
-			
-			
-			//Checks if 1 second has passed
-			if(currentT-lastT>=1000)
-			{
-				float rate = getRate();
-				health = Math.max(0,health-rate);
-				health2 = Math.max(0,health2-rate);
-				health3 = Math.max(0,health3-rate);
-				health4 = Math.max(0,health4-rate);
-				lastT = System.currentTimeMillis();
+		if(!paused) {
+			if(alive && !runDialogue ){
+				getInput();
+				currentT = System.currentTimeMillis();
+				
+				
+				//Checks if 1 second has passed
+				if(currentT-lastT>=1000)
+				{
+					float rate = getRate();
+					health = Math.max(0,health-rate);
+					health2 = Math.max(0,health2-rate);
+					health3 = Math.max(0,health3-rate);
+					health4 = Math.max(0,health4-rate);
+					lastT = System.currentTimeMillis();
+				}
+				if(health <=0 || health2<=0 || health3<=0 || health4<=0)
+					alive = false;
 			}
-			if(health <=0 || health2<=0 || health3<=0 || health4<=0)
-				alive = false;
-		}
 		checkDialogue();
+		}
+		
 		checkSetting();
 		checkExit();
 		checkPaused();
