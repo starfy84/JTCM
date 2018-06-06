@@ -270,10 +270,9 @@ public class LevelOne extends Screen {
 					alive = false;
 			}
 		checkDialogue();
-		}
-		
 		checkSetting();
 		checkExit();
+		}
 		checkPaused();
 		if(DEBUG)
 			printScore();
