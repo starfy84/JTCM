@@ -35,7 +35,7 @@ public class TextProcessing implements InputProcessor{
 		if(!enter) {
 			if(key == 8 && str.length()>0)
 				str = str.substring(0,str.length()-1);
-			else if(str.length()<bound&& ((key>=48&&key<=57)||(key>=65&&key<=90)||(key>=97&&key<=122)))
+			else if(str.length()<bound&& ((key>=48&&key<=57)||(key>=65&&key<=90)||(key>=97&&key<=122)||(key==32&&str.length()>0)))
 				str+=key;
 		}
 		return false;
