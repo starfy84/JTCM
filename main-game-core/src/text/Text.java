@@ -20,8 +20,9 @@ public class Text {
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private Texture blackdot;
-	private boolean done;
+	private boolean done,paused;
 	public Text(int fontSize,Color c,AssetManager man) {
+		this.paused = paused;
 		blackdot = man.get("blackdot.png",Texture.class);
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param= new FreeTypeFontParameter();
@@ -33,7 +34,7 @@ public class Text {
 		i = 0;
 		lastT = System.currentTimeMillis();
 	}
-	public void printText(String str, SpriteBatch s,float x,float y,float xBoxPos,float yBoxPos,float w, float h,float dim,long time) {
+	public void printText(String str, SpriteBatch s,float x,float y,float xBoxPos,float yBoxPos,float w, float h,float dim,long time,boolean paused) {
 		long rate=time;
 		if(Gdx.input.isKeyPressed(Keys.SPACE))
 			rate = time/5;
@@ -44,7 +45,7 @@ public class Text {
 		currT = System.currentTimeMillis();
 		if(currT - lastT >=rate)
 		{
-			glyph.setText(font, str.substring(0, Math.min(str.length(), i++)));
+			glyph.setText(font, str.substring(0, Math.min(str.length(), paused?i:i++)));
 			lastT = currT;
 		}
 		s.setColor(new Color(1,1,1,dim));
@@ -55,8 +56,8 @@ public class Text {
 			done = true;
 		}
 	}
-	public void printText(String str,SpriteBatch s,long time) {
-		printText(str,s,360,200,350,10,830,200,0.7f,time);
+	public void printText(String str,SpriteBatch s,long time,boolean paused) {
+		printText(str,s,360,200,350,10,830,200,0.7f,time,paused);
 	}
 	private void resetPrint(int a) {
 		i = 0;

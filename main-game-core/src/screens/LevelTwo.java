@@ -352,7 +352,7 @@ public class LevelTwo extends Screen {
 			s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
 			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
 			if(runDialogue)
-				text.printText("Eyy Fakur wassup, it's me, Wakanda forever mbaku, leader of\nthe beyblade club.", s,85);
+				text.printText("Eyy Fakur wassup, it's me, Wakanda forever mbaku, leader of\nthe beyblade club.", s,85,paused);
 			SettingsScreen.applyBrightness(s);
 
 		}
