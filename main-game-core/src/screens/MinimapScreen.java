@@ -18,7 +18,7 @@ import com.main.game.JTCM;
  */
 public class MinimapScreen extends Screen {
 
-	Texture map;
+	Texture map,bI,bA;
 	/**
 	 * {@link MinimapScreen} constructor
 	 * @param sm screen manager to determine current screen
@@ -28,28 +28,15 @@ public class MinimapScreen extends Screen {
 		super(sm, man);
 		// TODO Auto-generated constructor stub
 		map = man.get("map.png",Texture.class);
+		bI = man.get("backIdle.png",Texture.class);
+		bA = man.get("backActive.png",Texture.class);
 		//cam.position.set(JTCM.WIDTH/2,JTCM.HEIGHT/2,0);
 	}
 
 	@Override
 	public void getInput() {
-		// TODO Auto-generated method stub
-		if(Gdx.input.isKeyJustPressed(Keys.X)) {
-//			cam.position.set(0,0,0);
+		if(Gdx.input.justTouched()&&Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight())
 			sm.pop();
-		}
-//		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-//			cam.translate(-5, 0);
-//		}
-//		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-//			cam.translate(5, 0);
-//		}
-//		if(Gdx.input.isKeyPressed(Keys.UP)) {
-//			cam.translate(0, 5);
-//		}
-//		if(Gdx.input.isKeyPressed(Keys.DOWN)) {
-//			cam.translate(0, -5);
-//		}
 	}
 
 	@Override
@@ -64,6 +51,7 @@ public class MinimapScreen extends Screen {
 		// TODO Auto-generated method stub
 		s.begin();
 		s.draw(map, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
+		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
 		SettingsScreen.applyBrightness(s);
 		s.end();
 	}

@@ -36,7 +36,7 @@ public class SettingsScreen extends Screen {
 	private Map<String,Integer> vals;
 	private int pos;
 	public static float bright = 1f, sound = 0.5f, res = 100;
-	private Texture sI,sA,bI,bA,bg;
+	private Texture sI,sA,bI,bA,bg,backA,backI;
 	private static Texture blackdot;
 	private Music m;
 	/**
@@ -75,6 +75,8 @@ public class SettingsScreen extends Screen {
 		sliders.get("brightness").setValue(bright);
 		sliders.get("sound").setValue(sound);
 		//sliders.get("resolution").setValue(res);
+		backI = man.get("backWIdle.png",Texture.class);
+		backA = man.get("backWActive.png",Texture.class);
 		
 	}
 
@@ -117,7 +119,8 @@ public class SettingsScreen extends Screen {
 			pos = pos - 1 < 0 ? sliderNames.length - 1 : (pos - 1);
 		else if (Gdx.input.isKeyJustPressed(Keys.DOWN))
 			pos = (pos + 1) % sliderNames.length;
-		else if (Gdx.input.isKeyJustPressed(Keys.X)) {
+		else if(Gdx.input.justTouched()&&Gdx.input.getX()>=0 &&Gdx.input.getX()<=backI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-backI.getHeight())
+		{	
 			pos = 0;
 			sm.pop();
 		}
@@ -179,6 +182,8 @@ public class SettingsScreen extends Screen {
 		s.begin();
 		s.draw(pos==0?bA:bI,0, JTCM.HEIGHT - JTCM.HEIGHT / 4,JTCM.WIDTH,JTCM.HEIGHT/10);
 		s.draw(pos==1?sA:sI,0,JTCM.HEIGHT - JTCM.HEIGHT / 2,JTCM.WIDTH,JTCM.HEIGHT/10);
+		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=backI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-backI.getHeight()?backA:backI, 0, 0);
+
 		applyBrightness(s);
 		s.end();
 

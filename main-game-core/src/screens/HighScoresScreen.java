@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -40,6 +42,7 @@ public class HighScoresScreen extends Screen {
 	List<Object[]> scores = new ArrayList<Object[]>();
 	float posa;
 	int posb;
+	Texture bA,bI;
 	/**
 	 * {@link HighScoresScreen} constructor
 	 * @param sm Screen manager to determine current screen
@@ -49,6 +52,8 @@ public class HighScoresScreen extends Screen {
 		super(sm, man);
 		posa=341;
 		posb=900;
+		bI = man.get("backIdle.png",Texture.class);
+		bA = man.get("backActive.png",Texture.class);
 		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		FreeTypeFontParameter param = new FreeTypeFontParameter();
 		param.size = 85;
@@ -120,7 +125,8 @@ public class HighScoresScreen extends Screen {
 	 */
 	@Override
 	public void getInput() {
-
+		if(Gdx.input.justTouched()&&Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight())
+			sm.pop();
 	}
 
 	/**
@@ -131,7 +137,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	@Override
 	public void update(double t) {
-
+		getInput();
 	}
 
 	/**
@@ -153,6 +159,7 @@ public class HighScoresScreen extends Screen {
 			glyph.setText(font45, scores.get(x)[1]+"");
 			font45.draw(s, glyph, posb, JTCM.HEIGHT-45*(x+3));
 		}
+		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
 		SettingsScreen.applyBrightness(s);
 		s.end();
 

@@ -14,7 +14,7 @@ import com.badlogic.gdx.assets.AssetManager;
  * @author Dereck 
  */
 public class LevelSelectScreen extends Screen {
-	Texture bg,tutI,oneI,twoI,threeI,bonusI,tutA,oneA,twoA,threeA,bonusA;
+	Texture bg,tutI,oneI,twoI,threeI,bonusI,tutA,oneA,twoA,threeA,bonusA,bI,bA;
 
 	/**
 	 * {@link MenuScreen} Constructor
@@ -36,7 +36,8 @@ public class LevelSelectScreen extends Screen {
                 threeA = man.get("lvl3Active.png",Texture.class);
                 bonusI = man.get("bonusIdle.png",Texture.class);
                 bonusA = man.get("bonusActive.png",Texture.class);
-		
+        		bI = man.get("backWIdle.png",Texture.class);
+        		bA = man.get("backWActive.png",Texture.class);
 		
 	}
 
@@ -55,6 +56,8 @@ public class LevelSelectScreen extends Screen {
 			sm.set(new LevelThree(sm,man));
 		else if(Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-bonusI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+bonusI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-bonusI.getHeight())
 			sm.set(new BonusLevel(sm,man));
+		if(Gdx.input.justTouched()&&Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight())
+			sm.pop();
 	}
 
 	/**
@@ -83,6 +86,8 @@ public class LevelSelectScreen extends Screen {
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-twoI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+twoI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-twoI.getHeight()?twoA:twoI,JTCM.WIDTH/2-twoI.getWidth()/2,300);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-threeI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+threeI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-threeI.getHeight()?threeA:threeI,JTCM.WIDTH/2-threeI.getWidth()/2,200);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-bonusI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+bonusI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-100 && Gdx.input.getY()>=Gdx.graphics.getHeight()-100-bonusI.getHeight()?bonusA:bonusI,JTCM.WIDTH/2-bonusI.getWidth()/2,100);
+		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
+
 		SettingsScreen.applyBrightness(s);
 		s.end();
 
