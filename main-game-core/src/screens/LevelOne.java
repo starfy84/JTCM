@@ -1,7 +1,6 @@
 package screens;
 
 import java.awt.image.BufferedImage;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -13,9 +12,13 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.main.game.JTCM;
 
 import text.Text;
@@ -65,6 +68,10 @@ public class LevelOne extends Screen {
 	private long currentT, lastT;
 	
 	private boolean alive, paused, runDialogue;
+	
+	private FreeTypeFontGenerator gen;
+	private FreeTypeFontParameter param;
+	private GlyphLayout glyph;
 	
 	//Debugging mode
 	private final boolean DEBUG = true;
@@ -120,10 +127,14 @@ public class LevelOne extends Screen {
 		//Scale character
 		person.setSize((int)(person.getWidth()*1.5), (int)(person.getHeight()*1.5));
 		
-		font = new BitmapFont();
-		font.setColor(Color.RED);
-		font.getData().setScale(2);
-		
+		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
+		param = new FreeTypeFontParameter();
+		param.size = 65;
+		font = gen.generateFont(param);
+		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		font.getData().markupEnabled = true;
+		font.setColor(Color.BLACK);
+		glyph = new GlyphLayout();
 		//Character is in the centre of the screen
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
 		lastT = System.currentTimeMillis();
@@ -168,14 +179,6 @@ public class LevelOne extends Screen {
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-400 && Gdx.input.getY()>=JTCM.HEIGHT-400-act4.getHeight())
 			health = Math.min(1, health+0.05f);
 		//END OF INPUT FOR ACTION-BAR CLICKING
-		
-		//PAUSE FUNCTION
-		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-			paused = !paused;
-			System.out.println("Paused button was pressed: "+paused);
-		}
-		
-
 		
 		//START OF DEBUG TOOLS
 		if(DEBUG) {
@@ -233,6 +236,13 @@ public class LevelOne extends Screen {
 			System.out.println((health + health2 + health3 + health4)*100);
 	}
 	
+	private void checkPaused() {
+		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			paused = !paused;
+			System.out.println("Paused button was pressed: "+paused);
+		}
+	}
+	
 	/**
 	 * This method will be run on a loop.
 	 * 
@@ -241,7 +251,7 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void update(double t) {
-		if(alive && !runDialogue) {
+		if(alive && !runDialogue&&!paused) {
 			getInput();
 			currentT = System.currentTimeMillis();
 			
@@ -262,6 +272,7 @@ public class LevelOne extends Screen {
 		checkDialogue();
 		checkSetting();
 		checkExit();
+		checkPaused();
 		if(DEBUG)
 			printScore();
 
@@ -359,14 +370,20 @@ public class LevelOne extends Screen {
 			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
 			if(runDialogue)
 				text.printText("Eyy Fakur wassup, it's me, Wakanda forever mbaku, leader of\nthe beyblade club.", s,85);
-			SettingsScreen.applyBrightness(s);
-
 		}
 		else
 		{
-			s.setColor(Color.BLACK);
-			font.draw(s, "You died.", JTCM.WIDTH/2, JTCM.HEIGHT/2);
+			glyph.setText(font, "[RED]You are literally dead.[]");
+			font.draw(s, glyph, JTCM.WIDTH/2-glyph.width/2, JTCM.HEIGHT/2-glyph.height/2);
+		}
+		SettingsScreen.applyBrightness(s);
+		if(paused)
+		{
+			s.setColor(1,1,1,0.9f);
+			s.draw(blackdot, 0,0,JTCM.WIDTH, JTCM.HEIGHT);
 			s.setColor(Color.WHITE);
+			glyph.setText(font, "THE GAME IS LITERALLY PAUSED");
+			font.draw(s, glyph, JTCM.WIDTH/2-glyph.width/2, JTCM.HEIGHT/2-glyph.height/2);	
 		}
 		s.end(); //Ends sprite batch
 
