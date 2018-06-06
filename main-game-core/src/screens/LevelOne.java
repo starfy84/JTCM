@@ -381,7 +381,7 @@ public class LevelOne extends Screen {
 		SettingsScreen.applyBrightness(s);
 		if(paused)
 		{
-			s.setColor(1,1,1,0.9f);
+			s.setColor(1,1,1,0.8f);
 			s.draw(blackdot, 0,0,JTCM.WIDTH, JTCM.HEIGHT);
 			s.setColor(Color.WHITE);
 			glyph.setText(font, "THE GAME IS LITERALLY PAUSED");
