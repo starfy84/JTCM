@@ -43,7 +43,7 @@ public class LevelOne extends Screen {
 	//Collision Picture
 	private	BufferedImage collisionPic;
 	
-	//Player --PLEASE CHANGE SPRITE--
+	//Player
 	private Sprite person;
 	
 	//Array for collision
@@ -53,7 +53,7 @@ public class LevelOne extends Screen {
 	private double xCoord = 0-JTCM.WIDTH*5/2.5, yCoord = 0-JTCM.HEIGHT*5/2.5;
 	
 	//Character's x and y on the array
-	private double charX, charY;
+	private double charX, charY, lastCharY;
 	
 	//Health values 1,2,3 and 4
 	private float health, health2, health3, health4;
@@ -329,9 +329,13 @@ public class LevelOne extends Screen {
 			//Minimap
 			s.draw(minimap, 0, 0, minimap.getWidth()/5, minimap.getHeight()/5);
 			
+			//Check if player is on the path for black dot drawing
+			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE))
+				lastCharY = charY;
+
 			//Dot on minimap
-			s.draw(blackdot, (float)(charX/5-5),(float)(179-charY/5-5), 10, 10);
-			
+			s.draw(blackdot, (float)(charX/5-5),(float)(179-lastCharY/5-5), 10, 10);
+					
 			//Person
 			s.draw(person, person.getX(), person.getY(),person.getWidth(),person.getHeight());
 			
