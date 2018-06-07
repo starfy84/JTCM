@@ -41,8 +41,8 @@ public class MenuScreen extends Screen {
                 eI = man.get("exitIdle.png",Texture.class);
                 eA = man.get("exitActive.png",Texture.class);
                 
-                sI = man.get("settingIdle.jpg",Texture.class);
-                sA = man.get("settingActive.jpg",Texture.class);
+                sI = man.get("settingIdle.png",Texture.class);
+                sA = man.get("settingActive.png",Texture.class);
                 
                 
                 
