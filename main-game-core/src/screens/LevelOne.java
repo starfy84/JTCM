@@ -147,7 +147,7 @@ public class LevelOne extends Screen {
 		
 		//START OF INPUT FOR CHARACTER MOVEMENT
 		try {
-			if (Gdx.input.isKeyPressed(Keys.RIGHT) && (!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.BLACK) || !collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+2.5)].equals(java.awt.Color.BLACK))) {
+			if (Gdx.input.isKeyPressed(Keys.RIGHT) && (!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+7.5)].equals(java.awt.Color.BLACK) || !collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+7.5)].equals(java.awt.Color.BLACK))) {
 				xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
 				charX += 2.5;
 			}
@@ -155,7 +155,7 @@ public class LevelOne extends Screen {
 				xCoord += JTCM.WIDTH*5.0/map.getWidth()/2*5;
 				charX -= 2.5;
 			}
-			if (Gdx.input.isKeyPressed(Keys.UP) && (!collisionArr[(int)Math.ceil(charY-2.5)][(int)Math.round(charX)].equals(java.awt.Color.BLACK) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.BLACK))) {
+			if (Gdx.input.isKeyPressed(Keys.UP) && (!collisionArr[(int)Math.ceil(charY-5)][(int)Math.round(charX+5)].equals(java.awt.Color.BLACK) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.BLACK))) {
 				yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 				charY -= 2.5;
 			}
@@ -323,7 +323,7 @@ public class LevelOne extends Screen {
 		if(alive) {
 			
 			//Check if player is indoors
-			if ((!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLACK))|| (!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.WHITE)&&!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.BLACK)))
+			if ((!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLACK)) || (!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX/*-7.5*/)].equals(java.awt.Color.WHITE)&&!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX/*-7.5*/)].equals(java.awt.Color.BLACK)))
 			{
 				//Indoor Map
 				s.draw(indoorMap, Math.round(xCoord), Math.round(yCoord), JTCM.WIDTH*5, JTCM.HEIGHT*5);
