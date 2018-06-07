@@ -67,7 +67,7 @@ public class LevelOne extends Screen {
 	//Time for health depletion 
 	private long currentT, lastT;
 	
-	private boolean alive, paused, runDialogue;
+	private boolean alive, paused, runDialogue,initScene;
 	
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
@@ -84,7 +84,8 @@ public class LevelOne extends Screen {
         super(sm, man);
         alive = true;
         text = new Text(45,Color.WHITE,man);
-        paused = runDialogue = false;
+        paused = runDialogue =false;
+        initScene = true;
         health = 1;
         health2 = 1;
         health3 = 1;
@@ -238,6 +239,10 @@ public class LevelOne extends Screen {
 	private void checkPaused() {
 		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
 			paused = !paused;
+			if(music.isPlaying())
+				music.pause();
+			else
+				music.play();
 			System.out.println("Paused button was pressed: "+paused);
 		}
 	}
@@ -251,7 +256,7 @@ public class LevelOne extends Screen {
 	@Override
 	public void update(double t) {
 		if(!paused) {
-			if(alive && !runDialogue ){
+			if(alive && !initScene){
 				getInput();
 				currentT = System.currentTimeMillis();
 				
@@ -269,9 +274,12 @@ public class LevelOne extends Screen {
 				if(health <=0 || health2<=0 || health3<=0 || health4<=0)
 					alive = false;
 			}
-		checkDialogue();
-		checkSetting();
-		checkExit();
+			//checkDialogue();
+			checkScene();
+			checkSetting();
+			checkExit();
+			if(!alive)
+				music.stop();
 		}
 		checkPaused();
 		if(DEBUG)
@@ -279,6 +287,12 @@ public class LevelOne extends Screen {
 
 	}
 
+	private void checkScene() {
+		if(text.done()&& Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+			text.resetPrint();
+			initScene = false;
+		}
+	}
 	private void checkDialogue() {
 		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
 			if(text.done()) {
@@ -369,8 +383,12 @@ public class LevelOne extends Screen {
 			s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
 			s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
 			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
-			if(runDialogue)
-				text.printText("Eyy Fakur wassup, it's me, Wakanda forever mbaku, leader of\nthe beyblade club.", s,85,paused);
+			
+			//TEXT DRAWING AREA
+			if(initScene) {
+				text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
+			}
+			//END TEXT DRAWING AREA
 		}
 		else
 		{

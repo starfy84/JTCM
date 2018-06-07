@@ -22,7 +22,7 @@ public class TextProcessing implements InputProcessor{
 	}
 	@Override
 	public boolean keyDown(int key) {
-		if(!enter && str.length()<bound)
+		if(!enter && str.length()<=bound&& str.length()>0)
 			switch(key) {
 			case Keys.ENTER:
 				enter = true;

@@ -17,9 +17,10 @@ import text.TextProcessing;
 
 public class NameScreen extends Screen {
 
-	TextProcessing tp;
-	BitmapFont font;
-	GlyphLayout glyph;
+	private static TextProcessing tp;
+	private BitmapFont font;
+	private GlyphLayout glyph;
+	private static String name="";
 	public NameScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		// TODO Auto-generated constructor stub
@@ -37,7 +38,7 @@ public class NameScreen extends Screen {
 	@Override
 	public void getInput() {
 		// TODO Auto-generated method stub
-		if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		if(tp.enterPressed()) {
 			sm.pop();
 		}
 	}
@@ -61,6 +62,10 @@ public class NameScreen extends Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		
+	}
+	public static String getName() {
+		name = "[RED]"+tp.getString()+"[]";
+		return name;
 	}
 
 }
