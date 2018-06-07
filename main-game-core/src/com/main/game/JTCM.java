@@ -40,10 +40,10 @@ public class JTCM extends ApplicationAdapter {
 	private static SettingsScreen sc;
 	
 	//Clickable buttons
-	private static final String[] buttons=new String[] {"setting"};
+	private static final String[] buttons=new String[] {};
 	
 	//Selectable text
-	private static final String[] text = new String[] {"bright","sound","exit","lvlslct","highscores","instructions","lvl3","bonus","lvl1","lvl2","Tut","left","right","back","backW"};
+	private static final String[] text = new String[] {"bright","sound","exit","lvlslct","highscores","instructions","lvl3","bonus","lvl1","lvl2","Tut","left","right","back","backW","setting"};
 	
 	/**
 	 * This method initializes the sprite batch and pushes the menu screen to the
