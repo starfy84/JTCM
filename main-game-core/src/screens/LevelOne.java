@@ -3,6 +3,10 @@ package screens;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -21,6 +25,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.main.game.JTCM;
 
+import items.Event;
 import text.Text;
 
 /**
@@ -35,7 +40,7 @@ import text.Text;
 public class LevelOne extends Screen {
 
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
-	private Texture map, indoorMap, minimap, blackdot, bar, bar2, bar3, bar4, act1, act2, act3, act4;
+	private Texture map, indoorMap, minimap, blackdot, bar, bar2, bar3, bar4, act1, act2, act3, act4,act5;
 	
 	//Our text drawer
 	private Text text;
@@ -59,20 +64,25 @@ public class LevelOne extends Screen {
 	private double charX, charY, lastCharY;
 	
 	//Health values 1,2,3 and 4
-	private float health, health2, health3, health4;
+	private float health, exercise, happiness, social,energy;
 	
 	//Song
 	public static Music music;
 	
 	//Time for health depletion 
-	private long currentT, lastT;
+	private long currentT, lastT,eCurrT,eLastT;
 	
-	private boolean alive, paused, runDialogue,initScene;
+	private boolean alive, paused, runDialogue,initScene,eventRun;
 	
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
 	private GlyphLayout glyph;
 	
+	private Event event;
+	//Events
+	private List<Event> events;
+	
+	private int currEvent;
 	//Debugging mode
 	private final boolean DEBUG = true;
     /**
@@ -86,10 +96,42 @@ public class LevelOne extends Screen {
         text = new Text(45,Color.WHITE,man);
         paused = runDialogue =false;
         initScene = true;
-        health = 1;
-        health2 = 1;
-        health3 = 1;
-        health4 = 1;
+        health = 1f;
+        exercise = 1f;
+        happiness = 1f;
+        social = 1f;
+        energy = 1f;
+        eventRun = false;
+//        events = new ArrayList<Event>();
+//        Map<String,float[]> temp = new HashMap<String,float[]>();
+//        events.add(new Event("Your power went out! All internet related activites are disabled.", true));
+//        events.add(new Event("You have a stomach ache! Your physical health decreases by 10.",null,new float[] {-0.1f,0,0,0,0},null,""));
+//        events.add(new Event("You have exercised too much! Your energy decreases by 10.",null,new float[] {0,0,0,0,-0.1f},null,""));
+        
+        
+//        temp.put("Tell your parents", new float[] {0f,0f,0f,0f,0f});
+//        temp.put("Tell him your personal information", new float[] {0f,0f,0f,(int)(Math.random()*2)==0?0f:-0.5f,0f});
+//        temp.put("Politely tell him that you won’t tell him your address", new float[] {0f,0f,0f,0.1f,0f});
+//        temp.put("Block him", new float[] {0f,0f,0f,-0.1f,0f});
+//        
+//        events.add(new Event("Met an online friend recently who is asking for your personal info. What do you do?",temp,null,null,"Never tell your personal info to someone you just met. They could be an online predator!"));
+//        events.add(new Event("You're addicted to video games! Social loss doubled. Health loss doubled",null,null,new float[] {2,1,1,2,1},""));
+//        events.add(new Event("You are having a hard time making friends and coping with misfortunate events. Social loss doubled. Health loss doubled. Happiness loss tripled.",null,null,new float[] {2,1,3,2,1},""));
+//        
+//        temp = new HashMap<String,float[]>();
+//        temp.put("Keep going. No pain no gain!", new float[] {-0.2f,0f,0f,0f,0f});
+//        temp.put("Stop exercising", new float[] {0f,0f,0f,10f,0f});
+//        
+//        events.add(new Event("Feeling sharp pain while exercising. What do you do?",temp,null,null,""));
+//        
+//        
+//        temp = new HashMap<String,float[]>();
+//        temp.put("Yell back", new float[] {0f,0f,-0.05f,-0.05f,0f});
+//        temp.put("Take the punishment and say nothing", new float[] {0f,0f,-0.5f,0f,0f});
+//        events.add(new Event("Parents are upset at you for something you don’t agree with! What do you do?",temp,null,null,""));
+//        events.add(new Event("Friends are upset at you for something you don’t agree with! What do you do?",temp,null,null,""));
+        
+        
         music = Gdx.audio.newMusic(Gdx.files.internal("BTS - DNA.mp3"));
         music.setVolume(SettingsScreen.sound);
         music.setLooping(true);
@@ -138,6 +180,7 @@ public class LevelOne extends Screen {
 		//Character is in the centre of the screen
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
 		lastT = System.currentTimeMillis();
+		eLastT = System.currentTimeMillis();
 	}
 
 	/**
@@ -171,11 +214,11 @@ public class LevelOne extends Screen {
 		
 		//START OF INPUT FOR ACTION-BAR CLICKING
 		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-100 && Gdx.input.getY()>=JTCM.HEIGHT-100-act1.getHeight())
-			health4 = Math.min(1, health4+0.05f);
+			social = Math.min(1, social+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-200 && Gdx.input.getY()>=JTCM.HEIGHT-200-act2.getHeight())
-			health3 = Math.min(1, health3+0.05f);
+			happiness = Math.min(1, happiness+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-300 && Gdx.input.getY()>=JTCM.HEIGHT-300-act3.getHeight())
-			health2 = Math.min(1, health2+0.05f);
+			exercise = Math.min(1, exercise+0.05f);
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-400 && Gdx.input.getY()>=JTCM.HEIGHT-400-act4.getHeight())
 			health = Math.min(1, health+0.05f);
 		//END OF INPUT FOR ACTION-BAR CLICKING
@@ -186,22 +229,25 @@ public class LevelOne extends Screen {
 			if(Gdx.input.isKeyPressed(Keys.NUM_1))
 				health = Math.max(0,health-0.01f);
 			if(Gdx.input.isKeyPressed(Keys.NUM_2))
-				health2 = Math.max(0,health2-0.01f);
+				exercise = Math.max(0,exercise-0.01f);
 			if(Gdx.input.isKeyPressed(Keys.NUM_3))
-				health3 = Math.max(0,health3-0.01f);
+				happiness= Math.max(0,happiness-0.01f);
 			if(Gdx.input.isKeyPressed(Keys.NUM_4))
-				health4 = Math.max(0,health4-0.01f);
+				social = Math.max(0,social-0.01f);
 			
 			//Resets health
 			if(Gdx.input.isKeyJustPressed(Keys.Q))
-				health =1;
+				health =1f;
 			if(Gdx.input.isKeyJustPressed(Keys.W))
-				health2 =1;
+				exercise =1f;
 			if(Gdx.input.isKeyJustPressed(Keys.E))
-				health3 =1;
+				happiness =1f;
 			if(Gdx.input.isKeyJustPressed(Keys.R))
-				health4 =1;
+				social =1f;
 
+			if(Gdx.input.isKeyJustPressed(Keys.P))
+				sm.push(new LibraryScreen(sm,man));
+			
 		}
 		//END OF DEBUG TOOLS
 	}
@@ -233,7 +279,7 @@ public class LevelOne extends Screen {
 	private void printScore()
 	{
 		if(Gdx.input.isKeyJustPressed(Keys.L))
-			System.out.println((health + health2 + health3 + health4)*100);
+			System.out.println((health + exercise+happiness +social)*100);
 	}
 	
 	private void checkPaused() {
@@ -259,19 +305,31 @@ public class LevelOne extends Screen {
 			if(alive && !initScene){
 				getInput();
 				currentT = System.currentTimeMillis();
-				
+				eCurrT = System.currentTimeMillis();
 				
 				//Checks if 1 second has passed
 				if(currentT-lastT>=1000)
 				{
 					float rate = getRate();
 					health = Math.max(0,health-rate);
-					health2 = Math.max(0,health2-rate);
-					health3 = Math.max(0,health3-rate);
-					health4 = Math.max(0,health4-rate);
+					exercise = Math.max(0,exercise-rate);
+					happiness = Math.max(0,happiness-rate);
+					social = Math.max(0,social-rate);
 					lastT = System.currentTimeMillis();
 				}
-				if(health <=0 || health2<=0 || health3<=0 || health4<=0)
+//				if(eCurrT-eLastT>=3000)
+//				{
+//					int rand1=(int)(Math.random()*3);
+//					int rand2 = (int)(Math.random()*3);
+//					System.out.println(rand1+" "+rand2);
+//					if(rand1==rand2&&!eventRun) {
+//						currEvent = (int)(Math.random()*events.size());
+//						event = events.get(currEvent);
+//						eventRun = true;
+//					}
+//					eLastT = System.currentTimeMillis();
+//				}
+				if(health <=0 || exercise<=0 || happiness<=0 || social<=0)
 					alive = false;
 			}
 			//checkDialogue();
@@ -313,7 +371,7 @@ public class LevelOne extends Screen {
 	 */
 	private float getRate() {
 		int countGreen=0,countYellow=0,countRed=0;
-		float[] arr = {health,health2,health3,health4};
+		float[] arr = {health,exercise,happiness,social};
 		for(float x : arr) {
 			if (x>0.7f)
 				countGreen++;
@@ -368,12 +426,12 @@ public class LevelOne extends Screen {
 			//Changes colours of health bar and draws bars 1,2,3 and 4
 			s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
 			s.draw(bar, 10, JTCM.HEIGHT-20,JTCM.WIDTH/4* health,10);
-			s.setColor(health2>0.7f?Color.GREEN:health2>0.3f?Color.YELLOW:Color.RED);
-			s.draw(bar2, 10, JTCM.HEIGHT-35,JTCM.WIDTH/4*health2,10);
-			s.setColor(health3>0.7f?Color.GREEN:health3>0.3f?Color.YELLOW:Color.RED);
-			s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*health3,10);
-			s.setColor(health4>0.7f?Color.GREEN:health4>0.3f?Color.YELLOW:Color.RED);
-			s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*health4,10);
+			s.setColor(exercise>0.7f?Color.GREEN:exercise>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar2, 10, JTCM.HEIGHT-35,JTCM.WIDTH/4*exercise,10);
+			s.setColor(happiness>0.7f?Color.GREEN:happiness>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*happiness,10);
+			s.setColor(social>0.7f?Color.GREEN:social>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*social,10);
 			
 			//Reset tint
 			s.setColor(Color.WHITE);
@@ -388,6 +446,12 @@ public class LevelOne extends Screen {
 			if(initScene) {
 				text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
 			}
+//			else if(eventRun&&event.run()) {
+//				events.get(currEvent).trigger();
+//				events.get(currEvent).check();
+//				
+//			}
+
 			//END TEXT DRAWING AREA
 		}
 		else

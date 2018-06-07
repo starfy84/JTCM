@@ -28,7 +28,7 @@ public class JTCM extends ApplicationAdapter {
 	public static final String TITLE = "Journey to Channelenmajour";
 	
 	//Image manager
-    private AssetManager man;
+    public static AssetManager man;
     
     //Screen manager
 	private ScreenManager sm;

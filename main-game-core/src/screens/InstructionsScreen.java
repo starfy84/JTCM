@@ -107,10 +107,11 @@ public class InstructionsScreen extends Screen {
 		glyph.setText(font, text[pos]);
 		s.begin();
 		s.draw(bg, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
-		s.draw(Gdx.input.getX()>=20 &&Gdx.input.getX()<=20+lI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-lI.getHeight()&& pos>0?lA:lI,20,(JTCM.HEIGHT-lI.getHeight())/2);
-		s.draw(Gdx.input.getX()>=JTCM.WIDTH-rI.getWidth()-20 &&Gdx.input.getX()<=JTCM.WIDTH-20&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-rI.getHeight()&&pos<text.length-1?rA:rI,JTCM.WIDTH-rI.getWidth()-20,(JTCM.HEIGHT-rI.getHeight())/2);
-		s.draw(Gdx.input.getX()>=JTCM.WIDTH-rI.getWidth()-20 &&Gdx.input.getX()<=JTCM.WIDTH-20&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-rI.getHeight()&&pos<text.length-1?rA:rI,JTCM.WIDTH-rI.getWidth()-20,(JTCM.HEIGHT-rI.getHeight())/2);
-		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
+		if(pos>0)
+			s.draw(Gdx.input.getX()>=20 &&Gdx.input.getX()<=20+lI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-lI.getHeight()?lA:lI,20,(JTCM.HEIGHT-lI.getHeight())/2);
+		if(pos<text.length-1)
+			s.draw(Gdx.input.getX()>=JTCM.WIDTH-rI.getWidth()-20 &&Gdx.input.getX()<=JTCM.WIDTH-20&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-rI.getHeight()?rA:rI,JTCM.WIDTH-rI.getWidth()-20,(JTCM.HEIGHT-rI.getHeight())/2);
+		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
 		font.draw(s, glyph, 10, JTCM.HEIGHT - 10);
 		SettingsScreen.applyBrightness(s);
 		s.end();
