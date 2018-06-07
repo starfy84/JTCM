@@ -251,7 +251,7 @@ public class LevelOne extends Screen {
 			if(Gdx.input.isKeyJustPressed(Keys.T))
 				energy =1f;
 
-			if(Gdx.input.isKeyJustPressed(Keys.P))
+			if(Gdx.input.isKeyJustPressed(Keys.P) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.GREEN) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.GREEN)))
 				sm.push(new LibraryScreen(sm,man));
 			
 		}
