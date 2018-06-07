@@ -20,14 +20,14 @@ public class Text {
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private Texture blackdot;
-	private boolean done,paused;
+	private boolean done;
 	public Text(int fontSize,Color c,AssetManager man) {
-		this.paused = paused;
 		blackdot = man.get("blackdot.png",Texture.class);
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param= new FreeTypeFontParameter();
 		param.size = fontSize;
 		font = gen.generateFont(param);
+		font.getData().markupEnabled = true;
 		font.setColor(c);
 		glyph = new GlyphLayout(font,"");
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -43,10 +43,22 @@ public class Text {
 //		if(Gdx.input.isKeyJustPressed(Keys.ENTER))
 //			i = str.length();
 		currT = System.currentTimeMillis();
-		if(currT - lastT >=rate)
-		{
-			glyph.setText(font, str.substring(0, Math.min(str.length(), paused?i:i++)));
-			lastT = currT;
+		if(!paused) {
+			if(str.charAt(Math.min(str.length()-1,i))=='[')
+			{
+				for(;i<str.length();i++) {
+					if(str.charAt(i)==']')
+					{
+						i++;
+						break;
+					}
+				}
+			}
+			if(currT - lastT >=rate)
+			{
+				glyph.setText(font, str.substring(0, Math.min(str.length(), i++)));
+				lastT = currT;
+			}
 		}
 		s.setColor(new Color(1,1,1,dim));
 		s.draw(blackdot,xBoxPos,yBoxPos,w,h);
