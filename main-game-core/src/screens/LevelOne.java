@@ -70,17 +70,20 @@ public class LevelOne extends Screen {
 	public static Music music;
 	
 	//Time for health depletion 
-	private long currentT, lastT,eCurrT,eLastT;
+	private long currentT, lastT;
 	
-	private boolean alive, paused, runDialogue,initScene,eventRun;
+	private boolean alive, paused, runDialogue,initScene;
+	
+	//EVENTS
+	private boolean powerloss,stomachache,tired,onlineFriend,pain,pUpset,fUpset,hateFood,eventRun;
+	private String[] scenes = {} ;
+	//END EVENTS
 	
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
 	private GlyphLayout glyph;
 	
-	private Event event;
-	//Events
-	private List<Event> events;
+	private long eCurrT,eLastT;
 	
 	private int currEvent;
 	//Debugging mode
@@ -101,7 +104,6 @@ public class LevelOne extends Screen {
         happiness = 1f;
         social = 1f;
         energy = 1f;
-        eventRun = false;
 //        events = new ArrayList<Event>();
 //        Map<String,float[]> temp = new HashMap<String,float[]>();
 //        events.add(new Event("Your power went out! All internet related activites are disabled.", true));
@@ -180,7 +182,6 @@ public class LevelOne extends Screen {
 		//Character is in the centre of the screen
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
 		lastT = System.currentTimeMillis();
-		eLastT = System.currentTimeMillis();
 	}
 
 	/**
@@ -234,6 +235,9 @@ public class LevelOne extends Screen {
 				happiness= Math.max(0,happiness-0.01f);
 			if(Gdx.input.isKeyPressed(Keys.NUM_4))
 				social = Math.max(0,social-0.01f);
+			if(Gdx.input.isKeyPressed(Keys.NUM_5)) {
+				energy = Math.max(0, energy-0.01f);
+			}
 			
 			//Resets health
 			if(Gdx.input.isKeyJustPressed(Keys.Q))
@@ -244,6 +248,8 @@ public class LevelOne extends Screen {
 				happiness =1f;
 			if(Gdx.input.isKeyJustPressed(Keys.R))
 				social =1f;
+			if(Gdx.input.isKeyJustPressed(Keys.T))
+				energy =1f;
 
 			if(Gdx.input.isKeyJustPressed(Keys.P))
 				sm.push(new LibraryScreen(sm,man));
@@ -305,7 +311,9 @@ public class LevelOne extends Screen {
 			if(alive && !initScene){
 				getInput();
 				currentT = System.currentTimeMillis();
-				eCurrT = System.currentTimeMillis();
+				
+				if(!eventRun)
+					eCurrT = System.currentTimeMillis();
 				
 				//Checks if 1 second has passed
 				if(currentT-lastT>=1000)
@@ -317,18 +325,15 @@ public class LevelOne extends Screen {
 					social = Math.max(0,social-rate);
 					lastT = System.currentTimeMillis();
 				}
-//				if(eCurrT-eLastT>=3000)
-//				{
-//					int rand1=(int)(Math.random()*3);
-//					int rand2 = (int)(Math.random()*3);
-//					System.out.println(rand1+" "+rand2);
-//					if(rand1==rand2&&!eventRun) {
-//						currEvent = (int)(Math.random()*events.size());
-//						event = events.get(currEvent);
-//						eventRun = true;
-//					}
-//					eLastT = System.currentTimeMillis();
-//				}
+				if(eCurrT-eLastT>=3000)
+				{
+					int rand = (int)(Math.random()* 100);
+					if(rand<10&&!eventRun) {
+						System.out.println("event will run now");
+						eventRun = true;
+					}
+					eLastT = System.currentTimeMillis();
+				}
 				if(health <=0 || exercise<=0 || happiness<=0 || social<=0)
 					alive = false;
 			}
