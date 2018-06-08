@@ -43,7 +43,7 @@ public class BonusLevel extends Screen {
 		//Collision Picture
 		private	BufferedImage collisionPic;
 		
-		//Player --PLEASE CHANGE SPRITE--
+		//Player
 		private Sprite person;
 		
 		//Array for collision
