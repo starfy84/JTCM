@@ -40,7 +40,7 @@ import text.Text;
 public class LevelOne extends Screen {
 
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
-	private Texture map, indoorMap, minimap, blackdot, bar, bar2, bar3, bar4, act1, act2, act3, act4,act5;
+	private Texture background, map, indoorMap, minimap, blackdot, bar, bar2, bar3, bar4, act1, act2, act3, act4,act5;
 	
 	//Our text drawer
 	private Text text;
@@ -138,6 +138,7 @@ public class LevelOne extends Screen {
         music.setVolume(SettingsScreen.sound);
         music.setLooping(true);
         music.play();
+        background = man.get("Background.png",Texture.class);
         map = man.get("map.png",Texture.class); 
         indoorMap = man.get("indoorMap.png",Texture.class);
 		minimap = man.get("map.png",Texture.class);
@@ -398,7 +399,8 @@ public class LevelOne extends Screen {
 	public void render(SpriteBatch s) {
 		s.begin(); //Begins sprite batch
 		if(alive) {
-			
+			s.draw(background,Math.round(xCoord-750),Math.round(yCoord+500),JTCM.WIDTH*5,JTCM.HEIGHT*5);
+			s.draw(background,Math.round(xCoord+750),Math.round(yCoord-500),JTCM.WIDTH*5,JTCM.HEIGHT*5);
 			//Check if player is indoors
 			if ((!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLACK)) || (!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.WHITE)&&!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLACK)))
 			{

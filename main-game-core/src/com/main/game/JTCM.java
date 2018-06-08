@@ -58,6 +58,7 @@ public class JTCM extends ApplicationAdapter {
                 
                 //Loading assets
                 man.load("collisionDetection.png",Texture.class);
+                man.load("Background.png", Texture.class);
                 man.load("map.png",Texture.class);
                 man.load("indoorMap.png",Texture.class);
                 man.load("menu.png",Texture.class);
