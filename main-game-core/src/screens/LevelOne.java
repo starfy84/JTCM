@@ -315,7 +315,7 @@ public class LevelOne extends Screen {
 	private void printScore()
 	{
 		if(Gdx.input.isKeyJustPressed(Keys.L))
-			System.out.println((health + exercise+happiness +social)*100);
+			System.out.println((health + exercise+happiness +social+energy)*100);
 	}
 	
 	private void checkPaused() {
@@ -368,7 +368,7 @@ public class LevelOne extends Screen {
 					}
 					eLastT = System.currentTimeMillis();
 				}
-				if(health <=0 || exercise<=0 || happiness<=0 || social<=0)
+				if(health <=0 || exercise<=0 || happiness<=0 || social<=0 || energy<=0)
 					alive = false;
 				
 			}
@@ -403,7 +403,7 @@ public class LevelOne extends Screen {
 	 */
 	private float getRate() {
 		int countGreen=0,countYellow=0,countRed=0;
-		float[] arr = {health,exercise,happiness,social};
+		float[] arr = {health,exercise,happiness,social,energy};
 		for(float x : arr) {
 			if (x>0.7f)
 				countGreen++;
@@ -468,7 +468,7 @@ public class LevelOne extends Screen {
 			s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*happiness,10);
 			s.setColor(social>0.7f?Color.GREEN:social>0.3f?Color.YELLOW:Color.RED);
 			s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*social,10);
-			s.setColor(energy>0.7f?Color.GREEN:social>0.3f?Color.YELLOW:Color.RED);
+			s.setColor(energy>0.7f?Color.GREEN:energy>0.3f?Color.YELLOW:Color.RED);
 			s.draw(bar5, 10, JTCM.HEIGHT-80,JTCM.WIDTH/4*energy,10);
 			
 			//Reset tint
