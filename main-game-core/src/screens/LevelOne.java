@@ -136,10 +136,6 @@ public class LevelOne extends Screen {
 		social = 1f;
 		study = 1f;
 		energy = 1f;
-<<<<<<< HEAD
-=======
-		
->>>>>>> 3efd7fee8f5679a25f48492428be02c4518bc3f5
 		music = Gdx.audio.newMusic(Gdx.files.internal("lvlone.mp3"));
 		music.setVolume(SettingsScreen.sound);
 		music.setLooping(true);
