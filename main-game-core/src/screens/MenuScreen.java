@@ -109,7 +109,7 @@ public class MenuScreen extends Screen {
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-500) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-500)-iI.getHeight()?iA:iI,JTCM.WIDTH/2-iI.getWidth()/2,JTCM.HEIGHT-500);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-600) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-600)-eI.getHeight()?eA:eI,JTCM.WIDTH/2-eI.getWidth()/2,JTCM.HEIGHT-600);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-700) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-700)-sI.getHeight()?sA:sI,JTCM.WIDTH/4-sI.getWidth()/2,JTCM.HEIGHT-700);
-		glyph.setText(font,"Journey to Channelenmajour");
+		glyph.setText(font,"JOURNEY TO CHANNELENMAJOUR");
 		font.draw(s,glyph,JTCM.WIDTH/2-glyph.width/2,JTCM.HEIGHT-50);
 		SettingsScreen.applyBrightness(s);
 		s.end();
