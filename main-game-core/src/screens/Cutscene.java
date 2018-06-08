@@ -9,7 +9,7 @@ import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
 
 /**
- * This class runs the tutorial of the game </br>
+ * This class runs the Cutscene of the game </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 5/18/18 </br>
  * Time spent: 0:15 (Reused from levelOne)
@@ -18,17 +18,17 @@ import com.badlogic.gdx.assets.AssetManager;
  * @author Rohit
  */
 
-public class Tutorial extends Screen {
+public class Cutscene extends Screen {
 	BitmapFont font;
 	Texture map, person;
 	double xCoord = -2500, yCoord = -700;
 
 	/**
-	 * {@link Tutorial} constructor
+	 * {@link Cutscene} constructor
 	 * @param sm screen manager to determine current screen
 	 * @param man asset manager to load images
 	 */
-	public Tutorial(ScreenManager sm, AssetManager man) {
+	public Cutscene(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		map = man.get("map.png", Texture.class);
 		person = man.get("person.png", Texture.class);
