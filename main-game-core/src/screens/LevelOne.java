@@ -73,17 +73,7 @@ public class LevelOne extends Screen {
 	private boolean eventRun;
 	private boolean[] bEvents = new boolean[11];
 	private boolean[] eventText = new boolean[11];
-//	private String[] sEvents = {
-//			"You have a power outage! Internet related activites\nhave been disabled.",
-//			"You have a stomach ache! Your health bar goes down by\n10.",
-//			"You have exercised too much! Your energy bar goes\ndown by 10.",
-//			"You have met an online friend recently who is asking\nfor your personal info. What do you do?",
-//			"You are addicted to video games! Social and health\ndepletion rate doubled.",
-//			"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
-//			"You feel sharp pain while exercising. What do you do?",
-//			"Your parents are upset at you for something you don’t\nagree with! What do you do?",
-//			"Your friends are upset at you for something you don’t\nagree with! What do you do?",
-//			"You don’t like the taste of all this healthy food!\nYour happiness bar goes down by 10."};
+
 	private String[] sEvents = {
 			"You have a power outage! Internet related activites\nhave been disabled.", //Passive
 			"You have a stomach ache! Your health bar goes down by\n10.", //Instant
@@ -91,6 +81,10 @@ public class LevelOne extends Screen {
 			"You feel sharp pain while exercising. What do you do?", //Instant
 			"Your parents are upset at you for something you don’t\nagree with! What do you do?", //Instant
 			"Your friends are upset at you for something you don’t\nagree with! What do you do?"}; //Instant
+//	"You have exercised too much! Your energy bar goes\ndown by 10.",
+//	"You are addicted to video games! Social and health\ndepletion rate doubled.",
+//	"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
+//	"You don’t like the taste of all this healthy food!\nYour happiness bar goes down by 10."};
 
 	
 	private int rand=10, tipNum;
@@ -435,7 +429,7 @@ public class LevelOne extends Screen {
 	public void update(double t) {
 		//System.out.println(textRun);
 		if(!paused) {
-			if(alive && !initScene&&!eventText[rand>=eventText.length?10:rand]){
+			if(alive && !initScene&&!eventText[rand>=eventText.length?10:rand]&&!tipMsg){
 				getInput();
 				currentT = System.currentTimeMillis();
 				
@@ -456,7 +450,7 @@ public class LevelOne extends Screen {
 				}
 				if(eCurrT-eLastT>=3000)
 				{
-					rand = (int)(Math.random()*50);
+					rand = (int)(Math.random()*75);
 					System.out.println(rand);
 					if(rand<6&&!eventRun) {
 						System.out.println("event will run now");
