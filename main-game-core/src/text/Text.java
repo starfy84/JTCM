@@ -39,7 +39,7 @@ public class Text {
 		if(Gdx.input.isKeyPressed(Keys.SPACE))
 			rate = time/5;
 		else
-			rate = time; 
+			rate = time;
 //		if(Gdx.input.isKeyJustPressed(Keys.ENTER))
 //			i = str.length();
 		currT = System.currentTimeMillis();
