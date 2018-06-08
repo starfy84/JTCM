@@ -671,11 +671,6 @@ public class LevelOne extends Screen {
 				// Minimap
 				s.draw(minimap, 0, 0, minimap.getWidth() / 5, minimap.getHeight() / 5);
 
-				// Rectangular border
-				s.draw(blackdot, 0, 0, minimap.getWidth() / 5 + 5, minimap.getHeight() / 5 + 5);
-
-				// Minimap
-				s.draw(minimap, 0, 0, minimap.getWidth() / 5, minimap.getHeight() / 5);
 
 				// Check if player is on the path for black dot drawing
 				if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.WHITE)
@@ -739,18 +734,6 @@ public class LevelOne extends Screen {
 				glyph.setText(font, "Energy");
 				font.draw(s, glyph, JTCM.WIDTH - 130, JTCM.HEIGHT - 600);
 
-				// TEXT DRAWING AREA
-				if (initScene) {
-					text.printText("Hi " + NameScreen.getName() + ",\nI'm the narrator... you have depression!", s, 85,
-							paused);
-				}
-				if (tipMsg) {
-					text.printText(tips[tipNum], s, 85, paused);
-				}
-				if (eventRun && eventText[rand]) {
-					text.printText(sEvents[rand], s, 85, paused);
-				}
-
 				if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.WHITE)
 						|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX - 7.5)]
 								.equals(java.awt.Color.WHITE))
@@ -799,14 +782,6 @@ public class LevelOne extends Screen {
 				s.draw(blackdot, JTCM.WIDTH - 150, 0, 125, JTCM.HEIGHT);
 				s.setColor(Color.WHITE);
 
-				// Action bars 1,2,3 and 4
-				s.draw(act1, JTCM.WIDTH - act1.getWidth() - 40, 550);
-				s.draw(act2, JTCM.WIDTH - act2.getWidth() - 40, 450);
-				s.draw(act3, JTCM.WIDTH - act3.getWidth() - 40, 350);
-				s.draw(act4, JTCM.WIDTH - act4.getWidth() - 40, 250);
-				s.draw(act5, JTCM.WIDTH - act5.getWidth() - 40, 150);
-				s.draw(act6, JTCM.WIDTH - act6.getWidth() - 40, 50);
-
 				// TEXT DRAWING AREA
 				if (initScene) {
 					text.printText("Hi " + NameScreen.getName()
@@ -827,12 +802,24 @@ public class LevelOne extends Screen {
 
 				// END TEXT DRAWING AREA
 			} else {
-				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]");
+				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]\nCLICK TO CONTINUE");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+				if(Gdx.input.justTouched())
+				{
+					HighScoresScreen hs = new HighScoresScreen(sm,man,"one");
+					hs.insertScore(new Object[] {NameScreen.getName(),this.health+this.energy+this.social+this.exercise+this.happiness+this.study});
+					sm.set(hs);
+				}
 			}
 		} else {
-			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]");
+			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]\nCLICK TO CONTINUE");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+			if(Gdx.input.justTouched())
+			{
+				HighScoresScreen hs = new HighScoresScreen(sm,man,"one");
+				hs.insertScore(new Object[] {NameScreen.getName(),this.health+this.energy+this.social+this.exercise+this.happiness+this.study});
+				sm.set(hs);
+			}
 		}
 		SettingsScreen.applyBrightness(s);
 		if (paused) {

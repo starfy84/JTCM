@@ -43,14 +43,16 @@ public class HighScoresScreen extends Screen {
 	float posa;
 	int posb;
 	Texture bA,bI;
+	String prefix;
 	/**
 	 * {@link HighScoresScreen} constructor
 	 * @param sm Screen manager to determine current screen
 	 * @param man Asset manager to load images
 	 */
-	public HighScoresScreen(ScreenManager sm, AssetManager man) {
+	public HighScoresScreen(ScreenManager sm, AssetManager man,String prefix) {
 		super(sm, man);
 		posa=341;
+		this.prefix = prefix;
 		posb=900;
 		bI = man.get("backIdle.png",Texture.class);
 		bA = man.get("backActive.png",Texture.class);
@@ -91,7 +93,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	public void write() {
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscores/scores.txt")));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscores/"+prefix+"scores.txt")));
 			for(Object[] x : scores)
 				out.println(x[0]+" "+x[1]);
 			out.close();
@@ -106,7 +108,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	public void read() {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader("highscores/scores.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("highscores/"+prefix+"scores.txt"));
 			String[] tokens= new String[2];
 			String inp="";
 			while((inp=in.readLine())!=null) {
