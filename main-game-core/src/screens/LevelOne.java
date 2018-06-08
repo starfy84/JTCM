@@ -69,6 +69,8 @@ public class LevelOne extends Screen {
 	// Time for health depletion
 	private long currentT, lastT, start, end;
 
+	
+	//Status booleans
 	private boolean alive, paused, initScene, tipMsg;
 
 	// EVENTS
@@ -134,6 +136,10 @@ public class LevelOne extends Screen {
 		social = 1f;
 		study = 1f;
 		energy = 1f;
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 3efd7fee8f5679a25f48492428be02c4518bc3f5
 		music = Gdx.audio.newMusic(Gdx.files.internal("lvlone.mp3"));
 		music.setVolume(SettingsScreen.sound);
 		music.setLooping(true);
@@ -143,12 +149,16 @@ public class LevelOne extends Screen {
 		indoorMap = man.get("indoorMap.png", Texture.class);
 		minimap = man.get("map.png", Texture.class);
 		blackdot = man.get("blackdot.png", Texture.class);
+		
+		//Status bars
 		bar1 = man.get("blank.jpg", Texture.class);
 		bar2 = man.get("blank.jpg", Texture.class);
 		bar3 = man.get("blank.jpg", Texture.class);
 		bar4 = man.get("blank.jpg", Texture.class);
 		bar5 = man.get("blank.jpg", Texture.class);
 		bar6 = man.get("blank.jpg", Texture.class);
+		
+		//Setting cogs used for collision purposes (no need to create unnecessary collision objects)
 		act1 = man.get("settingIdle.png", Texture.class);
 		act2 = man.get("settingIdle.png", Texture.class);
 		act3 = man.get("settingIdle.png", Texture.class);
