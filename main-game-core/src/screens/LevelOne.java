@@ -85,25 +85,13 @@ public class LevelOne extends Screen {
 //			"Your friends are upset at you for something you don’t\nagree with! What do you do?",
 //			"You don’t like the taste of all this healthy food!\nYour happiness bar goes down by 10."};
 	private String[] sEvents = {
-<<<<<<< HEAD
 			"You have a power outage! Internet related activites\nhave been disabled.", //Passive
 			"You have a stomach ache! Your health bar goes down by\n10.", //Instant
 			"You have met an online friend recently who is asking\nfor your personal info. What do you do?", //Instant
 			"You feel sharp pain while exercising. What do you do?", //Instant
 			"Your parents are upset at you for something you don’t\nagree with! What do you do?", //Instant
 			"Your friends are upset at you for something you don’t\nagree with! What do you do?"}; //Instant
-	
-=======
-			"You have a power outage! Internet related activites\nhave been disabled.",
-			"You have a stomach ache! Your health bar goes down by\n10.",
-			"You have exercised too much! Your energy bar goes\ndown by 10.",
-			"You have met an online friend recently who is asking\nfor your personal info. What do you do?",
-			"You are addicted to video games! Social and health\ndepletion rate doubled.",
-			"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
-			"You feel sharp pain while exercising. What do you do?",
-			"Your parents are upset at you for something you don't\nagree with! What do you do?",
-			"Your friends are upset at you for something you don't\nagree with! What do you do?"};
->>>>>>> 60c7957a913498be2d545623079ae24144c66bf1
+
 	
 	private int rand=10, tipNum;
 	//END EVENTS
@@ -468,7 +456,7 @@ public class LevelOne extends Screen {
 				}
 				if(eCurrT-eLastT>=3000)
 				{
-					rand = (int)(Math.random()*6/*50*/);
+					rand = (int)(Math.random()*50);
 					System.out.println(rand);
 					if(rand<6&&!eventRun) {
 						System.out.println("event will run now");
