@@ -237,15 +237,15 @@ public class LevelOne extends Screen {
 		//END OF INPUT FOR CHARACTER MOVEMENT
 		
 		//START OF INPUT FOR ACTION-BAR CLICKING
-		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-150 && Gdx.input.getY()>=JTCM.HEIGHT-150-act1.getHeight())
-			social = Math.min(1, social+0.05f);
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-250 && Gdx.input.getY()>=JTCM.HEIGHT-250-act2.getHeight())
-			happiness = Math.min(1, happiness+0.05f);
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-350 && Gdx.input.getY()>=JTCM.HEIGHT-350-act3.getHeight())
-			exercise = Math.min(1, exercise+0.05f);
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-450 && Gdx.input.getY()>=JTCM.HEIGHT-450-act4.getHeight())
+		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-550 && Gdx.input.getY()>=JTCM.HEIGHT-550-act1.getHeight())
 			health = Math.min(1, health+0.05f);
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act5.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-550 && Gdx.input.getY()>=JTCM.HEIGHT-550-act5.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-450 && Gdx.input.getY()>=JTCM.HEIGHT-450-act2.getHeight())
+			exercise = Math.min(1, exercise+0.05f);
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-350 && Gdx.input.getY()>=JTCM.HEIGHT-350-act3.getHeight())
+			happiness = Math.min(1, happiness+0.05f);
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-250 && Gdx.input.getY()>=JTCM.HEIGHT-250-act4.getHeight())
+			social = Math.min(1, social+0.05f);
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act5.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-150 && Gdx.input.getY()>=JTCM.HEIGHT-150-act5.getHeight())
 			energy = Math.min(1, energy+0.05f);
 		//END OF INPUT FOR ACTION-BAR CLICKING
 		
@@ -480,16 +480,15 @@ public class LevelOne extends Screen {
 	        s.setColor(Color.WHITE);
 			
 			//Action bars 1,2,3 and 4
-			s.draw(act1,JTCM.WIDTH-act1.getWidth()-40,150);
-			s.draw(act2,JTCM.WIDTH-act2.getWidth()-40,250);
+			s.draw(act1,JTCM.WIDTH-act1.getWidth()-40,550);
+			s.draw(act2,JTCM.WIDTH-act2.getWidth()-40,450);
 			s.draw(act3,JTCM.WIDTH-act3.getWidth()-40,350);
-			s.draw(act4,JTCM.WIDTH-act4.getWidth()-40,450);
-			s.draw(act5,JTCM.WIDTH-act5.getWidth()-40,550);
+			s.draw(act4,JTCM.WIDTH-act4.getWidth()-40,250);
+			s.draw(act5,JTCM.WIDTH-act5.getWidth()-40,150);
 			
 			//TEXT DRAWING AREA
 			if(initScene) {
-				//text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
-				text.printText("023456789012345678902234567890323456789042345678905234567890", s, 85, paused);
+				text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
 			}
 			if(eventRun && eventText[rand]) {
 				text.printText(sEvents[rand], s, 85, paused);
