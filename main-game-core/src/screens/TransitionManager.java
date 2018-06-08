@@ -6,10 +6,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.main.game.JTCM;
 
 public class TransitionManager {
+	
+	//Base graphics variables
 	private SpriteBatch s;
 	private Texture blackdot;
 	private float x,y;
 	private boolean in,out;
+	
 	public TransitionManager(SpriteBatch sb,Texture img) {
 		s = sb;
 		blackdot = img;

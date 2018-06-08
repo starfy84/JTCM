@@ -17,16 +17,22 @@ import text.Text;
 
 public class ChoiceScreen extends Screen {
 
+	//Font variables
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
 	private BitmapFont font;
 	private GlyphLayout glyph;
+	
+	//Background
 	private Texture bg;
+	
+	//Event variables
 	private String[] choices;
 	public static int choice = 0;
 	private boolean draw;
 	private Text text;
 	private String[] tips;
+	
 	public ChoiceScreen(ScreenManager sm, AssetManager man, String[] tips, String... choices) {
 		super(sm, man);
 		this.tips = tips;

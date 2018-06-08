@@ -184,6 +184,7 @@ public class LevelOne extends Screen {
 		// Scale character
 		person.setSize((int) (person.getWidth() * 1.5), (int) (person.getHeight() * 1.5));
 
+		//Font variables
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param = new FreeTypeFontParameter();
 		param.size = 40;
@@ -192,6 +193,7 @@ public class LevelOne extends Screen {
 		font.getData().markupEnabled = true;
 		glyph = new GlyphLayout();
 
+		//Font variables
 		gen1 = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param1 = new FreeTypeFontParameter();
 		param1.size = 15;

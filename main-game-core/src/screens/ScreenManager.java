@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Dereck
  */
 public class ScreenManager {
+	
+	//Stack of screens that can be manipulated (removed, added)
 	private Stack<Screen> screens;
 
 	/**

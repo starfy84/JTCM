@@ -14,6 +14,7 @@ import com.main.game.JTCM;
  */
 public class LoadingScreen extends Screen {
 
+	//Background
 	private Texture load;
 	/**
 	 * {@link LoadingScreen} constructor

@@ -26,12 +26,15 @@ import text.Text;
  */
 public class LibraryScreen extends Screen {
 
+	//Font variables
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
 	private BitmapFont textFont,titleFont;
 	private GlyphLayout titleGlyph,textGlyph;
 	private int pos;
 	private String[] text,title;
+	
+	//backgrounds
 	private Texture bg,lI,lA,rI,rA,bI,bA;
 
 	/**

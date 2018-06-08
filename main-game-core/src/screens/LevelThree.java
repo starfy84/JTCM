@@ -76,6 +76,7 @@ public class LevelThree extends Screen {
 	private boolean[] bEvents = new boolean[11];
 	private boolean[] eventText = new boolean[11];
 
+	//Event variables
 	private boolean stop;
 	private String[] sEvents = { "You have a power outage! Internet related activites\nhave been disabled.", // Passive
 			"You have a stomach ache! Your health bar goes down by\n10.", // Instant
@@ -83,12 +84,6 @@ public class LevelThree extends Screen {
 			"You feel sharp pain while exercising. What do you do?", // Instant
 			"Your parents are upset at you for something you don’t\nagree with! What do you do?", // Instant
 			"Your friends are upset at you for something you don’t\nagree with! What do you do?" }; // Instant
-	// "You are addicted to video games! Social and health\ndepletion rate
-	// doubled.",
-	// "You are having a hard time making friends and coping\nwith misfortunate
-	// events. Social and health depletion\nrate doubled. Happiness depletion rate
-	// tripled.",
-
 	private int rand = 10, tipNum;
 	// END EVENTS
 
@@ -105,10 +100,12 @@ public class LevelThree extends Screen {
 			"Relaxing at home is really effective and\nrefreshing!",
 			"Relaxing is important in order to reduce stress\nand fatigue." };
 
+	//Font variables
 	private FreeTypeFontGenerator gen, gen1;
 	private FreeTypeFontParameter param, param1;
 	private GlyphLayout glyph, glyph1;
 
+	//Time variables
 	private long eCurrT, eLastT;
 
 	// Debugging mode
@@ -134,48 +131,7 @@ public class LevelThree extends Screen {
 		social = 1f;
 		study = 1f;
 		energy = 1f;
-		// events = new ArrayList<Event>();
-		// Map<String,float[]> temp = new HashMap<String,float[]>();
-		// events.add(new Event("Your power went out! All internet related activites are
-		// disabled.", true));
-		// events.add(new Event("You have a stomach ache! Your physical health decreases
-		// by 10.",null,new float[] {-0.1f,0,0,0,0},null,""));
-		// events.add(new Event("You have exercised too much! Your energy decreases by
-		// 10.",null,new float[] {0,0,0,0,-0.1f},null,""));
-
-		// temp.put("Tell your parents", new float[] {0f,0f,0f,0f,0f});
-		// temp.put("Tell him your personal information", new float[]
-		// {0f,0f,0f,(int)(Math.random()*2)==0?0f:-0.5f,0f});
-		// temp.put("Politely tell him that you won't tell him your address", new
-		// float[] {0f,0f,0f,0.1f,0f});
-		// temp.put("Block him", new float[] {0f,0f,0f,-0.1f,0f});
-		//
-		// events.add(new Event("Met an online friend recently who is asking for your
-		// personal info. What do you do?",temp,null,null,"Never tell your personal info
-		// to someone you just met. They could be an online predator!"));
-		// events.add(new Event("You're addicted to video games! Social loss doubled.
-		// Health loss doubled",null,null,new float[] {2,1,1,2,1},""));
-		// events.add(new Event("You are having a hard time making friends and coping
-		// with misfortunate events. Social loss doubled. Health loss doubled. Happiness
-		// loss tripled.",null,null,new float[] {2,1,3,2,1},""));
-		//
-		// temp = new HashMap<String,float[]>();
-		// temp.put("Keep going. No pain no gain!", new float[] {-0.2f,0f,0f,0f,0f});
-		// temp.put("Stop exercising", new float[] {0f,0f,0f,10f,0f});
-		//
-		// events.add(new Event("Feeling sharp pain while exercising. What do you
-		// do?",temp,null,null,""));
-		//
-		//
-		// temp = new HashMap<String,float[]>();
-		// temp.put("Yell back", new float[] {0f,0f,-0.05f,-0.05f,0f});
-		// temp.put("Take the punishment and say nothing", new float[]
-		// {0f,0f,-0.5f,0f,0f});
-		// events.add(new Event("Parents are upset at you for something you don't agree
-		// with! What do you do?",temp,null,null,""));
-		// events.add(new Event("Friends are upset at you for something you don't agree
-		// with! What do you do?",temp,null,null,""));
-
+		
 		music = Gdx.audio.newMusic(Gdx.files.internal("lvltwo.mp3"));
 		music.setVolume(SettingsScreen.sound);
 		music.setLooping(true);
@@ -185,12 +141,16 @@ public class LevelThree extends Screen {
 		indoorMap = man.get("indoorMap.png", Texture.class);
 		minimap = man.get("map.png", Texture.class);
 		blackdot = man.get("blackdot.png", Texture.class);
+		
+		//User bars
 		bar1 = man.get("blank.jpg", Texture.class);
 		bar2 = man.get("blank.jpg", Texture.class);
 		bar3 = man.get("blank.jpg", Texture.class);
 		bar4 = man.get("blank.jpg", Texture.class);
 		bar5 = man.get("blank.jpg", Texture.class);
 		bar6 = man.get("blank.jpg", Texture.class);
+		
+		//Setting cogs used for collision purposes (no need to create unnecessary collision objects)
 		act1 = man.get("settingIdle.png", Texture.class);
 		act2 = man.get("settingIdle.png", Texture.class);
 		act3 = man.get("settingIdle.png", Texture.class);
@@ -219,6 +179,7 @@ public class LevelThree extends Screen {
 		// Scale character
 		person.setSize((int) (person.getWidth() * 1.5), (int) (person.getHeight() * 1.5));
 
+		//Font variables
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param = new FreeTypeFontParameter();
 		param.size = 65;
@@ -227,6 +188,8 @@ public class LevelThree extends Screen {
 		font.getData().markupEnabled = true;
 		glyph = new GlyphLayout();
 
+		
+		//Font variables
 		gen1 = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param1 = new FreeTypeFontParameter();
 		param1.size = 15;
@@ -729,8 +692,8 @@ public class LevelThree extends Screen {
 
 				// TEXT DRAWING AREA
 				if (initScene) {
-					text.printText("Hi [RED]" + NameScreen.getName()
-							+ "[],\nyou have a hard time making friends and dealing with\ndepression! Every bar decreases twice as fast!",
+					text.printText("Hi " + NameScreen.getName()
+							+ ",\nyou have a hard time making friends and dealing with\ndepression! Every bar decreases twice as fast!",
 							s, 85, paused);
 				}
 				if (tipMsg) {
@@ -739,32 +702,14 @@ public class LevelThree extends Screen {
 				if (eventRun && eventText[rand]) {
 					text.printText(sEvents[rand], s, 85, paused);
 				}
-				// else if(eventRun&&event.run()) {
-				// events.get(currEvent).trigger();
-				// events.get(currEvent).check();
-				//
-				// }
-
-				// END TEXT DRAWING AREA
 			} else {
-				glyph.setText(font, "[RED]LEVEL THREE[]:[RED]FAILED[]\n[BLACK]CLICK TO CONTINUE[]");
+				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
-				if(Gdx.input.justTouched())
-				{
-					HighScoresScreen hs = new HighScoresScreen(sm,man,"three");
-					hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
-					sm.set(hs);
-				}
 			}
-		} else {
-			glyph.setText(font, "[RED]LEVEL THREE[]: [LIME]COMPLETE[]\n[BLACK]CLICK TO CONTINUE[]");
+		}
+		else {
+			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
-			if(Gdx.input.justTouched())
-			{
-				HighScoresScreen hs = new HighScoresScreen(sm,man,"three");
-				hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
-				sm.set(hs);
-			}
 		}
 		SettingsScreen.applyBrightness(s);
 		if (paused) {

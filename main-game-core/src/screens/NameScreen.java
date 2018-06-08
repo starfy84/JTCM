@@ -18,11 +18,15 @@ import text.TextProcessing;
 
 public class NameScreen extends Screen {
 
+	//Background
 	private Texture bg;
+	
+	//Font variables
 	private static TextProcessing tp;
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private static String name="";
+	
 	public NameScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		// TODO Auto-generated constructor stub
@@ -70,7 +74,7 @@ public class NameScreen extends Screen {
 		
 	}
 	public static String getName() {
-		name = tp.getString();
+		name = "[RED]"+tp.getString()+"[]";
 		return name;
 	}
 

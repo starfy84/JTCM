@@ -26,12 +26,15 @@ import text.Text;
  */
 public class InstructionsScreen extends Screen {
 
+	//Font variables
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private int pos;
 	private String[] text;
+	
+	//Backgrounds
 	private Texture bg,lI,lA,rI,rA,bI,bA;
 
 	/**
