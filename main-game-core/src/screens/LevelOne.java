@@ -161,7 +161,7 @@ public class LevelOne extends Screen {
 //        events.add(new Event("Friends are upset at you for something you don't agree with! What do you do?",temp,null,null,""));
         
         
-        music = Gdx.audio.newMusic(Gdx.files.internal("BTS - DNA.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("lvlone.mp3"));
         music.setVolume(SettingsScreen.sound);
         music.setLooping(true);
         music.play();

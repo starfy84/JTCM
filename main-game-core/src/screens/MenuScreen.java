@@ -5,6 +5,8 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.main.game.JTCM;
-import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the menu screen.</br>
  * Teacher: Ms. Krasteva </br>
@@ -28,7 +29,8 @@ public class MenuScreen extends Screen {
 	private FreeTypeFontParameter param;
 	private BitmapFont font;
 	private GlyphLayout glyph;
-	Texture menu,lI,lA,hI,hA,iI,iA,eI,eA,sI,sA;
+	private Texture menu,lI,lA,hI,hA,iI,iA,eI,eA,sI,sA;
+	private Music music;
 
 	/**
 	 * {@link MenuScreen} Constructor
@@ -38,6 +40,10 @@ public class MenuScreen extends Screen {
 	 */
         public MenuScreen(ScreenManager sm, AssetManager man) {
                 super(sm,man);
+                music = Gdx.audio.newMusic(Gdx.files.internal("menusong.mp3"));
+                music.setVolume(SettingsScreen.sound);
+                music.setLooping(true);
+                music.play();
                 menu = man.get("ChallengerBackground.jpg",Texture.class);
                 lI = man.get("lvlslctIdle.png",Texture.class);
                 lA = man.get("lvlslctActive.png",Texture.class);
@@ -77,7 +83,10 @@ public class MenuScreen extends Screen {
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-600) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-600)-eI.getHeight())
 			Gdx.app.exit();
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-700) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-700)-sI.getHeight())
-			sm.push(JTCM.getSettingsScreen());
+			{
+				JTCM.getSettingsScreen().setMusic(music);
+				sm.push(JTCM.getSettingsScreen());
+			}
 		else if (Gdx.input.isKeyJustPressed(Keys.K))
 			sm.push(new NameScreen(sm,man));
 	}
