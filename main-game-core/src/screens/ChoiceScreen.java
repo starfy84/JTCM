@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -12,49 +13,58 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.main.game.JTCM;
 
+import text.Text;
+
 public class ChoiceScreen extends Screen {
-	
+
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private Texture bg;
 	private String[] choices;
-	public static int choice=0;
-	public ChoiceScreen(ScreenManager sm, AssetManager man,String ... choices) {
+	public static int choice = 0;
+	private boolean draw;
+	private Text text;
+	private String[] tips;
+	public ChoiceScreen(ScreenManager sm, AssetManager man, String[] tips, String... choices) {
 		super(sm, man);
+		this.tips = tips;
+		text = new Text(45, Color.WHITE, man);
 		Gdx.input.setInputProcessor(new InputProcessor() {
 			@Override
 			public boolean keyDown(int key) {
-				switch(key) {
-				case Keys.NUM_1:
-					choice = 1;
-				break;
-				case Keys.NUM_2:
-					choice = 2;
-				break;
-				case Keys.NUM_3:
-					choice = 3;
-				break;
-				case Keys.NUM_4:
-					choice = 4;
-				break;
-				case Keys.NUM_5:
-					choice = 5;
-				break;
-				case Keys.NUM_6:
-					choice = 6;
-				break;
-				case Keys.NUM_7:
-					choice = 7;
-				break;
-				case Keys.NUM_8:
-					choice = 8;
-				break;
-				case Keys.NUM_9:
-					choice = 9;
-				break;
-				}
+				if (!draw)
+					switch (key) {
+					case Keys.NUM_1:
+						choice = 1;
+						break;
+					case Keys.NUM_2:
+						choice = 2;
+						break;
+					case Keys.NUM_3:
+						choice = 3;
+						break;
+					case Keys.NUM_4:
+						choice = 4;
+						break;
+					case Keys.NUM_5:
+						choice = 5;
+						break;
+					case Keys.NUM_6:
+						choice = 6;
+						break;
+					case Keys.NUM_7:
+						choice = 7;
+						break;
+					case Keys.NUM_8:
+						choice = 8;
+						break;
+					case Keys.NUM_9:
+						choice = 9;
+						break;
+
+					}
 				return false;
 			}
 
@@ -105,17 +115,20 @@ public class ChoiceScreen extends Screen {
 		param.size = 50;
 		glyph = new GlyphLayout();
 		this.choices = choices;
-		bg = man.get("back.png",Texture.class);
+		bg = man.get("back.png", Texture.class);
 		font = gen.generateFont(param);
-		 
+
 	}
 
 	@Override
 	public void getInput() {
 		// TODO Auto-generated method stub
-		System.out.println(choice>0&&choice<=choices.length);
-		if(choice>0&&choice<=choices.length)
+		if(text.done()&& Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+			draw=false;
+			text.resetPrint();
 			sm.pop();
+			
+		}
 	}
 
 	@Override
@@ -129,11 +142,16 @@ public class ChoiceScreen extends Screen {
 	public void render(SpriteBatch s) {
 		// TODO Auto-generated method stub
 		s.begin();
-		s.draw(bg, 0, 0,JTCM.WIDTH,JTCM.HEIGHT);
-		for(int x = 0 ;x < choices.length;x++) {
-			glyph.setText(font,(x+1)+". "+choices[x]);
-			font.draw(s, glyph, 10, JTCM.HEIGHT-(100 + 100*x));
+		s.draw(bg, 0, 0, JTCM.WIDTH, JTCM.HEIGHT);
+		for (int x = 0; x < choices.length; x++) {
+			glyph.setText(font, (x + 1) + ". " + choices[x]);
+			font.draw(s, glyph, 10, JTCM.HEIGHT - (100 + 100 * x));
 		}
+		if (choice > 0 && choice <= choices.length) {
+			draw = true;
+		}
+		if(draw)
+			text.printText(tips[choice-1], s, 85, false);
 		s.end();
 	}
 

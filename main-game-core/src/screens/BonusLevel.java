@@ -513,15 +513,23 @@ public class BonusLevel extends Screen {
 				else if(bEvents[2]) {
 					bEvents[2] = false;
 					if(!eventText[2]) {
-						sm.push(new ChoiceScreen(sm,man,"Tell your parents","Tell him your personal info","Politely tell him that you won’t tell him your address","Block him"));
+						sm.push(new ChoiceScreen(sm,man,new String[]{"Telling your parents is always a good idea, since they will know what to do","Never tell your personal info to someone you just met. They could be an online predator!","Never tell your personal info to someone you just met. They could be an online predator! Still, it’s ok to keep talking to them about other things since they could just be a curious friend.","Never tell your personal info to someone you just met. They could be an online predator! Better safe than sorry! You still just lost a potential friend though…"},"Tell your parents","Tell him your personal info","Politely tell him that you won’t tell him your address","Block him"));
 						if(ChoiceScreen.choice == 1)
-						{}
+						{
+							
+						}
 						else if(ChoiceScreen.choice == 2)
-						{}
+						{
+							social-=(int)(Math.random()*2)==1?0.5:0;
+						}
 						else if(ChoiceScreen.choice == 3)
-						{}
+						{
+							social = (float) Math.min(1, social+0.1);
+						}
 						else if(ChoiceScreen.choice == 4)
-						{}
+						{
+							social-=0.1;
+						}
 						ChoiceScreen.choice=0;
 						eventRun = false;
 					}
@@ -529,13 +537,15 @@ public class BonusLevel extends Screen {
 				else if(bEvents[3]) {
 					bEvents[3] = false;
 					if(!eventText[3]) {
-						sm.push(new ChoiceScreen(sm,man,"Keep going. No pain no gain!","Stop exercising"));
+						sm.push(new ChoiceScreen(sm,man,new String[] {"Sharp pain is very bad during exercise! This is not normal and you should stop exercising immediately if you feel sharp pain.","Good job! Sharp pain is very bad during exercise! This is not normal and you should stop exercising immediately if you feel sharp pain."},"Keep going. No pain no gain!","Stop exercising"));
 						if(ChoiceScreen.choice == 1)
-						{}
+						{
+							health-=0.2;
+						}
 						else if(ChoiceScreen.choice == 2)
-						{}
-						else if(ChoiceScreen.choice == 3)
-						{}
+						{
+							
+						}
 						ChoiceScreen.choice=0;
 						eventRun = false;
 					}
@@ -543,13 +553,24 @@ public class BonusLevel extends Screen {
 				else if(bEvents[4]) {
 					bEvents[4] = false;
 					if(!eventText[4]) {
-						sm.push(new ChoiceScreen(sm,man,"Yell back","Take the punishment and say nothing","Calmly and peacefully talk with your parents"));
+						sm.push(new ChoiceScreen(sm,man,new String[] {"It’s never a good idea to argue with your parents. Often times nothing gets solved and there are only negative outcomes.","Staying quiet about it may not directly damage the relationship with your parents, but you will feel sadder and more problem may arise in the future if you don’t fix it now.","Sometimes you need to just accept things as they are and move on."},"Yell back","Take the punishment and say nothing","Calmly and peacefully talk with your parents"));
 						if(ChoiceScreen.choice == 1)
-						{}
+						{
+							social-=0.05;
+							happiness-=0.05;
+						}
 						else if(ChoiceScreen.choice == 2)
-						{}
+						{
+							happiness-=0.05;
+						}
 						else if(ChoiceScreen.choice == 3)
-						{}
+						{
+							boolean random = (int)(Math.random()*2)==1;
+							if(random) {
+								happiness = (float)Math.min(1,happiness+0.1);
+								social = (float)Math.min(1,social+0.1);
+							}
+						}
 						ChoiceScreen.choice=0;
 						eventRun = false;
 					}
@@ -557,13 +578,24 @@ public class BonusLevel extends Screen {
 				else if(bEvents[5]) {
 					bEvents[5] =false;
 					if(!eventText[5]) {
-						sm.push(new ChoiceScreen(sm,man,"Yell back","Take the punishment and say nothing","Calmly and peacefully talk with your parents"));
+						sm.push(new ChoiceScreen(sm,man,new String[] {"It’s never a good idea to argue with your parents. Often times nothing gets solved and there are only negative outcomes.","Staying quiet about it may not directly damage the relationship with your parents, but you will feel sadder and more problem may arise in the future if you don’t fix it now.","Sometimes you need to just accept things as they are and move on."},"Yell back","Take the punishment and say nothing","Calmly and peacefully talk with your parents"));
 						if(ChoiceScreen.choice == 1)
-						{}
+						{
+							social-=0.05;
+							happiness-=0.05;
+						}
 						else if(ChoiceScreen.choice == 2)
-						{}
+						{
+							happiness-=0.05;
+						}
 						else if(ChoiceScreen.choice == 3)
-						{}
+						{
+							boolean random = (int)(Math.random()*2)==1;
+							if(random) {
+								happiness = (float)Math.min(1,happiness+0.1);
+								social = (float)Math.min(1,social+0.1);
+							}
+						}
 						ChoiceScreen.choice=0;
 						eventRun = false;
 					}

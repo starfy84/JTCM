@@ -74,12 +74,20 @@ public class MenuScreen extends Screen {
 	 */
 	@Override
 	public void getInput() {
-		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2 && Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-300)&& Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-300)-lI.getHeight())
+		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2 && Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-300)&& Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-300)-lI.getHeight()) {
+			music.stop();
 			sm.push(new LevelSelectScreen(sm,man));
+		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-hI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+hI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-400) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-400)-hI.getHeight())
+		{
+			music.stop();
 			sm.push(new HighScoresScreen(sm,man));
+		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-500) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-500)-iI.getHeight())
+		{
+			music.stop();
 			sm.push(new InstructionsScreen(sm,man));
+		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-600) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-600)-eI.getHeight())
 			Gdx.app.exit();
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-700) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-700)-sI.getHeight())
@@ -141,6 +149,7 @@ public class MenuScreen extends Screen {
 		eA.dispose();
 		sI.dispose();
 		sA.dispose();
+		music.dispose();
 	}
 
 }
