@@ -62,15 +62,15 @@ public class InstructionsScreen extends Screen {
 		bI = man.get("backWIdle.png",Texture.class);
 		bA = man.get("backWActive.png",Texture.class);
 		text = new String[] { "[ROYAL]Goal[]: Have the highest score at the end of each level.",
-				"You play as a student and try to [ROYAL]keep all of your status bars high[].",
+				"You play as a student with a variety of [ROYAL]status bars[]",
 				"[ROYAL]Status bars degrade consistently[] so you must try your hardest to keep them all high!",
 				"To keep your status bars high, you must [ROYAL]perform activities[] from the [ROYAL]action bar[] by clicking on their\nrespective buttons.",
 				"Be careful not to let your status bars drop below a certain level, or all the status bars will start to\n[RED]degrade faster[]!",
 				"[ROYAL]Location matters[]! Performing certain actions at specific location can be [LIME]more effective[] or [RED]less effective[].",
 				"There are specific events that show up randomly which can [ROYAL]restrict actions or change the rates[] of your\nstatus bars drop.",
-				"At the end of [ROYAL]6 minutes[] the level ends and the total of your status bars is added together to give you a\nscore.",
+				"At the end of [ROYAL]3 minutes[] the level ends and the total of your status bars is added together to give you a\nscore.",
 				"If at anytime during the level, one of your status bars drops to zero, you will [RED]lose[]!",
-				"At any point during the game press [RED]C[] to view controls, [RED]S[] to open the settings screen, and [RED]space[] to\nadvance the dialogue. Click on the minimap to view a larger map." };
+				"At any point during the game press [RED]ESC[] to exit the game, [RED]S[] to open the settings screen,[RED]P[] to pause,\nand [RED]space[] to advance the dialogue. Click on the minimap to view a larger map." };
 	}
 
 	/**

@@ -697,8 +697,8 @@ public class LevelThree extends Screen {
 
 				// TEXT DRAWING AREA
 				if (initScene) {
-					text.printText("Hi " + NameScreen.getName()
-							+ ",\nyou have a hard time making friends and dealing with\ndepression! Every bar decreases twice as fast!",
+					text.printText("Hi [RED]" + NameScreen.getName()
+							+ "[],\nyou have a hard time making friends and dealing with\ndepression! Every bar decreases twice as fast!",
 							s, 85, paused);
 				}
 				if (tipMsg) {

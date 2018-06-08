@@ -702,8 +702,8 @@ public class LevelTwo extends Screen {
 
 				// TEXT DRAWING AREA
 				if (initScene) {
-					text.printText("Hi " + NameScreen.getName()
-							+ ",\nyou are very addicted to video games. Social,\nhealth, and exercise rates will drop twice as fast.",
+					text.printText("Hi [RED]" + NameScreen.getName()
+							+ "[],\nyou are very addicted to video games. Social,\nhealth, and exercise rates will drop twice as fast.",
 							s, 85, paused);
 				}
 				if (tipMsg) {
