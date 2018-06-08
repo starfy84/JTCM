@@ -71,7 +71,7 @@ public class Cutscene extends Screen {
 
 	
 	//Status booleans
-	private boolean alive, paused, initScene, tipMsg;
+	private boolean alive, paused, tipMsg;
 
 	// EVENTS
 	private boolean eventRun;
@@ -91,7 +91,7 @@ public class Cutscene extends Screen {
 	// events. Social and health depletion\nrate doubled. Happiness depletion rate
 	// tripled.",
 
-	private int rand = 10, tipNum;
+	private int rand = 10, tipNum, panelNum = 0;
 	// END EVENTS
 
 	// TIPS
@@ -107,6 +107,13 @@ public class Cutscene extends Screen {
 			"Relaxing at home is really effective and\nrefreshing!",
 			"Relaxing is important in order to reduce stress\nand fatigue." };
 
+	//Cutscene instructions
+	private String[]panels = {"Hi friend. It�s me, narrator!\nSo how�s your journey to Channelenmajour coming along?",
+			"Wait what?!\nYou don�t know what Channelenmajour is?!",
+			"Well put simply,\n Channelenmajour is the statewhere someone is doing\n extremely well in all aspects of life.",
+			"After each level,\n you can be one step closer to Channelenmajour.",
+			"Now you are ready to embark on your\njourney to Channelenmajour. Good Luck!"};
+	//Font variables
 	private FreeTypeFontGenerator gen, gen1;
 	private FreeTypeFontParameter param, param1;
 	private GlyphLayout glyph, glyph1;
@@ -129,7 +136,6 @@ public class Cutscene extends Screen {
 		alive = true;
 		text = new Text(45, Color.WHITE, man);
 		paused = false;
-		initScene = true;
 		health = 1f;
 		exercise = 1f;
 		happiness = 1f;
@@ -215,173 +221,6 @@ public class Cutscene extends Screen {
 	@Override
 	public void getInput() {
 
-		// START OF INPUT FOR CHARACTER MOVEMENT
-		try {
-			if (Gdx.input.isKeyPressed(Keys.RIGHT)
-					&& (!collisionArr[(int) Math.floor(charY)][(int) Math.round(charX + 7.5)]
-							.equals(java.awt.Color.BLACK)
-							|| !collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX + 7.5)]
-									.equals(java.awt.Color.BLACK))) {
-				xCoord -= JTCM.WIDTH * 5.0 / map.getWidth() / 2 * 5;
-				charX += 2.5;
-				energy = Math.max(0, energy - 0.001f);
-			}
-			if (Gdx.input.isKeyPressed(Keys.LEFT)
-					&& (!collisionArr[(int) Math.floor(charY)][(int) Math.round(charX - 10)]
-							.equals(java.awt.Color.BLACK)
-							|| !collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX - 10)]
-									.equals(java.awt.Color.BLACK))) {
-				xCoord += JTCM.WIDTH * 5.0 / map.getWidth() / 2 * 5;
-				charX -= 2.5;
-				energy = Math.max(0, energy - 0.001f);
-			}
-			if (Gdx.input.isKeyPressed(Keys.UP)
-					&& (!collisionArr[(int) Math.ceil(charY - 5)][(int) Math.round(charX + 5)]
-							.equals(java.awt.Color.BLACK)
-							&& !collisionArr[(int) Math.floor(charY)][(int) Math.round(charX - 7.5)]
-									.equals(java.awt.Color.BLACK)
-							&& !collisionArr[(int) Math.ceil(charY - 5)][(int) Math.round(charX - 7.5)]
-									.equals(java.awt.Color.BLACK)
-							&& !collisionArr[(int) Math.floor(charY)][(int) Math.round(charX + 5)]
-									.equals(java.awt.Color.BLACK))) {
-				yCoord -= JTCM.HEIGHT * 5.0 / map.getHeight() / 2 * 5;
-				charY -= 2.5;
-				energy = Math.max(0, energy - 0.001f);
-			}
-			if (Gdx.input.isKeyPressed(Keys.DOWN)
-					&& (!collisionArr[(int) Math.floor(charY + 2.5)][(int) Math.round(charX)]
-							.equals(java.awt.Color.BLACK)
-							&& !collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX - 7.5)]
-									.equals(java.awt.Color.BLACK))) {
-				yCoord += JTCM.HEIGHT * 5.0 / map.getHeight() / 2 * 5;
-				charY += 2.5;
-				energy = Math.max(0, energy - 0.001f);
-			}
-			if (Gdx.input.justTouched() && Gdx.input.getX() >= 0 && Gdx.input.getX() <= (minimap.getWidth() / 5) + 5
-					&& Gdx.input.getY() >= JTCM.HEIGHT - minimap.getHeight() / 5 && Gdx.input.getY() <= JTCM.HEIGHT)
-				sm.push(new MinimapScreen(sm, man));
-		} catch (ArrayIndexOutOfBoundsException e) {
-		}
-		// END OF INPUT FOR CHARACTER MOVEMENT
-
-		// START OF INPUT FOR ACTION-BAR CLICKING
-		if (Gdx.input.justTouched() && Gdx.input.getX() >= JTCM.WIDTH - act1.getWidth() - 5
-				&& Gdx.input.getX() <= JTCM.WIDTH - 5 && Gdx.input.getY() <= JTCM.HEIGHT - 550
-				&& Gdx.input.getY() >= JTCM.HEIGHT - 550 - act1.getHeight()) {
-			health = Math.min(1, health + 0.05f);
-			energy = Math.max(0, energy - 0.01f);
-			tipMsg = true;
-			tipNum = 0;
-		} else if (Gdx.input.justTouched() && Gdx.input.getX() >= JTCM.WIDTH - act2.getWidth() - 5
-				&& Gdx.input.getX() <= JTCM.WIDTH - 5 && Gdx.input.getY() <= JTCM.HEIGHT - 450
-				&& Gdx.input.getY() >= JTCM.HEIGHT - 450 - act2.getHeight()) {
-			if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.BLUE)
-					|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.BLUE)) {
-				exercise = Math.min(1, exercise + 0.1f);
-				tipNum = 1;
-			} else {
-				exercise = Math.min(1, exercise + 0.05f);
-				tipNum = 2;
-			}
-			energy = Math.max(0, energy - 0.01f);
-			tipMsg = true;
-
-		} else if (Gdx.input.justTouched() && Gdx.input.getX() >= JTCM.WIDTH - act3.getWidth() - 5
-				&& Gdx.input.getX() <= JTCM.WIDTH - 5 && Gdx.input.getY() <= JTCM.HEIGHT - 350
-				&& Gdx.input.getY() >= JTCM.HEIGHT - 350 - act3.getHeight()) {
-			if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.MAGENTA)
-					|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.MAGENTA)) {
-				happiness = Math.min(1, happiness + 0.1f);
-				tipNum = 3;
-			} else {
-				happiness = Math.min(1, happiness + 0.05f);
-				tipNum = 4;
-			}
-			energy = Math.max(0, energy - 0.01f);
-			tipMsg = true;
-
-		} else if (Gdx.input.justTouched() && Gdx.input.getX() >= JTCM.WIDTH - act4.getWidth() - 5
-				&& Gdx.input.getX() <= JTCM.WIDTH - 5 && Gdx.input.getY() <= JTCM.HEIGHT - 250
-				&& Gdx.input.getY() >= JTCM.HEIGHT - 250 - act4.getHeight()) {
-			if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.CYAN)
-					|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.CYAN)) {
-				social = Math.min(1, social + 0.1f);
-				tipNum = 5;
-			} else {
-				social = Math.min(1, social + 0.05f);
-				tipNum = 6;
-			}
-			energy = Math.max(0, energy - 0.01f);
-			happiness = Math.min(1, happiness + 0.05f);
-			tipMsg = true;
-		} else if (Gdx.input.justTouched() && Gdx.input.getX() >= JTCM.WIDTH - act5.getWidth() - 5
-				&& Gdx.input.getX() <= JTCM.WIDTH - 5 && Gdx.input.getY() <= JTCM.HEIGHT - 150
-				&& Gdx.input.getY() >= JTCM.HEIGHT - 150 - act5.getHeight()) {
-			if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.YELLOW)
-					|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.YELLOW)) {
-				study = Math.min(1, study + 0.1f);
-				tipNum = 7;
-			} else {
-				study = Math.min(1, study + 0.05f);
-				tipNum = 8;
-			}
-			happiness = Math.max(0, happiness - 0.05f);
-			tipMsg = true;
-		}
-
-		else if (Gdx.input.justTouched() && Gdx.input.getX() >= JTCM.WIDTH - act6.getWidth() - 5
-				&& Gdx.input.getX() <= JTCM.WIDTH - 5 && Gdx.input.getY() <= JTCM.HEIGHT - 50
-				&& Gdx.input.getY() >= JTCM.HEIGHT - 50 - act6.getHeight()) {
-			if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.RED)
-					|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.RED)) {
-				energy = Math.min(1, energy + 0.5f);
-				tipNum = 9;
-			} else {
-				energy = Math.min(1, energy + 0.1f);
-				tipNum = 10;
-			}
-			tipMsg = true;
-		}
-		// END OF INPUT FOR ACTION-BAR CLICKING
-
-		if (Gdx.input.isKeyJustPressed(Keys.EQUALS))
-			DEBUG = !DEBUG;
-
-		// START OF DEBUG TOOLS
-		if (DEBUG) {
-			// Brings health down
-			if (Gdx.input.isKeyPressed(Keys.NUM_1))
-				health = Math.max(0, health - 0.01f);
-			if (Gdx.input.isKeyPressed(Keys.NUM_2))
-				exercise = Math.max(0, exercise - 0.01f);
-			if (Gdx.input.isKeyPressed(Keys.NUM_3))
-				happiness = Math.max(0, happiness - 0.01f);
-			if (Gdx.input.isKeyPressed(Keys.NUM_4))
-				social = Math.max(0, social - 0.01f);
-			if (Gdx.input.isKeyPressed(Keys.NUM_5))
-				study = Math.max(0, study - 0.01f);
-			if (Gdx.input.isKeyPressed(Keys.NUM_6))
-				energy = Math.max(0, energy - 0.01f);
-
-			// Resets health
-			if (Gdx.input.isKeyJustPressed(Keys.Q))
-				health = 1f;
-			if (Gdx.input.isKeyJustPressed(Keys.W))
-				exercise = 1f;
-			if (Gdx.input.isKeyJustPressed(Keys.E))
-				happiness = 1f;
-			if (Gdx.input.isKeyJustPressed(Keys.R))
-				social = 1f;
-			if (Gdx.input.isKeyJustPressed(Keys.T))
-				study = 1f;
-			if (Gdx.input.isKeyJustPressed(Keys.Y))
-				energy = 1f;
-		}
-		// END OF DEBUG TOOLS
-		if (Gdx.input.isKeyJustPressed(Keys.L)
-				&& (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.GREEN)
-						|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.GREEN)))
-			sm.push(new LibraryScreen(sm, man));
 	}
 
 	/**
@@ -402,7 +241,7 @@ public class Cutscene extends Screen {
 	 * Handles input for exiting the game
 	 */
 	private void checkExit() {
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)|| panelNum >= 5) {
 			sm.pop();
 		}
 	}
@@ -428,38 +267,7 @@ public class Cutscene extends Screen {
 	public void update(double t) {
 		// System.out.println(textRun);
 		if (!paused) {
-			if (alive && !initScene && !eventText[rand >= eventText.length ? 10 : rand] && !tipMsg && !stop) {
-				getInput();
-				currentT = System.currentTimeMillis();
-
-				if (!eventRun)
-					eCurrT = System.currentTimeMillis();
-
-				// Checks if 1 second has passed
-
-				if (currentT - lastT >= 1000) {
-					float rate = getRate();
-					health = Math.max(0, health - rate * (2 + (bEvents[4] || bEvents[5] ? 1 : 0)));
-					exercise = Math.max(0, exercise - rate * 2);
-					happiness = Math.max(0, happiness - rate * (bEvents[5] ? 3 : 1));
-					social = Math.max(0, social - rate * (bEvents[4] || bEvents[5] ? 2 : 1));
-					study = Math.max(0, study - rate);
-					lastT = System.currentTimeMillis();
-				}
-				if (eCurrT - eLastT >= 3000) {
-					rand = (int) (Math.random() * 75);
-					System.out.println(rand);
-					if (rand < 6 && !eventRun) {
-						eventRun = true;
-						eventText[rand] = true;
-						bEvents[rand] = true;
-					}
-					eLastT = System.currentTimeMillis();
-				}
-				if (health <= 0 || exercise <= 0 || happiness <= 0 || social <= 0 || energy <= 0)
-					alive = false;
-
-			}
+			
 			// checkDialogue();
 			handleText();
 			checkSetting();
@@ -476,131 +284,13 @@ public class Cutscene extends Screen {
 
 	private void handleText() {
 		if (text.done() && Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-			if (initScene) {
+			if (panelNum < 5) {
 				text.resetPrint();
-				initScene = false;
-			}
-			if (tipMsg) {
-				text.resetPrint();
-				tipMsg = false;
-			} else if (eventText[rand]) {
-				text.resetPrint();
-				eventText[rand] = false;
-				if (bEvents[0]) {
-					eventRun = false;
-				}
-				if (bEvents[1]) {
-					if (!eventText[1]) {
-						health -= 0.1f;
-						eventRun = false;
-					}
-					bEvents[1] = false;
-				} else if (bEvents[2]) {
-					bEvents[2] = false;
-					if (!eventText[2]) {
-						sm.push(new ChoiceScreen(sm, man, new String[] {
-								"Telling your parents is always a good idea,\nsince they will know what to do",
-								"Never tell your personal info to someone\nyou just met. They could be an online predator!",
-								"Never tell your personal info to someone\nyou just met. They could be an online\npredator! Still, it’s ok to keep talking to them about\nother things since they could just be a\ncurious friend.",
-								"Never tell your personal info to someone\nyou just met. They could be an online\npredator! Better safe than sorry! You still just lost\na potential friend though…" },
-								"Tell your parents", "Tell him your personal info",
-								"Politely tell him that you won’t tell him your address", "Block him"));
-						if (ChoiceScreen.choice == 1) {
-
-						} else if (ChoiceScreen.choice == 2) {
-							social -= (int) (Math.random() * 2) == 1 ? 0.5 : 0;
-						} else if (ChoiceScreen.choice == 3) {
-							social = (float) Math.min(1, social + 0.1);
-						} else if (ChoiceScreen.choice == 4) {
-							social -= 0.1;
-						}
-						ChoiceScreen.choice = 0;
-						eventRun = false;
-					}
-				} else if (bEvents[3]) {
-					bEvents[3] = false;
-					if (!eventText[3]) {
-						sm.push(new ChoiceScreen(sm, man, new String[] {
-								"Sharp pain is very bad during exercise! This is\nnot normal and you should stop exercising immediately\nif you feel sharp pain.",
-								"Good job! Sharp pain is very bad during exercise!\nThis is not normal and you should stop exercising\nimmediately if you feel sharp pain." },
-								"Keep going. No pain no gain!", "Stop exercising"));
-						if (ChoiceScreen.choice == 1) {
-							health -= 0.2;
-						} else if (ChoiceScreen.choice == 2) {
-
-						}
-						ChoiceScreen.choice = 0;
-						eventRun = false;
-					}
-				} else if (bEvents[4]) {
-					bEvents[4] = false;
-					if (!eventText[4]) {
-						sm.push(new ChoiceScreen(sm, man, new String[] {
-								"It’s never a good idea to argue with your\nparents. Often times nothing gets solved and\nthere are only negative outcomes.",
-								"Staying quiet about it may not directly\ndamage the relationship with your parents,\nbut you will feel sadder and more problem may\narise in the future if you don’t fix it now.",
-								"Sometimes you need to just accept\nthings as they are and move on." }, "Yell back",
-								"Take the punishment and say nothing", "Calmly and peacefully talk with your parents"));
-						if (ChoiceScreen.choice == 1) {
-							social -= 0.05;
-							happiness -= 0.05;
-						} else if (ChoiceScreen.choice == 2) {
-							happiness -= 0.05;
-						} else if (ChoiceScreen.choice == 3) {
-							boolean random = (int) (Math.random() * 2) == 1;
-							if (random) {
-								happiness = (float) Math.min(1, happiness + 0.1);
-								social = (float) Math.min(1, social + 0.1);
-							}
-						}
-						ChoiceScreen.choice = 0;
-						eventRun = false;
-					}
-				} else if (bEvents[5]) {
-					bEvents[5] = false;
-					if (!eventText[5]) {
-						sm.push(new ChoiceScreen(sm, man, new String[] {
-								"It’s never a good idea to argue with your\nfriends. Often times nothing gets solved and\nthere are only negative outcomes.",
-								"Staying quiet about it may not directly\ndamage the relationship with your friends,\nbut you will feel sadder and more problem may\narise in the future if you don’t fix it now.",
-								"Sometimes you need to just accept\nthings as they are and move on." }, "Yell back",
-								"Take the punishment and say nothing", "Calmly and peacefully talk with your friends"));
-						if (ChoiceScreen.choice == 1) {
-							social -= 0.05;
-							happiness -= 0.05;
-						} else if (ChoiceScreen.choice == 2) {
-							happiness -= 0.05;
-						} else if (ChoiceScreen.choice == 3) {
-							boolean random = (int) (Math.random() * 2) == 1;
-							if (random) {
-								happiness = (float) Math.min(1, happiness + 0.1);
-								social = (float) Math.min(1, social + 0.1);
-							}
-						}
-						ChoiceScreen.choice = 0;
-						eventRun = false;
-					}
-				}
+				panelNum++;
 			}
 		}
 	}
 
-	/**
-	 * This method finds out how fast each bar should deplete
-	 * 
-	 * @return rate
-	 */
-	private float getRate() {
-		int countGreen = 0, countYellow = 0, countRed = 0;
-		float[] arr = { health, exercise, happiness, social, energy };
-		for (float x : arr) {
-			if (x > 0.7f)
-				countGreen++;
-			else if (x > 0.3f)
-				countYellow++;
-			else
-				countRed++;
-		}
-		return (countGreen > 0 ? 0.01f : 0) + 0.015f * countYellow + 0.02f * countRed;
-	}
 
 	/**
 	 * This method draws my graphics
@@ -749,24 +439,15 @@ public class Cutscene extends Screen {
 				s.setColor(Color.WHITE);
 
 				// TEXT DRAWING AREA
-				if (initScene) {
-					text.printText("Hi [RED]" + NameScreen.getName()
-							+ "[],\nyour eating habits aren't healthy!\nYour health and exercise bars drop twice as fast.",
-							s, 85, paused);
+				if (panelNum<5) {
+					text.printText(panels[panelNum], s, 85, paused);
 				}
-				if (tipMsg) {
-					text.printText(tips[tipNum], s, 85, paused);
-				}
+				if (panelNum >= 5) {System.out.println("Done!");}
 				if (eventRun && eventText[rand]) {
 					text.printText(sEvents[rand], s, 85, paused);
 				}
-				// else if(eventRun&&event.run()) {
-				// events.get(currEvent).trigger();
-				// events.get(currEvent).check();
-				//
-				// }
 
-				// END TEXT DRAWING AREA
+			// END TEXT DRAWING AREA
 			} else {
 				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]\n[BLACK]CLICK TO CONTINUE[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);

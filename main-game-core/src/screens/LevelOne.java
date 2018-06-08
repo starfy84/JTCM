@@ -760,11 +760,6 @@ public class LevelOne extends Screen {
 				if (eventRun && eventText[rand]) {
 					text.printText(sEvents[rand], s, 85, paused);
 				}
-				// else if(eventRun&&event.run()) {
-				// events.get(currEvent).trigger();
-				// events.get(currEvent).check();
-				//
-				// }
 
 				// END TEXT DRAWING AREA
 			} else {
