@@ -24,7 +24,7 @@ public class NameScreen extends Screen {
 	public NameScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		// TODO Auto-generated constructor stub
-		tp = new TextProcessing(25);
+		tp = new TextProcessing(10);
 		Gdx.input.setInputProcessor(tp);
 		glyph = new GlyphLayout();
 		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
