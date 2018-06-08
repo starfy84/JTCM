@@ -74,7 +74,7 @@ public class NameScreen extends Screen {
 		
 	}
 	public static String getName() {
-		name = "[RED]"+tp.getString()+"[]";
+		name = tp.getString();
 		return name;
 	}
 

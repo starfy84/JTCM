@@ -82,7 +82,7 @@ public class HighScoresScreen extends Screen {
 			return;
 		}
 		for(int x = scores.size()-1;x>=0;x--)
-			if((Double)(score[1]) <= (Double)(scores.get(x)[1])) {
+			if((Float)(score[1]) <= (Float)(scores.get(x)[1])) {
 				scores.add(x+1, score);
 				return;
 			}
@@ -115,7 +115,7 @@ public class HighScoresScreen extends Screen {
 			while((inp=in.readLine())!=null) {
 				tokens[0] = inp.substring(0, inp.lastIndexOf(" "));
 				tokens[1] = inp.substring(inp.lastIndexOf(" ")+1);
-				scores.add(new Object[] {tokens[0],Double.parseDouble(tokens[1])});
+				scores.add(new Object[] {tokens[0],Float.parseFloat(tokens[1])});
 			}
 			in.close();
 		} catch (IOException e) {

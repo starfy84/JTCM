@@ -30,7 +30,7 @@ public class MenuScreen extends Screen {
 	private BitmapFont font;
 	private GlyphLayout glyph;
 	private Texture menu,lI,lA,hI,hA,iI,iA,eI,eA,sI,sA;
-	private Music music;
+	public static Music music;
 
 	/**
 	 * {@link MenuScreen} Constructor
@@ -75,17 +75,14 @@ public class MenuScreen extends Screen {
 	@Override
 	public void getInput() {
 		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-lI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+lI.getWidth()/2 && Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-300)&& Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-300)-lI.getHeight()) {
-			music.stop();
 			sm.push(new LevelSelectScreen(sm,man));
 		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-hI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+hI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-400) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-400)-hI.getHeight())
 		{
-			music.stop();
 			sm.push(new HighScoresSelect(sm,man));
 		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-500) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-500)-iI.getHeight())
 		{
-			music.stop();
 			sm.push(new InstructionsScreen(sm,man));
 		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-600) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-600)-eI.getHeight())

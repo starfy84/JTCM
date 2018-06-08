@@ -35,7 +35,7 @@ public class InstructionsScreen extends Screen {
 	private String[] text;
 	
 	//Backgrounds
-	private Texture bg,lI,lA,rI,rA,bI,bA;
+	private Texture bg,lI,lA,rI,rA,bI,bA,slides[];
 
 	/**
 	 * {@link MenuScreen} Constructor
@@ -45,6 +45,8 @@ public class InstructionsScreen extends Screen {
 	 */
 	public InstructionsScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
+		for(int x = 0 ;x< slides.length;x++)
+			slides[x] = man.get("instructions/s"+x+".png",Texture.class);
 		bg = man.get("back.png",Texture.class);
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param = new FreeTypeFontParameter();
@@ -62,15 +64,15 @@ public class InstructionsScreen extends Screen {
 		bI = man.get("backWIdle.png",Texture.class);
 		bA = man.get("backWActive.png",Texture.class);
 		text = new String[] { "[ROYAL]Goal[]: Have the highest score at the end of each level.",
-				"You play as a student and try to [ROYAL]keep all of your status bars high[].",
+				"You play as a student with a variety of [ROYAL]status bars[]",
 				"[ROYAL]Status bars degrade consistently[] so you must try your hardest to keep them all high!",
 				"To keep your status bars high, you must [ROYAL]perform activities[] from the [ROYAL]action bar[] by clicking on their\nrespective buttons.",
 				"Be careful not to let your status bars drop below a certain level, or all the status bars will start to\n[RED]degrade faster[]!",
 				"[ROYAL]Location matters[]! Performing certain actions at specific location can be [LIME]more effective[] or [RED]less effective[].",
 				"There are specific events that show up randomly which can [ROYAL]restrict actions or change the rates[] of your\nstatus bars drop.",
-				"At the end of [ROYAL]6 minutes[] the level ends and the total of your status bars is added together to give you a\nscore.",
+				"At the end of [ROYAL]3 minutes[] the level ends and the total of your status bars is added together to give you a\nscore.",
 				"If at anytime during the level, one of your status bars drops to zero, you will [RED]lose[]!",
-				"At any point during the game press [RED]C[] to view controls, [RED]S[] to open the settings screen, and [RED]space[] to\nadvance the dialogue. Click on the minimap to view a larger map." };
+				"At any point during the game press [RED]ESC[] to exit the game, [RED]S[] to open the settings screen,[RED]P[] to pause,\nand [RED]space[] to advance the dialogue. Click on the minimap to view a larger map." };
 	}
 
 	/**
@@ -114,6 +116,9 @@ public class InstructionsScreen extends Screen {
 			s.draw(Gdx.input.getX()>=20 &&Gdx.input.getX()<=20+lI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-lI.getHeight()?lA:lI,20,(JTCM.HEIGHT-lI.getHeight())/2);
 		if(pos<text.length-1)
 			s.draw(Gdx.input.getX()>=JTCM.WIDTH-rI.getWidth()-20 &&Gdx.input.getX()<=JTCM.WIDTH-20&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-rI.getHeight()?rA:rI,JTCM.WIDTH-rI.getWidth()-20,(JTCM.HEIGHT-rI.getHeight())/2);
+		
+		
+		
 		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
 		font.draw(s, glyph, 10, JTCM.HEIGHT - 10);
 		SettingsScreen.applyBrightness(s);
