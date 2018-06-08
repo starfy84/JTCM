@@ -350,7 +350,7 @@ public class LevelOne extends Screen {
 				}
 				if(eCurrT-eLastT>=3000)
 				{
-					rand = (int)(Math.random()* 10);
+					rand = (int)(Math.random()* 100);
 					System.out.println(rand);
 					if(rand<10&&!eventRun) {
 						System.out.println("event will run now");
