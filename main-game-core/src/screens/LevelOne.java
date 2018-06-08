@@ -40,7 +40,7 @@ import text.Text;
 public class LevelOne extends Screen {
 
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
-	private Texture background, map, indoorMap, minimap, blackdot, bar, bar2, bar3, bar4, act1, act2, act3, act4,act5;
+	private Texture background, map, indoorMap, minimap, blackdot, bar1, bar2, bar3, bar4, bar5, act1, act2, act3, act4, act5;
 	
 	//Our text drawer
 	private Text text;
@@ -86,9 +86,9 @@ public class LevelOne extends Screen {
 			"You are addicted to video games! Social and health\ndepletion rate doubled.",
 			"You are having a hard time making friends and coping with\nmisfortunate events. Social and health depletion rate doubled. Happiness depletion rate tripled.",
 			"You feel sharp pain while exercising. What do you do?",
-			"Your parents are upset at you for something you don’t agree\nwith! What do you do?",
-			"Your friends are upset at you for something you don’t agree\nwith! What do you do?",
-			"You don’t like the taste of all this healthy food! Your\nhappiness bar goes down by 10."};
+			"Your parents are upset at you for something you don't agree\nwith! What do you do?",
+			"Your friends are upset at you for something you don't agree\nwith! What do you do?",
+			"You don't like the taste of all this healthy food! Your\nhappiness bar goes down by 10."};
 	
 	private int rand=10;
 	//END EVENTS
@@ -159,14 +159,16 @@ public class LevelOne extends Screen {
         indoorMap = man.get("indoorMap.png",Texture.class);
 		minimap = man.get("map.png",Texture.class);
 		blackdot = man.get("blackdot.png",Texture.class);
-		bar = man.get("blank.jpg",Texture.class);
+		bar1 = man.get("blank.jpg",Texture.class);
 		bar2 = man.get("blank.jpg",Texture.class);
 		bar3 = man.get("blank.jpg",Texture.class);
 		bar4 = man.get("blank.jpg",Texture.class);
+		bar5 = man.get("blank.jpg",Texture.class);
 		act1 = man.get("settingIdle.png",Texture.class);
 		act2 = man.get("settingIdle.png",Texture.class);
 		act3 = man.get("settingIdle.png",Texture.class);
 		act4 = man.get("settingIdle.png",Texture.class);
+		act5 = man.get("settingIdle.png",Texture.class);
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -212,18 +214,22 @@ public class LevelOne extends Screen {
 			if (Gdx.input.isKeyPressed(Keys.RIGHT) && (!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+7.5)].equals(java.awt.Color.BLACK) || !collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX+7.5)].equals(java.awt.Color.BLACK))) {
 				xCoord -= JTCM.WIDTH*5.0/map.getWidth()/2*5;
 				charX += 2.5;
+				energy = Math.max(0,energy-0.001f);
 			}
 			if (Gdx.input.isKeyPressed(Keys.LEFT) && (!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.BLACK) || !collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-10)].equals(java.awt.Color.BLACK))) {
 				xCoord += JTCM.WIDTH*5.0/map.getWidth()/2*5;
 				charX -= 2.5;
+				energy = Math.max(0,energy-0.001f);
 			}
 			if (Gdx.input.isKeyPressed(Keys.UP) && (!collisionArr[(int)Math.ceil(charY-5)][(int)Math.round(charX+5)].equals(java.awt.Color.BLACK) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.BLACK) && !collisionArr[(int)Math.ceil(charY-5)][(int)Math.round(charX-7.5)].equals(java.awt.Color.BLACK) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX+5)].equals(java.awt.Color.BLACK))) {
 				yCoord -= JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 				charY -= 2.5;
+				energy = Math.max(0,energy-0.001f);
 			}
 			if (Gdx.input.isKeyPressed(Keys.DOWN) && (!collisionArr[(int)Math.floor(charY+2.5)][(int)Math.round(charX)].equals(java.awt.Color.BLACK) && !collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX-7.5)].equals(java.awt.Color.BLACK))) {
 				yCoord += JTCM.HEIGHT*5.0/map.getHeight()/2*5;
 				charY += 2.5;
+				energy = Math.max(0,energy-0.001f);
 			}
 			if(Gdx.input.justTouched()&& Gdx.input.getX()>=0 && Gdx.input.getX()<=(minimap.getWidth()/5)+5 && Gdx.input.getY()>=JTCM.HEIGHT-minimap.getHeight()/5 && Gdx.input.getY()<=JTCM.HEIGHT)
 				sm.push(new MinimapScreen(sm,man));
@@ -231,14 +237,16 @@ public class LevelOne extends Screen {
 		//END OF INPUT FOR CHARACTER MOVEMENT
 		
 		//START OF INPUT FOR ACTION-BAR CLICKING
-		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-100 && Gdx.input.getY()>=JTCM.HEIGHT-100-act1.getHeight())
+		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-150 && Gdx.input.getY()>=JTCM.HEIGHT-150-act1.getHeight())
 			social = Math.min(1, social+0.05f);
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-200 && Gdx.input.getY()>=JTCM.HEIGHT-200-act2.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-250 && Gdx.input.getY()>=JTCM.HEIGHT-250-act2.getHeight())
 			happiness = Math.min(1, happiness+0.05f);
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-300 && Gdx.input.getY()>=JTCM.HEIGHT-300-act3.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-350 && Gdx.input.getY()>=JTCM.HEIGHT-350-act3.getHeight())
 			exercise = Math.min(1, exercise+0.05f);
-		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-400 && Gdx.input.getY()>=JTCM.HEIGHT-400-act4.getHeight())
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-450 && Gdx.input.getY()>=JTCM.HEIGHT-450-act4.getHeight())
 			health = Math.min(1, health+0.05f);
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act5.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-550 && Gdx.input.getY()>=JTCM.HEIGHT-550-act5.getHeight())
+			energy = Math.min(1, energy+0.05f);
 		//END OF INPUT FOR ACTION-BAR CLICKING
 		
 		//START OF DEBUG TOOLS
@@ -453,13 +461,15 @@ public class LevelOne extends Screen {
 			
 			//Changes colours of health bar and draws bars 1,2,3 and 4
 			s.setColor(health>0.7f?Color.GREEN:health>0.3f?Color.YELLOW:Color.RED);
-			s.draw(bar, 10, JTCM.HEIGHT-20,JTCM.WIDTH/4* health,10);
+			s.draw(bar1, 10, JTCM.HEIGHT-20,JTCM.WIDTH/4* health,10);
 			s.setColor(exercise>0.7f?Color.GREEN:exercise>0.3f?Color.YELLOW:Color.RED);
 			s.draw(bar2, 10, JTCM.HEIGHT-35,JTCM.WIDTH/4*exercise,10);
 			s.setColor(happiness>0.7f?Color.GREEN:happiness>0.3f?Color.YELLOW:Color.RED);
 			s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*happiness,10);
 			s.setColor(social>0.7f?Color.GREEN:social>0.3f?Color.YELLOW:Color.RED);
 			s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*social,10);
+			s.setColor(energy>0.7f?Color.GREEN:social>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar5, 10, JTCM.HEIGHT-80,JTCM.WIDTH/4*energy,10);
 			
 			//Reset tint
 			s.setColor(Color.WHITE);
@@ -470,14 +480,16 @@ public class LevelOne extends Screen {
 	        s.setColor(Color.WHITE);
 			
 			//Action bars 1,2,3 and 4
-			s.draw(act1,JTCM.WIDTH-act1.getWidth()-40,250);
-			s.draw(act2,JTCM.WIDTH-act2.getWidth()-40,350);
-			s.draw(act3,JTCM.WIDTH-act3.getWidth()-40,450);
-			s.draw(act4,JTCM.WIDTH-act4.getWidth()-40,550);
+			s.draw(act1,JTCM.WIDTH-act1.getWidth()-40,150);
+			s.draw(act2,JTCM.WIDTH-act2.getWidth()-40,250);
+			s.draw(act3,JTCM.WIDTH-act3.getWidth()-40,350);
+			s.draw(act4,JTCM.WIDTH-act4.getWidth()-40,450);
+			s.draw(act5,JTCM.WIDTH-act5.getWidth()-40,550);
 			
 			//TEXT DRAWING AREA
 			if(initScene) {
-				text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
+				//text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
+				text.printText("023456789012345678902234567890323456789042345678905234567890", s, 85, paused);
 			}
 			if(eventRun && eventText[rand]) {
 				text.printText(sEvents[rand], s, 85, paused);
