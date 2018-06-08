@@ -8,13 +8,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -32,10 +27,6 @@ import com.main.game.JTCM;
  * @author Dereck
  */
 public class SettingsScreen extends Screen {
-	private FreeTypeFontGenerator gen;
-	private FreeTypeFontParameter param;
-	private BitmapFont font;
-	private GlyphLayout glyph;
 	private Skin skin;
 	private Stage st;
 	private String[] sliderNames;
@@ -84,16 +75,9 @@ public class SettingsScreen extends Screen {
 		sliders.get("brightness").setValue(bright);
 		sliders.get("sound").setValue(sound);
 		//sliders.get("resolution").setValue(res);
-		//backI = man.get("backWIdle.png",Texture.class);
-		//backA = man.get("backWActive.png",Texture.class);
+		backI = man.get("backWIdle.png",Texture.class);
+		backA = man.get("backWActive.png",Texture.class);
 		
-    	gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
-        param = new FreeTypeFontParameter();
-        param.size = 10;
-        font = gen.generateFont(param);
-        font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-        font.getData().markupEnabled = true;
-        glyph = new GlyphLayout();
 	}
 
 	/**
@@ -198,9 +182,8 @@ public class SettingsScreen extends Screen {
 		s.begin();
 		s.draw(pos==0?bA:bI,0, JTCM.HEIGHT - JTCM.HEIGHT / 4,JTCM.WIDTH,JTCM.HEIGHT/10);
 		s.draw(pos==1?sA:sI,0,JTCM.HEIGHT - JTCM.HEIGHT / 2,JTCM.WIDTH,JTCM.HEIGHT/10);
-		font.setColor(Gdx.input.getX()>=0 &&Gdx.input.getX()<=backI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-backI.getHeight()?Color.WHITE:Color.CYAN);
-		glyph.setText(font, "BRIGHTNESS");
-		font.draw(s, glyph, 100,100);
+		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=backI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-backI.getHeight()?backA:backI, 0, 0);
+
 		applyBrightness(s);
 		s.end();
 
