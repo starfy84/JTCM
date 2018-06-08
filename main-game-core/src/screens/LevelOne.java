@@ -3,10 +3,6 @@ package screens;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +21,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.main.game.JTCM;
 
-import items.Event;
 import text.Text;
 
 /**
@@ -78,16 +73,25 @@ public class LevelOne extends Screen {
 	private boolean eventRun;
 	private boolean[] bEvents = new boolean[11];
 	private boolean[] eventText = new boolean[11];
+//	private String[] sEvents = {
+//			"You have a power outage! Internet related activites\nhave been disabled.",
+//			"You have a stomach ache! Your health bar goes down by\n10.",
+//			"You have exercised too much! Your energy bar goes\ndown by 10.",
+//			"You have met an online friend recently who is asking\nfor your personal info. What do you do?",
+//			"You are addicted to video games! Social and health\ndepletion rate doubled.",
+//			"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
+//			"You feel sharp pain while exercising. What do you do?",
+//			"Your parents are upset at you for something you don’t\nagree with! What do you do?",
+//			"Your friends are upset at you for something you don’t\nagree with! What do you do?",
+//			"You don’t like the taste of all this healthy food!\nYour happiness bar goes down by 10."};
 	private String[] sEvents = {
-			"You have a power outage! Internet related activites\nhave been disabled.",
-			"You have a stomach ache! Your health bar goes down by\n10.",
-			"You have exercised too much! Your energy bar goes\ndown by 10.",
-			"You have met an online friend recently who is asking\nfor your personal info. What do you do?",
-			"You are addicted to video games! Social and health\ndepletion rate doubled.",
-			"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
-			"You feel sharp pain while exercising. What do you do?",
-			"Your parents are upset at you for something you don't\nagree with! What do you do?",
-			"Your friends are upset at you for something you don't\nagree with! What do you do?"};
+			"You have a power outage! Internet related activites\nhave been disabled.", //Passive
+			"You have a stomach ache! Your health bar goes down by\n10.", //Instant
+			"You have met an online friend recently who is asking\nfor your personal info. What do you do?", //Instant
+			"You feel sharp pain while exercising. What do you do?", //Instant
+			"Your parents are upset at you for something you don’t\nagree with! What do you do?", //Instant
+			"Your friends are upset at you for something you don’t\nagree with! What do you do?"}; //Instant
+
 	
 	private int rand=10, tipNum;
 	//END EVENTS
@@ -111,8 +115,7 @@ public class LevelOne extends Screen {
 	private GlyphLayout glyph;
 	
 	private long eCurrT,eLastT;
-	
-	private int currEvent;
+
 	//Debugging mode
 	private final boolean DEBUG = true;
 	
@@ -440,6 +443,7 @@ public class LevelOne extends Screen {
 					eCurrT = System.currentTimeMillis();
 				
 				//Checks if 1 second has passed
+
 				if(currentT-lastT>=1000)
 				{
 					float rate = getRate();
@@ -452,22 +456,13 @@ public class LevelOne extends Screen {
 				}
 				if(eCurrT-eLastT>=3000)
 				{
-					rand = (int)(Math.random()* 100);
+					rand = (int)(Math.random()*50);
 					System.out.println(rand);
-					if(rand<10&&!eventRun) {
+					if(rand<6&&!eventRun) {
 						System.out.println("event will run now");
 						eventRun = true;
 						eventText[rand] = true;
 						bEvents[rand] = true;
-						if(bEvents[1]) {
-							health-=0.1f;
-						}
-						else if(bEvents[2]) {
-							energy-=0.1f;
-						}
-						else if(bEvents[9]) {
-							happiness-=0.1f;
-						}
 					}
 					eLastT = System.currentTimeMillis();
 				}
@@ -501,6 +496,74 @@ public class LevelOne extends Screen {
 			else if(eventText[rand]) {
 				text.resetPrint();
 				eventText[rand] = false;
+				if(bEvents[0]) {
+					eventRun = false;
+				}
+				if(bEvents[1]) {
+					if(!eventText[1]) {
+						health-=0.1f;
+						eventRun = false;
+					}
+					bEvents[1] = false;
+				}
+				else if(bEvents[2]) {
+					bEvents[2] = false;
+					if(!eventText[2]) {
+						sm.push(new ChoiceScreen(sm,man,"Tell your parents","Tell him your personal info","Politely tell him that you won’t tell him your address","Block him"));
+						if(ChoiceScreen.choice == 1)
+						{}
+						else if(ChoiceScreen.choice == 2)
+						{}
+						else if(ChoiceScreen.choice == 3)
+						{}
+						else if(ChoiceScreen.choice == 4)
+						{}
+						ChoiceScreen.choice=0;
+						eventRun = false;
+					}
+				}
+				else if(bEvents[3]) {
+					bEvents[3] = false;
+					if(!eventText[3]) {
+						sm.push(new ChoiceScreen(sm,man,"Keep going. No pain no gain!","Stop exercising"));
+						if(ChoiceScreen.choice == 1)
+						{}
+						else if(ChoiceScreen.choice == 2)
+						{}
+						else if(ChoiceScreen.choice == 3)
+						{}
+						ChoiceScreen.choice=0;
+						eventRun = false;
+					}
+				}
+				else if(bEvents[4]) {
+					bEvents[4] = false;
+					if(!eventText[4]) {
+						sm.push(new ChoiceScreen(sm,man,"Yell back","Take the punishment and say nothing","Calmly and peacefully talk with your parents"));
+						if(ChoiceScreen.choice == 1)
+						{}
+						else if(ChoiceScreen.choice == 2)
+						{}
+						else if(ChoiceScreen.choice == 3)
+						{}
+						ChoiceScreen.choice=0;
+						eventRun = false;
+					}
+				}
+				else if(bEvents[5]) {
+					bEvents[5] =false;
+					if(!eventText[5]) {
+						sm.push(new ChoiceScreen(sm,man,"Yell back","Take the punishment and say nothing","Calmly and peacefully talk with your parents"));
+						if(ChoiceScreen.choice == 1)
+						{}
+						else if(ChoiceScreen.choice == 2)
+						{}
+						else if(ChoiceScreen.choice == 3)
+						{}
+						ChoiceScreen.choice=0;
+						eventRun = false;
+					}
+				}
 			}
 		}
 	}
@@ -599,7 +662,7 @@ public class LevelOne extends Screen {
 			
 			//TEXT DRAWING AREA
 			if(initScene) {
-				text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
+				text.printText("Hi "+NameScreen.getName()+",\nI'm the narrator... you have depression!", s, 85, paused);
 			}
 			if(tipMsg)
 			{
@@ -607,7 +670,6 @@ public class LevelOne extends Screen {
 			}
 			if(eventRun && eventText[rand]) {
 				text.printText(sEvents[rand], s, 85, paused);
-				System.out.println(text.done());
 			}
 //			else if(eventRun&&event.run()) {
 //				events.get(currEvent).trigger();
