@@ -46,21 +46,25 @@ public class LevelSelectScreen extends Screen {
 	public void getInput() {
 		if(Gdx.input.justTouched()&& Gdx.input.getX()>=JTCM.WIDTH/2-tutI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+tutI.getWidth()/2 && Gdx.input.getY()<=Gdx.graphics.getHeight()-500 && Gdx.input.getY()>=Gdx.graphics.getHeight()-500-tutI.getHeight())
 		{
+			MenuScreen.music.stop();
 			sm.set(new Cutscene(sm,man));
 			sm.push(new NameScreen(sm,man));
 		}
 		else if(Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-oneI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+oneI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-400 && Gdx.input.getY()>=Gdx.graphics.getHeight()-400-oneI.getHeight())
 		{
+			MenuScreen.music.stop();
 			sm.set(new LevelOne(sm,man));
 			sm.push(new NameScreen(sm,man));
 		}
 		else if(Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-twoI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+twoI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-300 && Gdx.input.getY()>=Gdx.graphics.getHeight()-300-twoI.getHeight())
 		{
+			MenuScreen.music.stop();
 			sm.set(new LevelTwo(sm,man));
 			sm.push(new NameScreen(sm,man));
 		}
 		else if(Gdx.input.justTouched()&& Gdx.input.getX()>=JTCM.WIDTH/2-threeI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+threeI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-200 && Gdx.input.getY()>=Gdx.graphics.getHeight()-200-threeI.getHeight())
 		{
+			MenuScreen.music.stop();
 			sm.set(new LevelThree(sm,man));
 			sm.push(new NameScreen(sm,man));
 		}
