@@ -93,16 +93,16 @@ public class LevelOne extends Screen {
 	//TIPS
 	private String[] tips = {
 			"It's good to eat healthy but it's ok to break the\nrules once in a while.",
-			"Exercising at the gym is really effective! Make sure\nyou don't overdo it though!",
-			"Exercise is great for your body, but make sure you\ndon't overdo it!",
-			"Arcades are really fun! Try not to get addicted!",
-			"It's important to be happy with your life. Don't get\ncarried away though!",
-			"Meeting freinds in real life is really enjoyable!\nTalking to frinds online is also fun and convenient.",
-			"Talking to friends online is really convenient!\nMeeting freinds can be even more fun too!",
-			"Studying in a work environment is really effective\nsince you can focus! Studying can be boring so make\nsure you relax too.",
-			"Studying is really important in order to have a\nsucessful future. Studying can be boring so make sure\nyou relax too.",
-			"Relaxing at home is really effective and\nrefreshing!",
-			"Relaxing is important in order to reduce stress\nand fatigue."};
+			"You exercised at the gym!\nExercising at the gym is really effective! Make sure\nyou don't overdo it though!",
+			"You exercised!\nExercise is great for your body, but make sure you\ndon't overdo it!",
+			"You played at the arcade!\nArcades are really fun! Try not to get addicted!",
+			"You decided to have some fun!\nIt's important to be happy with your life. Don't get\ncarried away though!",
+			"You had fun at your friend's house!\nMeeting freinds in real life is really enjoyable!\nTalking to frinds online is also fun and convenient.",
+			"You messaged your friend over the internet!\nTalking to friends online is really convenient!\nMeeting freinds can be even more fun too!",
+			"You studied at school!\nStudying in a work environment is really effective\nsince you can focus! Studying can be boring so make\nsure you relax too.",
+			"You decided to study!\nStudying is really important in order to have a\nsucessful future. Studying can be boring so make sure\nyou relax too.",
+			"You decided to sleep at home!\nRelaxing at home is really effective and\nrefreshing!",
+			"You decided to sleep!\nRelaxing is important in order to reduce stress\nand fatigue."};
 	
 	private FreeTypeFontGenerator gen,gen1;
 	private FreeTypeFontParameter param,param1;
