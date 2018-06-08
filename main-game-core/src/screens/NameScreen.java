@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -17,6 +18,7 @@ import text.TextProcessing;
 
 public class NameScreen extends Screen {
 
+	private Texture bg;
 	private static TextProcessing tp;
 	private BitmapFont font;
 	private GlyphLayout glyph;
@@ -33,6 +35,7 @@ public class NameScreen extends Screen {
 		font = gen.generateFont(param);
 		font.setColor(Color.BLACK);
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		bg = man.get("back.png",Texture.class);
 	}
 
 	@Override
@@ -53,8 +56,11 @@ public class NameScreen extends Screen {
 	public void render(SpriteBatch s) {
 		// TODO Auto-generated method stub
 		s.begin();
+		s.draw(bg,0,0,JTCM.WIDTH,JTCM.HEIGHT);
 		glyph.setText(font, tp.getString());
 		font.draw(s, glyph, (JTCM.WIDTH-glyph.width)/2f,(JTCM.HEIGHT-glyph.height)/2);
+		glyph.setText(font, "PLEASE ENTER YOUR NAME");
+		font.draw(s, glyph, (JTCM.WIDTH-glyph.width)/2f,(JTCM.HEIGHT-glyph.height*2));
 		s.end();
 	}
 
