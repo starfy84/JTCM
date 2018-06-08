@@ -72,7 +72,7 @@ public class LevelOne extends Screen {
 	//Time for health depletion 
 	private long currentT, lastT;
 	
-	private boolean alive, paused,initScene;
+	private boolean alive, paused, initScene, tipMsg;
 	
 	//EVENTS
 	private boolean eventRun;
@@ -87,11 +87,24 @@ public class LevelOne extends Screen {
 			"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
 			"You feel sharp pain while exercising. What do you do?",
 			"Your parents are upset at you for something you don't\nagree with! What do you do?",
-			"Your friends are upset at you for something you don't\nagree with! What do you do?",
-			"You don't like the taste of all this healthy food!\nYour happiness bar goes down by 10."};
+			"Your friends are upset at you for something you don't\nagree with! What do you do?"};
 	
-	private int rand=10;
+	private int rand=10, tipNum;
 	//END EVENTS
+	
+	//TIPS
+	private String[] tips = {
+			"It's good to eat healthy but it's ok to break the\nrules once in a while.",
+			"Exercising at the gym is really effective! Make sure\nyou don't overdo it though!",
+			"Exercise is great for your body, but make sure you\ndon't overdo it!",
+			"Arcades are really fun! Try not to get addicted!",
+			"It's important to be happy with your life. Don't get\ncarried away though!",
+			"Meeting freinds in real life is really enjoyable!\nTalking to frinds online is also fun and convenient.",
+			"Talking to friends online is really convenient!\nMeeting freinds can be even more fun too!",
+			"Studying in a work environment is really effective\nsince you can focus! Studying can be boring so make\nsure you relax too.",
+			"Studying is really important in order to have a\nsucessful future. Studying can be boring so make sure you\nrelax too.",
+			"Relaxing at home is really effective and\nrefreshing!",
+			"Relaxing is important in order to reduce stress\nand fatigue."};
 	
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
@@ -244,47 +257,86 @@ public class LevelOne extends Screen {
 		{
 			health = Math.min(1, health+0.05f);
 			energy = Math.max(0,energy-0.01f);
+			tipMsg = true;
+			tipNum = 0;
 		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-450 && Gdx.input.getY()>=JTCM.HEIGHT-450-act2.getHeight())
 		{
 			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLUE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLUE))
+			{
 				exercise = Math.min(1, exercise+0.1f);
+				tipNum = 1;	
+			}
 			else
+			{
 				exercise = Math.min(1, exercise+0.05f);
+				tipNum = 2;
+			}
 			energy = Math.max(0,energy-0.01f);
+			tipMsg = true;
+
 		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-350 && Gdx.input.getY()>=JTCM.HEIGHT-350-act3.getHeight())
 		{
 			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.MAGENTA) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.MAGENTA))
+			{
 				happiness = Math.min(1, happiness+0.1f);
+				tipNum = 3;	
+			}
 			else
+			{
 				happiness = Math.min(1, happiness+0.05f);
+				tipNum = 4;
+			}
 			energy = Math.max(0,energy-0.01f);
+			tipMsg = true;
+			
 		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-250 && Gdx.input.getY()>=JTCM.HEIGHT-250-act4.getHeight())
 		{
 			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.CYAN) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.CYAN))
+			{
 				social = Math.min(1, social+0.1f);
+				tipNum = 5;
+			}
 			else
+			{
 				social = Math.min(1, social+0.05f);
+				tipNum = 6;
+			}
 			energy = Math.max(0,energy-0.01f);
 			happiness = Math.min(1, happiness+0.05f);
+			tipMsg = true;
 		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act5.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-150 && Gdx.input.getY()>=JTCM.HEIGHT-150-act5.getHeight())
 		{
 			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.YELLOW) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.YELLOW))
+			{
 				study = Math.min(1, study+0.1f);
+				tipNum = 7;
+			}
 			else
+			{
 				study = Math.min(1, study+0.05f);
+				tipNum = 8;	
+			}
 			happiness = Math.max(0, happiness-0.05f);
+			tipMsg = true;
 		}
 			
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act6.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-50 && Gdx.input.getY()>=JTCM.HEIGHT-50-act6.getHeight())
 		{
 			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.RED))
+			{
 				energy = Math.min(1, energy+0.5f);
+				tipNum = 9;
+			}
 			else
+			{
 				energy = Math.min(1, energy+0.1f);
+				tipNum = 10;	
+			}
+			tipMsg = true;
 		}
 		//END OF INPUT FOR ACTION-BAR CLICKING
 		
@@ -442,6 +494,10 @@ public class LevelOne extends Screen {
 				text.resetPrint();
 				initScene = false;
 			}
+			if(tipMsg) {
+				text.resetPrint();
+				tipMsg = false;
+			}
 			else if(eventText[rand]) {
 				text.resetPrint();
 				eventText[rand] = false;
@@ -544,6 +600,10 @@ public class LevelOne extends Screen {
 			//TEXT DRAWING AREA
 			if(initScene) {
 				text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
+			}
+			if(tipMsg)
+			{
+				text.printText(tips[tipNum], s, 85, paused);
 			}
 			if(eventRun && eventText[rand]) {
 				text.printText(sEvents[rand], s, 85, paused);
