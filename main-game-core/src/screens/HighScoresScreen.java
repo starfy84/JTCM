@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -36,14 +37,14 @@ import com.main.game.JTCM;
  */
 public class HighScoresScreen extends Screen {
 
-	BitmapFont font85;
-	BitmapFont font45;
-	GlyphLayout glyph;
-	List<Object[]> scores = new ArrayList<Object[]>();
-	float posa;
-	int posb;
-	Texture bA,bI;
-	String prefix;
+	private BitmapFont font85;
+	private BitmapFont font45;
+	private GlyphLayout glyph;
+	private List<Object[]> scores = new ArrayList<Object[]>();
+	private float posa;
+	private int posb;
+	private Texture bA,bI;
+	private String prefix;
 	/**
 	 * {@link HighScoresScreen} constructor
 	 * @param sm Screen manager to determine current screen
@@ -81,7 +82,7 @@ public class HighScoresScreen extends Screen {
 			return;
 		}
 		for(int x = scores.size()-1;x>=0;x--)
-			if((Integer)(score[1]) <= (Integer)(scores.get(x)[1])) {
+			if((Double)(score[1]) <= (Double)(scores.get(x)[1])) {
 				scores.add(x+1, score);
 				return;
 			}
@@ -114,7 +115,7 @@ public class HighScoresScreen extends Screen {
 			while((inp=in.readLine())!=null) {
 				tokens[0] = inp.substring(0, inp.lastIndexOf(" "));
 				tokens[1] = inp.substring(inp.lastIndexOf(" ")+1);
-				scores.add(new Object[] {tokens[0],Integer.parseInt(tokens[1])});
+				scores.add(new Object[] {tokens[0],Double.parseDouble(tokens[1])});
 			}
 			in.close();
 		} catch (IOException e) {
@@ -129,6 +130,15 @@ public class HighScoresScreen extends Screen {
 	public void getInput() {
 		if(Gdx.input.justTouched()&&Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight())
 			sm.pop();
+		if(Gdx.input.isKeyJustPressed(Keys.R)) {
+			try {
+				new PrintWriter(new BufferedWriter(new FileWriter("highscores/"+prefix+"scores.txt"))).close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			scores.clear();
+			read();	
+		}
 	}
 
 	/**
@@ -162,6 +172,8 @@ public class HighScoresScreen extends Screen {
 			font45.draw(s, glyph, posb, JTCM.HEIGHT-45*(x+3));
 		}
 		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
+		glyph.setText(font45, "Press r to reset the highscores");
+		font45.draw(s, glyph, bI.getWidth()+10, glyph.height);
 		SettingsScreen.applyBrightness(s);
 		s.end();
 
@@ -172,7 +184,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	@Override
 	public void dispose() {
-//		font.dispose();
+		write();
 
 	}
 

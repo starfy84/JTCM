@@ -729,8 +729,8 @@ public class LevelTwo extends Screen {
 
 				// TEXT DRAWING AREA
 				if (initScene) {
-					text.printText("Hi " + NameScreen.getName()
-							+ ",\nyou are very addicted to video games.Social,\nhealth, and exercise rates will drop twice as fast.",
+					text.printText("Hi [RED]" + NameScreen.getName()
+							+ "[],\nyou are very addicted to video games.Social,\nhealth, and exercise rates will drop twice as fast.",
 							s, 85, paused);
 				}
 				if (tipMsg) {
@@ -747,13 +747,24 @@ public class LevelTwo extends Screen {
 
 				// END TEXT DRAWING AREA
 			} else {
-				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]");
+				glyph.setText(font, "[RED]LEVEL TWO[]:[RED]FAILED[]\n[BLACK]CLICK TO CONTINUE[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+				if(Gdx.input.justTouched())
+				{
+					HighScoresScreen hs = new HighScoresScreen(sm,man,"two");
+					hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
+					sm.set(hs);
+				}
 			}
-		}
-		else {
-			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]");
+		} else {
+			glyph.setText(font, "[RED]LEVEL TWO[]: [LIME]COMPLETE[]\n[BLACK]CLICK TO CONTINUE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+			if(Gdx.input.justTouched())
+			{
+				HighScoresScreen hs = new HighScoresScreen(sm,man,"two");
+				hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
+				sm.set(hs);
+			}
 		}
 		SettingsScreen.applyBrightness(s);
 		if (paused) {

@@ -729,8 +729,8 @@ public class LevelThree extends Screen {
 
 				// TEXT DRAWING AREA
 				if (initScene) {
-					text.printText("Hi " + NameScreen.getName()
-							+ ",\nyou have a hard time making friends and dealing with\ndepression! Every bar decreases twice as fast!",
+					text.printText("Hi [RED]" + NameScreen.getName()
+							+ "[],\nyou have a hard time making friends and dealing with\ndepression! Every bar decreases twice as fast!",
 							s, 85, paused);
 				}
 				if (tipMsg) {
@@ -747,13 +747,24 @@ public class LevelThree extends Screen {
 
 				// END TEXT DRAWING AREA
 			} else {
-				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]");
+				glyph.setText(font, "[RED]LEVEL THREE[]:[RED]FAILED[]\n[BLACK]CLICK TO CONTINUE[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+				if(Gdx.input.justTouched())
+				{
+					HighScoresScreen hs = new HighScoresScreen(sm,man,"three");
+					hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
+					sm.set(hs);
+				}
 			}
-		}
-		else {
-			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]");
+		} else {
+			glyph.setText(font, "[RED]LEVEL THREE[]: [LIME]COMPLETE[]\n[BLACK]CLICK TO CONTINUE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+			if(Gdx.input.justTouched())
+			{
+				HighScoresScreen hs = new HighScoresScreen(sm,man,"three");
+				hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
+				sm.set(hs);
+			}
 		}
 		SettingsScreen.applyBrightness(s);
 		if (paused) {

@@ -134,48 +134,6 @@ public class LevelOne extends Screen {
 		social = 1f;
 		study = 1f;
 		energy = 1f;
-		// events = new ArrayList<Event>();
-		// Map<String,float[]> temp = new HashMap<String,float[]>();
-		// events.add(new Event("Your power went out! All internet related activites are
-		// disabled.", true));
-		// events.add(new Event("You have a stomach ache! Your physical health decreases
-		// by 10.",null,new float[] {-0.1f,0,0,0,0},null,""));
-		// events.add(new Event("You have exercised too much! Your energy decreases by
-		// 10.",null,new float[] {0,0,0,0,-0.1f},null,""));
-
-		// temp.put("Tell your parents", new float[] {0f,0f,0f,0f,0f});
-		// temp.put("Tell him your personal information", new float[]
-		// {0f,0f,0f,(int)(Math.random()*2)==0?0f:-0.5f,0f});
-		// temp.put("Politely tell him that you won't tell him your address", new
-		// float[] {0f,0f,0f,0.1f,0f});
-		// temp.put("Block him", new float[] {0f,0f,0f,-0.1f,0f});
-		//
-		// events.add(new Event("Met an online friend recently who is asking for your
-		// personal info. What do you do?",temp,null,null,"Never tell your personal info
-		// to someone you just met. They could be an online predator!"));
-		// events.add(new Event("You're addicted to video games! Social loss doubled.
-		// Health loss doubled",null,null,new float[] {2,1,1,2,1},""));
-		// events.add(new Event("You are having a hard time making friends and coping
-		// with misfortunate events. Social loss doubled. Health loss doubled. Happiness
-		// loss tripled.",null,null,new float[] {2,1,3,2,1},""));
-		//
-		// temp = new HashMap<String,float[]>();
-		// temp.put("Keep going. No pain no gain!", new float[] {-0.2f,0f,0f,0f,0f});
-		// temp.put("Stop exercising", new float[] {0f,0f,0f,10f,0f});
-		//
-		// events.add(new Event("Feeling sharp pain while exercising. What do you
-		// do?",temp,null,null,""));
-		//
-		//
-		// temp = new HashMap<String,float[]>();
-		// temp.put("Yell back", new float[] {0f,0f,-0.05f,-0.05f,0f});
-		// temp.put("Take the punishment and say nothing", new float[]
-		// {0f,0f,-0.5f,0f,0f});
-		// events.add(new Event("Parents are upset at you for something you don't agree
-		// with! What do you do?",temp,null,null,""));
-		// events.add(new Event("Friends are upset at you for something you don't agree
-		// with! What do you do?",temp,null,null,""));
-
 		music = Gdx.audio.newMusic(Gdx.files.internal("lvlone.mp3"));
 		music.setVolume(SettingsScreen.sound);
 		music.setLooping(true);
@@ -784,8 +742,8 @@ public class LevelOne extends Screen {
 
 				// TEXT DRAWING AREA
 				if (initScene) {
-					text.printText("Hi " + NameScreen.getName()
-							+ ",\nyour eating habits aren't healthy!\nYour health and exercise bars drop twice as fast.",
+					text.printText("Hi [RED]" + NameScreen.getName()
+							+ "[],\nyour eating habits aren't healthy!\nYour health and exercise bars drop twice as fast.",
 							s, 85, paused);
 				}
 				if (tipMsg) {
@@ -802,22 +760,22 @@ public class LevelOne extends Screen {
 
 				// END TEXT DRAWING AREA
 			} else {
-				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]\nCLICK TO CONTINUE");
+				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]\n[BLACK]CLICK TO CONTINUE[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
 				if(Gdx.input.justTouched())
 				{
 					HighScoresScreen hs = new HighScoresScreen(sm,man,"one");
-					hs.insertScore(new Object[] {NameScreen.getName(),this.health+this.energy+this.social+this.exercise+this.happiness+this.study});
+					hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
 					sm.set(hs);
 				}
 			}
 		} else {
-			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]\nCLICK TO CONTINUE");
+			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]\n[BLACK]CLICK TO CONTINUE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
 			if(Gdx.input.justTouched())
 			{
 				HighScoresScreen hs = new HighScoresScreen(sm,man,"one");
-				hs.insertScore(new Object[] {NameScreen.getName(),this.health+this.energy+this.social+this.exercise+this.happiness+this.study});
+				hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
 				sm.set(hs);
 			}
 		}
