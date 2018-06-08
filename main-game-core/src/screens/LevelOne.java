@@ -350,10 +350,10 @@ public class LevelOne extends Screen {
 				if(currentT-lastT>=1000)
 				{
 					float rate = getRate();
-					health = Math.max(0,health-rate);
+					health = Math.max(0,health-rate*(bEvents[4]||bEvents[5]?2:1));
 					exercise = Math.max(0,exercise-rate);
-					happiness = Math.max(0,happiness-rate);
-					social = Math.max(0,social-rate);
+					happiness = Math.max(0,happiness-rate*(bEvents[5]?3:1));
+					social = Math.max(0,social-rate*(bEvents[4]||bEvents[5]?2:1));
 					lastT = System.currentTimeMillis();
 				}
 				if(eCurrT-eLastT>=3000)
@@ -365,6 +365,15 @@ public class LevelOne extends Screen {
 						eventRun = true;
 						eventText[rand] = true;
 						bEvents[rand] = true;
+						if(bEvents[1]) {
+							health-=0.1f;
+						}
+						else if(bEvents[2]) {
+							energy-=0.1f;
+						}
+						else if(bEvents[9]) {
+							happiness-=0.1f;
+						}
 					}
 					eLastT = System.currentTimeMillis();
 				}
@@ -376,6 +385,7 @@ public class LevelOne extends Screen {
 			handleText();
 			checkSetting();
 			checkExit();
+			
 			if(!alive)
 				music.stop();
 		}
