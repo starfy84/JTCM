@@ -35,7 +35,7 @@ public class InstructionsScreen extends Screen {
 	private String[] text;
 	
 	//Backgrounds
-	private Texture bg,lI,lA,rI,rA,bI,bA;
+	private Texture bg,lI,lA,rI,rA,bI,bA,slides[];
 
 	/**
 	 * {@link MenuScreen} Constructor
@@ -45,6 +45,8 @@ public class InstructionsScreen extends Screen {
 	 */
 	public InstructionsScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
+		for(int x = 0 ;x< slides.length;x++)
+			slides[x] = man.get("instructions/s"+x+".png",Texture.class);
 		bg = man.get("back.png",Texture.class);
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param = new FreeTypeFontParameter();
@@ -114,6 +116,9 @@ public class InstructionsScreen extends Screen {
 			s.draw(Gdx.input.getX()>=20 &&Gdx.input.getX()<=20+lI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-lI.getHeight()?lA:lI,20,(JTCM.HEIGHT-lI.getHeight())/2);
 		if(pos<text.length-1)
 			s.draw(Gdx.input.getX()>=JTCM.WIDTH-rI.getWidth()-20 &&Gdx.input.getX()<=JTCM.WIDTH-20&& Gdx.input.getY()<=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)&& Gdx.input.getY()>=JTCM.HEIGHT-((JTCM.HEIGHT-lI.getHeight())/2)-rI.getHeight()?rA:rI,JTCM.WIDTH-rI.getWidth()-20,(JTCM.HEIGHT-rI.getHeight())/2);
+		
+		
+		
 		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);		s.draw(Gdx.input.getX()>=0 &&Gdx.input.getX()<=bI.getWidth()&& Gdx.input.getY()<=JTCM.HEIGHT&& Gdx.input.getY()>=JTCM.HEIGHT-bI.getHeight()?bA:bI, 0, 0);
 		font.draw(s, glyph, 10, JTCM.HEIGHT - 10);
 		SettingsScreen.applyBrightness(s);

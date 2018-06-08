@@ -713,12 +713,12 @@ public class LevelTwo extends Screen {
 					text.printText(sEvents[rand], s, 85, paused);
 				}
 			} else {
-				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]");
+				glyph.setText(font, "[RED]LEVEL TWO[]:[RED]FAILED[]\n[BLACK]CLICK TO CONTINUE[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
 			}
 		}
 		else {
-			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]");
+			glyph.setText(font, "[RED]LEVEL TWO[]: [LIME]COMPLETE[]\n[BLACK]CLICK TO CONTINUE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
 		}
 		SettingsScreen.applyBrightness(s);
