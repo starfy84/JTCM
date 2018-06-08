@@ -48,7 +48,7 @@ public class LevelSelectScreen extends Screen {
 	public void getInput() {
 		if(Gdx.input.justTouched()&& Gdx.input.getX()>=JTCM.WIDTH/2-tutI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+tutI.getWidth()/2 && Gdx.input.getY()<=Gdx.graphics.getHeight()-500 && Gdx.input.getY()>=Gdx.graphics.getHeight()-500-tutI.getHeight())
 		{
-			sm.set(new Tutorial(sm,man));
+			sm.set(new Cutscene(sm,man));
 			sm.push(new NameScreen(sm,man));
 		}
 		else if(Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH/2-oneI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+oneI.getWidth()/2&& Gdx.input.getY()<=Gdx.graphics.getHeight()-400 && Gdx.input.getY()>=Gdx.graphics.getHeight()-400-oneI.getHeight())

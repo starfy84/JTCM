@@ -197,6 +197,7 @@ public class LevelOne extends Screen {
 		act4 = man.get("settingIdle.png", Texture.class);
 		act5 = man.get("settingIdle.png", Texture.class);
 		act6 = man.get("settingIdle.png", Texture.class);
+
 		try {
 			collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -221,7 +222,7 @@ public class LevelOne extends Screen {
 
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
 		param = new FreeTypeFontParameter();
-		param.size = 65;
+		param.size = 40;
 		font = gen.generateFont(param);
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		font.getData().markupEnabled = true;
@@ -376,10 +377,10 @@ public class LevelOne extends Screen {
 			tipMsg = true;
 		}
 		// END OF INPUT FOR ACTION-BAR CLICKING
-		
-		if(Gdx.input.isKeyJustPressed(Keys.EQUALS))
-			DEBUG=!DEBUG;
-		
+
+		if (Gdx.input.isKeyJustPressed(Keys.EQUALS))
+			DEBUG = !DEBUG;
+
 		// START OF DEBUG TOOLS
 		if (DEBUG) {
 			// Brings health down
@@ -411,9 +412,9 @@ public class LevelOne extends Screen {
 				energy = 1f;
 		}
 		// END OF DEBUG TOOLS
-		if (Gdx.input.isKeyJustPressed(Keys.L) && (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)]
-				.equals(java.awt.Color.GREEN)
-				|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.GREEN)))
+		if (Gdx.input.isKeyJustPressed(Keys.L)
+				&& (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.GREEN)
+						|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX)].equals(java.awt.Color.GREEN)))
 			sm.push(new LibraryScreen(sm, man));
 	}
 
@@ -670,7 +671,86 @@ public class LevelOne extends Screen {
 				// Minimap
 				s.draw(minimap, 0, 0, minimap.getWidth() / 5, minimap.getHeight() / 5);
 
+				// Rectangular border
+				s.draw(blackdot, 0, 0, minimap.getWidth() / 5 + 5, minimap.getHeight() / 5 + 5);
+
+				// Minimap
+				s.draw(minimap, 0, 0, minimap.getWidth() / 5, minimap.getHeight() / 5);
+
 				// Check if player is on the path for black dot drawing
+				if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.WHITE)
+						|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX - 7.5)]
+								.equals(java.awt.Color.WHITE))
+					lastCharY = charY;
+
+				// Dot on minimap
+				s.draw(blackdot, (float) (charX / 5 - 5), (float) (179 - lastCharY / 5 - 5), 10, 10);
+
+				// Person
+				s.draw(person, person.getX(), person.getY(), person.getWidth(), person.getHeight());
+
+				// Changes colours of health bar and draws bars 1,2,3 and 4
+				s.setColor(health > 0.7f ? Color.GREEN : health > 0.3f ? Color.YELLOW : Color.RED);
+				s.draw(bar1, 10, JTCM.HEIGHT - 20, JTCM.WIDTH / 4 * health, 10);
+				s.setColor(exercise > 0.7f ? Color.GREEN : exercise > 0.3f ? Color.YELLOW : Color.RED);
+				s.draw(bar2, 10, JTCM.HEIGHT - 35, JTCM.WIDTH / 4 * exercise, 10);
+				s.setColor(happiness > 0.7f ? Color.GREEN : happiness > 0.3f ? Color.YELLOW : Color.RED);
+				s.draw(bar3, 10, JTCM.HEIGHT - 50, JTCM.WIDTH / 4 * happiness, 10);
+				s.setColor(social > 0.7f ? Color.GREEN : social > 0.3f ? Color.YELLOW : Color.RED);
+				s.draw(bar4, 10, JTCM.HEIGHT - 65, JTCM.WIDTH / 4 * social, 10);
+				s.setColor(study > 0.7f ? Color.GREEN : study > 0.3f ? Color.YELLOW : Color.RED);
+				s.draw(bar5, 10, JTCM.HEIGHT - 80, JTCM.WIDTH / 4 * study, 10);
+				s.setColor(energy > 0.7f ? Color.GREEN : energy > 0.3f ? Color.YELLOW : Color.RED);
+				s.draw(bar6, 10, JTCM.HEIGHT - 95, JTCM.WIDTH / 4 * energy, 10);
+
+				// Reset tint
+				s.setColor(Color.WHITE);
+
+				// Start drawing action bar text
+				glyph1.setText(font1, "Health");
+				font1.draw(s, glyph1, 10, JTCM.HEIGHT - 7);
+				glyph1.setText(font1, "Exercise");
+				font1.draw(s, glyph1, 10, JTCM.HEIGHT - 22);
+				glyph1.setText(font1, "Happiness");
+				font1.draw(s, glyph1, 10, JTCM.HEIGHT - 37);
+				glyph1.setText(font1, "Social");
+				font1.draw(s, glyph1, 10, JTCM.HEIGHT - 52);
+				glyph1.setText(font1, "Study");
+				font1.draw(s, glyph1, 10, JTCM.HEIGHT - 67);
+				glyph1.setText(font1, "Energy");
+				font1.draw(s, glyph1, 10, JTCM.HEIGHT - 82);
+				// End action bar text
+
+				// Action bar holder
+				s.setColor(new Color(1, 1, 1, 0.7f));
+				s.draw(blackdot, JTCM.WIDTH - 150, 0, 125, JTCM.HEIGHT);
+				s.setColor(Color.WHITE);
+
+				glyph.setText(font, "Health");
+				font.draw(s, glyph, JTCM.WIDTH - 125, JTCM.HEIGHT - 100);
+				glyph.setText(font, "Exercise");
+				font.draw(s, glyph, JTCM.WIDTH - 135, JTCM.HEIGHT - 200);
+				glyph.setText(font, "Happiness");
+				font.draw(s, glyph, JTCM.WIDTH - 145, JTCM.HEIGHT - 300);
+				glyph.setText(font, "Social");
+				font.draw(s, glyph, JTCM.WIDTH - 125, JTCM.HEIGHT - 400);
+				glyph.setText(font, "Study");
+				font.draw(s, glyph, JTCM.WIDTH - 125, JTCM.HEIGHT - 500);
+				glyph.setText(font, "Energy");
+				font.draw(s, glyph, JTCM.WIDTH - 130, JTCM.HEIGHT - 600);
+
+				// TEXT DRAWING AREA
+				if (initScene) {
+					text.printText("Hi " + NameScreen.getName() + ",\nI'm the narrator... you have depression!", s, 85,
+							paused);
+				}
+				if (tipMsg) {
+					text.printText(tips[tipNum], s, 85, paused);
+				}
+				if (eventRun && eventText[rand]) {
+					text.printText(sEvents[rand], s, 85, paused);
+				}
+
 				if (collisionArr[(int) Math.floor(charY)][(int) Math.round(charX)].equals(java.awt.Color.WHITE)
 						|| collisionArr[(int) Math.ceil(charY)][(int) Math.round(charX - 7.5)]
 								.equals(java.awt.Color.WHITE))
@@ -750,8 +830,7 @@ public class LevelOne extends Screen {
 				glyph.setText(font, "[RED]LEVEL ONE[]:[RED]FAILED[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
 			}
-		}
-		else {
+		} else {
 			glyph.setText(font, "[RED]LEVEL ONE[]: [LIME]COMPLETE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
 		}
