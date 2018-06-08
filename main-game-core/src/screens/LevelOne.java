@@ -72,11 +72,25 @@ public class LevelOne extends Screen {
 	//Time for health depletion 
 	private long currentT, lastT;
 	
-	private boolean alive, paused, runDialogue,initScene;
+	private boolean alive, paused,initScene;
 	
 	//EVENTS
-	private boolean powerloss,stomachache,tired,onlineFriend,pain,pUpset,fUpset,hateFood,eventRun;
-	private String[] scenes = {} ;
+	private boolean eventRun;
+	private boolean[] bEvents = new boolean[11];
+	private boolean[] eventText = new boolean[11];
+	private String[] sEvents = {
+			"You have a power outage! Internet related activites\nhave been disabled.",
+			"You have a stomach ache! Your health bar goes down by 10.",
+			"You have exercised too much! Your energy bar goes down by 10.",
+			"You have met an online friend recently who is asking for\nyour personal info. What do you do?",
+			"You are addicted to video games! Social and health\ndepletion rate doubled.",
+			"You are having a hard time making friends and coping with\nmisfortunate events. Social and health depletion rate doubled. Happiness depletion rate tripled.",
+			"You feel sharp pain while exercising. What do you do?",
+			"Your parents are upset at you for something you don’t agree\nwith! What do you do?",
+			"Your friends are upset at you for something you don’t agree\nwith! What do you do?",
+			"You don’t like the taste of all this healthy food! Your\nhappiness bar goes down by 10."};
+	
+	private int rand=10;
 	//END EVENTS
 	
 	private FreeTypeFontGenerator gen;
@@ -88,6 +102,8 @@ public class LevelOne extends Screen {
 	private int currEvent;
 	//Debugging mode
 	private final boolean DEBUG = true;
+	
+	
     /**
      * {@link LevelOne} constructor
      * @param sm screen manager to determine current screen
@@ -97,7 +113,7 @@ public class LevelOne extends Screen {
         super(sm, man);
         alive = true;
         text = new Text(45,Color.WHITE,man);
-        paused = runDialogue =false;
+        paused=false;
         initScene = true;
         health = 1f;
         exercise = 1f;
@@ -258,6 +274,11 @@ public class LevelOne extends Screen {
 		}
 		//END OF DEBUG TOOLS
 	}
+	
+	/**
+	 * This method checks if the user would like to stop an event message.
+	 */
+
 
 	/**
 	 * Handles input for settings.
@@ -308,8 +329,9 @@ public class LevelOne extends Screen {
 	 */
 	@Override
 	public void update(double t) {
+		//System.out.println(textRun);
 		if(!paused) {
-			if(alive && !initScene){
+			if(alive && !initScene&&!eventText[rand]){
 				getInput();
 				currentT = System.currentTimeMillis();
 				
@@ -328,18 +350,22 @@ public class LevelOne extends Screen {
 				}
 				if(eCurrT-eLastT>=3000)
 				{
-					int rand = (int)(Math.random()* 100);
+					rand = (int)(Math.random()* 10);
+					System.out.println(rand);
 					if(rand<10&&!eventRun) {
 						System.out.println("event will run now");
 						eventRun = true;
+						eventText[rand] = true;
+						bEvents[rand] = true;
 					}
 					eLastT = System.currentTimeMillis();
 				}
 				if(health <=0 || exercise<=0 || happiness<=0 || social<=0)
 					alive = false;
+				
 			}
 			//checkDialogue();
-			checkScene();
+			handleText();
 			checkSetting();
 			checkExit();
 			if(!alive)
@@ -350,24 +376,16 @@ public class LevelOne extends Screen {
 			printScore();
 
 	}
-
-	private void checkScene() {
+	private void handleText() {
 		if(text.done()&& Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-			text.resetPrint();
-			initScene = false;
-		}
-	}
-	private void checkDialogue() {
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-			if(text.done()) {
+			if(initScene) {
 				text.resetPrint();
-				runDialogue = false;
+				initScene = false;
 			}
-			else if (!text.done() && !runDialogue){
+			else if(eventText[rand]) {
 				text.resetPrint();
-				runDialogue = true;
+				eventText[rand] = false;
 			}
-			
 		}
 	}
 	
@@ -460,6 +478,10 @@ public class LevelOne extends Screen {
 			//TEXT DRAWING AREA
 			if(initScene) {
 				text.printText("Hi "+NameScreen.getName()+", I'm the narrator... you have depression!", s, 85, paused);
+			}
+			if(eventRun && eventText[rand]) {
+				text.printText(sEvents[rand], s, 85, paused);
+				System.out.println(text.done());
 			}
 //			else if(eventRun&&event.run()) {
 //				events.get(currEvent).trigger();
