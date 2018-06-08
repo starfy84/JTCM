@@ -86,15 +86,9 @@ public class LevelOne extends Screen {
 			"You are addicted to video games! Social and health\ndepletion rate doubled.",
 			"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
 			"You feel sharp pain while exercising. What do you do?",
-<<<<<<< HEAD
 			"Your parents are upset at you for something you don’t\nagree with! What do you do?",
 			"Your friends are upset at you for something you don’t\nagree with! What do you do?",
 			"You don’t like the taste of all this healthy food!\nYour happiness bar goes down by 10."};
-=======
-			"Your parents are upset at you for something you don't agree\nwith! What do you do?",
-			"Your friends are upset at you for something you don't agree\nwith! What do you do?",
-			"You don't like the taste of all this healthy food! Your\nhappiness bar goes down by 10."};
->>>>>>> d82ef95fafb6e636746dd9bc03c6bc5a0f83394a
 	
 	private int rand=10;
 	//END EVENTS
