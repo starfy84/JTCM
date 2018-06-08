@@ -73,11 +73,11 @@ public class LevelTwo extends Screen {
 
 	// EVENTS
 	private boolean eventRun;
-	private boolean[] bEvents = new boolean[11];
-	private boolean[] eventText = new boolean[11];
+	private boolean[] bEvents = new boolean[6];
+	private boolean[] eventText = new boolean[6];
 
 	private boolean stop;
-	private String[] sEvents = { "You have a power outage! Internet related activites\nhave been disabled.", // Passive
+	private String[] sEvents = {
 			"You have a stomach ache! Your health bar goes down by\n10.", // Instant
 			"You have met an online friend recently who is asking\nfor your personal info. What do you do?", // Instant
 			"You feel sharp pain while exercising. What do you do?", // Instant
@@ -89,7 +89,7 @@ public class LevelTwo extends Screen {
 	// events. Social and health depletion\nrate doubled. Happiness depletion rate
 	// tripled.",
 
-	private int rand = 10, tipNum;
+	private int rand = 5, tipNum;
 	// END EVENTS
 
 	// TIPS
@@ -428,7 +428,7 @@ public class LevelTwo extends Screen {
 	public void update(double t) {
 		// System.out.println(textRun);
 		if (!paused) {
-			if (alive && !initScene && !eventText[rand >= eventText.length ? 10 : rand] && !tipMsg && !stop) {
+			if (alive && !initScene && !eventText[rand >= eventText.length ? 5 : rand] && !tipMsg && !stop) {
 				getInput();
 				currentT = System.currentTimeMillis();
 
@@ -449,7 +449,7 @@ public class LevelTwo extends Screen {
 				if (eCurrT - eLastT >= 3000) {
 					rand = (int) (Math.random() * 75);
 					System.out.println(rand);
-					if (rand < 6 && !eventRun) {
+					if (rand < 5 && !eventRun) {
 						eventRun = true;
 						eventText[rand] = true;
 						bEvents[rand] = true;
@@ -487,17 +487,14 @@ public class LevelTwo extends Screen {
 				text.resetPrint();
 				eventText[rand] = false;
 				if (bEvents[0]) {
-					eventRun = false;
-				}
-				if (bEvents[1]) {
-					if (!eventText[1]) {
+					if (!eventText[0]) {
 						health -= 0.1f;
 						eventRun = false;
 					}
+					bEvents[0] = false;
+				} else if (bEvents[1]) {
 					bEvents[1] = false;
-				} else if (bEvents[2]) {
-					bEvents[2] = false;
-					if (!eventText[2]) {
+					if (!eventText[1]) {
 						sm.push(new ChoiceScreen(sm, man, new String[] {
 								"Telling your parents is always a good idea,\nsince they will know what to do",
 								"Never tell your personal info to someone\nyou just met. They could be an online predator!",
@@ -517,9 +514,9 @@ public class LevelTwo extends Screen {
 						ChoiceScreen.choice = 0;
 						eventRun = false;
 					}
-				} else if (bEvents[3]) {
-					bEvents[3] = false;
-					if (!eventText[3]) {
+				} else if (bEvents[2]) {
+					bEvents[2] = false;
+					if (!eventText[2]) {
 						sm.push(new ChoiceScreen(sm, man, new String[] {
 								"Sharp pain is very bad during exercise! This is\nnot normal and you should stop exercising immediately\nif you feel sharp pain.",
 								"Good job! Sharp pain is very bad during exercise!\nThis is not normal and you should stop exercising\nimmediately if you feel sharp pain." },
@@ -532,9 +529,9 @@ public class LevelTwo extends Screen {
 						ChoiceScreen.choice = 0;
 						eventRun = false;
 					}
-				} else if (bEvents[4]) {
-					bEvents[4] = false;
-					if (!eventText[4]) {
+				} else if (bEvents[3]) {
+					bEvents[3] = false;
+					if (!eventText[3]) {
 						sm.push(new ChoiceScreen(sm, man, new String[] {
 								"It’s never a good idea to argue with your\nparents. Often times nothing gets solved and\nthere are only negative outcomes.",
 								"Staying quiet about it may not directly\ndamage the relationship with your parents,\nbut you will feel sadder and more problem may\narise in the future if you don’t fix it now.",
@@ -555,9 +552,9 @@ public class LevelTwo extends Screen {
 						ChoiceScreen.choice = 0;
 						eventRun = false;
 					}
-				} else if (bEvents[5]) {
-					bEvents[5] = false;
-					if (!eventText[5]) {
+				} else if (bEvents[4]) {
+					bEvents[4] = false;
+					if (!eventText[4]) {
 						sm.push(new ChoiceScreen(sm, man, new String[] {
 								"It’s never a good idea to argue with your\nfriends. Often times nothing gets solved and\nthere are only negative outcomes.",
 								"Staying quiet about it may not directly\ndamage the relationship with your friends,\nbut you will feel sadder and more problem may\narise in the future if you don’t fix it now.",
@@ -715,11 +712,23 @@ public class LevelTwo extends Screen {
 			} else {
 				glyph.setText(font, "[RED]LEVEL TWO[]:[RED]FAILED[]\n[BLACK]CLICK TO CONTINUE[]");
 				font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+				if(Gdx.input.justTouched())
+				{
+					HighScoresScreen hs = new HighScoresScreen(sm,man,"two");
+					hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
+					sm.set(hs);
+				}
 			}
 		}
 		else {
 			glyph.setText(font, "[RED]LEVEL TWO[]: [LIME]COMPLETE[]\n[BLACK]CLICK TO CONTINUE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+			if(Gdx.input.justTouched())
+			{
+				HighScoresScreen hs = new HighScoresScreen(sm,man,"two");
+				hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
+				sm.set(hs);
+			}
 		}
 		SettingsScreen.applyBrightness(s);
 		if (paused) {
