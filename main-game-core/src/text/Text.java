@@ -69,7 +69,7 @@ public class Text {
 		}
 	}
 	public void printText(String str,SpriteBatch s,long time,boolean paused) {
-		printText(str,s,360,200,350,10,830,200,0.7f,time,paused);
+		printText(str,s,360,200,350,10,760,200,0.7f,time,paused);
 	}
 	private void resetPrint(int a) {
 		i = 0;
