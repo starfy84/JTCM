@@ -41,7 +41,7 @@ public class LevelOne extends Screen {
 	private Text text;
 	
 	//Temporary font drawer
-	private BitmapFont font;
+	private BitmapFont font,font1;
 	
 	//Collision Picture
 	private	BufferedImage collisionPic;
@@ -104,9 +104,9 @@ public class LevelOne extends Screen {
 			"Relaxing at home is really effective and\nrefreshing!",
 			"Relaxing is important in order to reduce stress\nand fatigue."};
 	
-	private FreeTypeFontGenerator gen;
-	private FreeTypeFontParameter param;
-	private GlyphLayout glyph;
+	private FreeTypeFontGenerator gen,gen1;
+	private FreeTypeFontParameter param,param1;
+	private GlyphLayout glyph,glyph1;
 	
 	private long eCurrT,eLastT;
 
@@ -211,6 +211,16 @@ public class LevelOne extends Screen {
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		font.getData().markupEnabled = true;
 		glyph = new GlyphLayout();
+		
+		gen1 = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
+		param1 = new FreeTypeFontParameter();
+		param1.size = 15;
+		font1 = gen.generateFont(param1);
+		font1.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		font1.getData().markupEnabled = true;
+		glyph1 = new GlyphLayout();
+		font1.setColor(Color.BLACK);
+		
 		//Character is in the centre of the screen
 		person.setPosition(JTCM.WIDTH/2-person.getWidth()/2, JTCM.HEIGHT/2);
 		lastT = System.currentTimeMillis();
@@ -640,6 +650,21 @@ public class LevelOne extends Screen {
 			
 			//Reset tint
 			s.setColor(Color.WHITE);
+			
+			//Start drawing action bar text
+			glyph1.setText(font1, "Health");
+			font1.draw(s, glyph1, 10, JTCM.HEIGHT-7);
+			glyph1.setText(font1, "Exercise");
+			font1.draw(s, glyph1, 10, JTCM.HEIGHT-22);
+			glyph1.setText(font1, "Happiness");
+			font1.draw(s, glyph1, 10, JTCM.HEIGHT-37);
+			glyph1.setText(font1, "Social");
+			font1.draw(s, glyph1, 10, JTCM.HEIGHT-52);
+			glyph1.setText(font1, "Study");
+			font1.draw(s, glyph1, 10, JTCM.HEIGHT-67);
+			glyph1.setText(font1, "Energy");
+			font1.draw(s, glyph1, 10, JTCM.HEIGHT-82);
+			//End action bar text			
 			
 			//Action bar holder
 	        s.setColor(new Color(1,1,1,0.7f));
