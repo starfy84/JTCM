@@ -35,7 +35,7 @@ import text.Text;
 public class LevelOne extends Screen {
 
 	//Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3 and 4, Action bars 1,2,3 and 4.
-	private Texture background, map, indoorMap, minimap, blackdot, bar1, bar2, bar3, bar4, bar5, act1, act2, act3, act4, act5;
+	private Texture background, map, indoorMap, minimap, blackdot, bar1, bar2, bar3, bar4, bar5, bar6, act1, act2, act3, act4, act5, act6;
 	
 	//Our text drawer
 	private Text text;
@@ -59,7 +59,7 @@ public class LevelOne extends Screen {
 	private double charX, charY, lastCharY;
 	
 	//Health values 1,2,3 and 4
-	private float health, exercise, happiness, social,energy;
+	private float health, exercise, happiness, social, study, energy;
 	
 	//Song
 	public static Music music;
@@ -67,7 +67,7 @@ public class LevelOne extends Screen {
 	//Time for health depletion 
 	private long currentT, lastT;
 	
-	private boolean alive, paused,initScene;
+	private boolean alive, paused, initScene, tipMsg;
 	
 	//EVENTS
 	private boolean eventRun;
@@ -85,6 +85,7 @@ public class LevelOne extends Screen {
 //			"Your friends are upset at you for something you don’t\nagree with! What do you do?",
 //			"You don’t like the taste of all this healthy food!\nYour happiness bar goes down by 10."};
 	private String[] sEvents = {
+<<<<<<< HEAD
 			"You have a power outage! Internet related activites\nhave been disabled.", //Passive
 			"You have a stomach ache! Your health bar goes down by\n10.", //Instant
 			"You have met an online friend recently who is asking\nfor your personal info. What do you do?", //Instant
@@ -92,9 +93,34 @@ public class LevelOne extends Screen {
 			"Your parents are upset at you for something you don’t\nagree with! What do you do?", //Instant
 			"Your friends are upset at you for something you don’t\nagree with! What do you do?"}; //Instant
 	
+=======
+			"You have a power outage! Internet related activites\nhave been disabled.",
+			"You have a stomach ache! Your health bar goes down by\n10.",
+			"You have exercised too much! Your energy bar goes\ndown by 10.",
+			"You have met an online friend recently who is asking\nfor your personal info. What do you do?",
+			"You are addicted to video games! Social and health\ndepletion rate doubled.",
+			"You are having a hard time making friends and coping\nwith misfortunate events. Social and health depletion\nrate doubled. Happiness depletion rate tripled.",
+			"You feel sharp pain while exercising. What do you do?",
+			"Your parents are upset at you for something you don't\nagree with! What do you do?",
+			"Your friends are upset at you for something you don't\nagree with! What do you do?"};
+>>>>>>> 60c7957a913498be2d545623079ae24144c66bf1
 	
-	private int rand=10;
+	private int rand=10, tipNum;
 	//END EVENTS
+	
+	//TIPS
+	private String[] tips = {
+			"It's good to eat healthy but it's ok to break the\nrules once in a while.",
+			"Exercising at the gym is really effective! Make sure\nyou don't overdo it though!",
+			"Exercise is great for your body, but make sure you\ndon't overdo it!",
+			"Arcades are really fun! Try not to get addicted!",
+			"It's important to be happy with your life. Don't get\ncarried away though!",
+			"Meeting freinds in real life is really enjoyable!\nTalking to frinds online is also fun and convenient.",
+			"Talking to friends online is really convenient!\nMeeting freinds can be even more fun too!",
+			"Studying in a work environment is really effective\nsince you can focus! Studying can be boring so make\nsure you relax too.",
+			"Studying is really important in order to have a\nsucessful future. Studying can be boring so make sure you\nrelax too.",
+			"Relaxing at home is really effective and\nrefreshing!",
+			"Relaxing is important in order to reduce stress\nand fatigue."};
 	
 	private FreeTypeFontGenerator gen;
 	private FreeTypeFontParameter param;
@@ -121,6 +147,7 @@ public class LevelOne extends Screen {
         exercise = 1f;
         happiness = 1f;
         social = 1f;
+        study = 1f;
         energy = 1f;
 //        events = new ArrayList<Event>();
 //        Map<String,float[]> temp = new HashMap<String,float[]>();
@@ -131,7 +158,7 @@ public class LevelOne extends Screen {
         
 //        temp.put("Tell your parents", new float[] {0f,0f,0f,0f,0f});
 //        temp.put("Tell him your personal information", new float[] {0f,0f,0f,(int)(Math.random()*2)==0?0f:-0.5f,0f});
-//        temp.put("Politely tell him that you won’t tell him your address", new float[] {0f,0f,0f,0.1f,0f});
+//        temp.put("Politely tell him that you won't tell him your address", new float[] {0f,0f,0f,0.1f,0f});
 //        temp.put("Block him", new float[] {0f,0f,0f,-0.1f,0f});
 //        
 //        events.add(new Event("Met an online friend recently who is asking for your personal info. What do you do?",temp,null,null,"Never tell your personal info to someone you just met. They could be an online predator!"));
@@ -148,8 +175,8 @@ public class LevelOne extends Screen {
 //        temp = new HashMap<String,float[]>();
 //        temp.put("Yell back", new float[] {0f,0f,-0.05f,-0.05f,0f});
 //        temp.put("Take the punishment and say nothing", new float[] {0f,0f,-0.5f,0f,0f});
-//        events.add(new Event("Parents are upset at you for something you don’t agree with! What do you do?",temp,null,null,""));
-//        events.add(new Event("Friends are upset at you for something you don’t agree with! What do you do?",temp,null,null,""));
+//        events.add(new Event("Parents are upset at you for something you don't agree with! What do you do?",temp,null,null,""));
+//        events.add(new Event("Friends are upset at you for something you don't agree with! What do you do?",temp,null,null,""));
         
         
         music = Gdx.audio.newMusic(Gdx.files.internal("BTS - DNA.mp3"));
@@ -166,11 +193,13 @@ public class LevelOne extends Screen {
 		bar3 = man.get("blank.jpg",Texture.class);
 		bar4 = man.get("blank.jpg",Texture.class);
 		bar5 = man.get("blank.jpg",Texture.class);
+		bar6 = man.get("blank.jpg",Texture.class);
 		act1 = man.get("settingIdle.png",Texture.class);
 		act2 = man.get("settingIdle.png",Texture.class);
 		act3 = man.get("settingIdle.png",Texture.class);
 		act4 = man.get("settingIdle.png",Texture.class);
 		act5 = man.get("settingIdle.png",Texture.class);
+		act6 = man.get("settingIdle.png",Texture.class);
 		try {
 		    collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -240,15 +269,90 @@ public class LevelOne extends Screen {
 		
 		//START OF INPUT FOR ACTION-BAR CLICKING
 		if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act1.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-550 && Gdx.input.getY()>=JTCM.HEIGHT-550-act1.getHeight())
+		{
 			health = Math.min(1, health+0.05f);
+			energy = Math.max(0,energy-0.01f);
+			tipMsg = true;
+			tipNum = 0;
+		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act2.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-450 && Gdx.input.getY()>=JTCM.HEIGHT-450-act2.getHeight())
-			exercise = Math.min(1, exercise+0.05f);
+		{
+			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLUE) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLUE))
+			{
+				exercise = Math.min(1, exercise+0.1f);
+				tipNum = 1;	
+			}
+			else
+			{
+				exercise = Math.min(1, exercise+0.05f);
+				tipNum = 2;
+			}
+			energy = Math.max(0,energy-0.01f);
+			tipMsg = true;
+
+		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act3.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-350 && Gdx.input.getY()>=JTCM.HEIGHT-350-act3.getHeight())
-			happiness = Math.min(1, happiness+0.05f);
+		{
+			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.MAGENTA) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.MAGENTA))
+			{
+				happiness = Math.min(1, happiness+0.1f);
+				tipNum = 3;	
+			}
+			else
+			{
+				happiness = Math.min(1, happiness+0.05f);
+				tipNum = 4;
+			}
+			energy = Math.max(0,energy-0.01f);
+			tipMsg = true;
+			
+		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act4.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-250 && Gdx.input.getY()>=JTCM.HEIGHT-250-act4.getHeight())
-			social = Math.min(1, social+0.05f);
+		{
+			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.CYAN) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.CYAN))
+			{
+				social = Math.min(1, social+0.1f);
+				tipNum = 5;
+			}
+			else
+			{
+				social = Math.min(1, social+0.05f);
+				tipNum = 6;
+			}
+			energy = Math.max(0,energy-0.01f);
+			happiness = Math.min(1, happiness+0.05f);
+			tipMsg = true;
+		}
 		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act5.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-150 && Gdx.input.getY()>=JTCM.HEIGHT-150-act5.getHeight())
-			energy = Math.min(1, energy+0.05f);
+		{
+			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.YELLOW) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.YELLOW))
+			{
+				study = Math.min(1, study+0.1f);
+				tipNum = 7;
+			}
+			else
+			{
+				study = Math.min(1, study+0.05f);
+				tipNum = 8;	
+			}
+			happiness = Math.max(0, happiness-0.05f);
+			tipMsg = true;
+		}
+			
+		else if (Gdx.input.justTouched()&&Gdx.input.getX()>=JTCM.WIDTH-act6.getWidth()-5 && Gdx.input.getX()<=JTCM.WIDTH-5&& Gdx.input.getY()<=JTCM.HEIGHT-50 && Gdx.input.getY()>=JTCM.HEIGHT-50-act6.getHeight())
+		{
+			if (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.RED) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.RED))
+			{
+				energy = Math.min(1, energy+0.5f);
+				tipNum = 9;
+			}
+			else
+			{
+				energy = Math.min(1, energy+0.1f);
+				tipNum = 10;	
+			}
+			tipMsg = true;
+		}
 		//END OF INPUT FOR ACTION-BAR CLICKING
 		
 		//START OF DEBUG TOOLS
@@ -262,9 +366,10 @@ public class LevelOne extends Screen {
 				happiness= Math.max(0,happiness-0.01f);
 			if(Gdx.input.isKeyPressed(Keys.NUM_4))
 				social = Math.max(0,social-0.01f);
-			if(Gdx.input.isKeyPressed(Keys.NUM_5)) {
+			if(Gdx.input.isKeyPressed(Keys.NUM_5))
+				study = Math.max(0, study-0.01f);
+			if(Gdx.input.isKeyPressed(Keys.NUM_6))
 				energy = Math.max(0, energy-0.01f);
-			}
 			
 			//Resets health
 			if(Gdx.input.isKeyJustPressed(Keys.Q))
@@ -276,11 +381,12 @@ public class LevelOne extends Screen {
 			if(Gdx.input.isKeyJustPressed(Keys.R))
 				social =1f;
 			if(Gdx.input.isKeyJustPressed(Keys.T))
+				study =1f;
+			if(Gdx.input.isKeyJustPressed(Keys.Y))
 				energy =1f;
 
 			if(Gdx.input.isKeyJustPressed(Keys.P) && (collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.GREEN) || collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.GREEN)))
 				sm.push(new LibraryScreen(sm,man));
-			
 		}
 		//END OF DEBUG TOOLS
 	}
@@ -357,6 +463,7 @@ public class LevelOne extends Screen {
 					exercise = Math.max(0,exercise-rate);
 					happiness = Math.max(0,happiness-rate*(bEvents[5]?3:1));
 					social = Math.max(0,social-rate*(bEvents[4]||bEvents[5]?2:1));
+					study = Math.max(0,study-rate);
 					lastT = System.currentTimeMillis();
 				}
 				if(eCurrT-eLastT>=3000)
@@ -393,6 +500,10 @@ public class LevelOne extends Screen {
 			if(initScene) {
 				text.resetPrint();
 				initScene = false;
+			}
+			if(tipMsg) {
+				text.resetPrint();
+				tipMsg = false;
 			}
 			else if(eventText[rand]) {
 				text.resetPrint();
@@ -540,8 +651,10 @@ public class LevelOne extends Screen {
 			s.draw(bar3, 10, JTCM.HEIGHT-50,JTCM.WIDTH/4*happiness,10);
 			s.setColor(social>0.7f?Color.GREEN:social>0.3f?Color.YELLOW:Color.RED);
 			s.draw(bar4, 10, JTCM.HEIGHT-65,JTCM.WIDTH/4*social,10);
+			s.setColor(study>0.7f?Color.GREEN:study>0.3f?Color.YELLOW:Color.RED);
+			s.draw(bar5, 10, JTCM.HEIGHT-80,JTCM.WIDTH/4*study,10);
 			s.setColor(energy>0.7f?Color.GREEN:energy>0.3f?Color.YELLOW:Color.RED);
-			s.draw(bar5, 10, JTCM.HEIGHT-80,JTCM.WIDTH/4*energy,10);
+			s.draw(bar6, 10, JTCM.HEIGHT-95,JTCM.WIDTH/4*energy,10);
 			
 			//Reset tint
 			s.setColor(Color.WHITE);
@@ -557,10 +670,15 @@ public class LevelOne extends Screen {
 			s.draw(act3,JTCM.WIDTH-act3.getWidth()-40,350);
 			s.draw(act4,JTCM.WIDTH-act4.getWidth()-40,250);
 			s.draw(act5,JTCM.WIDTH-act5.getWidth()-40,150);
+			s.draw(act6,JTCM.WIDTH-act6.getWidth()-40,50);
 			
 			//TEXT DRAWING AREA
 			if(initScene) {
 				text.printText("Hi "+NameScreen.getName()+",\nI'm the narrator... you have depression!", s, 85, paused);
+			}
+			if(tipMsg)
+			{
+				text.printText(tips[tipNum], s, 85, paused);
 			}
 			if(eventRun && eventText[rand]) {
 				text.printText(sEvents[rand], s, 85, paused);
