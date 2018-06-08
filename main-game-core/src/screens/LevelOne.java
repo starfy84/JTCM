@@ -399,8 +399,11 @@ public class LevelOne extends Screen {
 	public void render(SpriteBatch s) {
 		s.begin(); //Begins sprite batch
 		if(alive) {
+			
+			//Draw background
 			s.draw(background,Math.round(xCoord-750),Math.round(yCoord+500),JTCM.WIDTH*5,JTCM.HEIGHT*5);
 			s.draw(background,Math.round(xCoord+750),Math.round(yCoord-500),JTCM.WIDTH*5,JTCM.HEIGHT*5);
+			
 			//Check if player is indoors
 			if ((!collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.WHITE) && !collisionArr[(int)Math.floor(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLACK)) || (!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.WHITE)&&!collisionArr[(int)Math.ceil(charY)][(int)Math.round(charX)].equals(java.awt.Color.BLACK)))
 			{
@@ -443,11 +446,16 @@ public class LevelOne extends Screen {
 			//Reset tint
 			s.setColor(Color.WHITE);
 			
+			//Action bar holder
+	        s.setColor(new Color(1,1,1,0.7f));
+	        s.draw(blackdot,JTCM.WIDTH-150,0,125,JTCM.HEIGHT);
+	        s.setColor(Color.WHITE);
+			
 			//Action bars 1,2,3 and 4
-			s.draw(act1,JTCM.WIDTH-act1.getWidth()-5,100);
-			s.draw(act2,JTCM.WIDTH-act2.getWidth()-5,200);
-			s.draw(act3,JTCM.WIDTH-act3.getWidth()-5,300);
-			s.draw(act4,JTCM.WIDTH-act4.getWidth()-5,400);
+			s.draw(act1,JTCM.WIDTH-act1.getWidth()-40,250);
+			s.draw(act2,JTCM.WIDTH-act2.getWidth()-40,350);
+			s.draw(act3,JTCM.WIDTH-act3.getWidth()-40,450);
+			s.draw(act4,JTCM.WIDTH-act4.getWidth()-40,550);
 			
 			//TEXT DRAWING AREA
 			if(initScene) {
