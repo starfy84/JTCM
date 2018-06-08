@@ -108,10 +108,10 @@ public class Cutscene extends Screen {
 			"Relaxing is important in order to reduce stress\nand fatigue." };
 
 	//Cutscene instructions
-	private String[]panels = {"Hi friend. It’s me, narrator!\nSo how’s your journey to Channelenmajour coming along?",
+	private String[]panels = {"Hi friend. It’s me, narrator! So how’s\nyour journey to Channelenmajour coming along?",
 			"Wait what?!\nYou don’t know what Channelenmajour is?!",
-			"Well put simply,\n Channelenmajour is the statewhere someone is doing\n extremely well in all aspects of life.",
-			"After each level,\n you can be one step closer to Channelenmajour.",
+			"Well put simply,\nChannelenmajour is the state where someone is doing\nextremely well in all aspects of life.",
+			"After each level,\nyou can be one step closer to Channelenmajour.",
 			"Now you are ready to embark on your\njourney to Channelenmajour. Good Luck!"};
 	//Font variables
 	private FreeTypeFontGenerator gen, gen1;

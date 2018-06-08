@@ -37,7 +37,7 @@ public class LevelThree extends Screen {
 	// Map, Minimap, Dot on the minimap to show where the user is, Health bars 1,2,3
 	// and 4, Action bars 1,2,3 and 4.
 	private Texture background, map, indoorMap, minimap, blackdot, bar1, bar2, bar3, bar4, bar5, bar6, act1, act2, act3,
-			act4, act5, act6;
+			act4, act5, act6, icon;
 
 	// Our text drawer
 	private Text text;
@@ -157,6 +157,9 @@ public class LevelThree extends Screen {
 		act4 = man.get("settingIdle.png", Texture.class);
 		act5 = man.get("settingIdle.png", Texture.class);
 		act6 = man.get("settingIdle.png", Texture.class);
+		
+		//Challenger icon
+		icon = man.get("ChallengerIcon.png",Texture.class);
 		try {
 			collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
@@ -466,7 +469,7 @@ public class LevelThree extends Screen {
 		}
 		checkPaused();
 		end = System.currentTimeMillis();
-		if (end - start >= 180000)
+		if (end - start >= 180)
 			stop = true;
 	}
 
@@ -713,8 +716,9 @@ public class LevelThree extends Screen {
 			}
 		}
 		else {
-			glyph.setText(font, "[RED]LEVEL THREE[]: [LIME]COMPLETE[]\n[BLACK]CLICK TO CONTINUE[]");
+			glyph.setText(font, "[RED]LEVEL THREE[]: [LIME]COMPLETE[]\n[BLUE]CONGRADULATIONS! YOU HAVE HIT CHANNELENMAJOUR![]\n[BLACK]CLICK TO CONTINUE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
+			s.draw(icon,JTCM.WIDTH/2-icon.getWidth()/2,JTCM.HEIGHT/2-icon.getHeight()/2+100);
 		}
 		SettingsScreen.applyBrightness(s);
 		if (paused) {

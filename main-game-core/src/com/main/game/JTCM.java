@@ -64,9 +64,8 @@ public class JTCM extends ApplicationAdapter {
                 man.load("menu.png",Texture.class);
                 man.load("blackdot.png",Texture.class);
                 man.load("person.png",Texture.class);
-                //man.load("lvlslct.jpg",Texture.class);
-                //man.load("newMenu.png",Texture.class);
                 man.load("back.png",Texture.class);
+                man.load("ChallengerIcon.png",Texture.class);
                 man.load("ChallengerBackground.jpg",Texture.class);
                 man.load("blank.jpg",Texture.class);
                 man.load("instructions/s1.png",Texture.class);

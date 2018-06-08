@@ -57,8 +57,6 @@ public class LoadingScreen extends Screen {
 	 */
 	@Override
 	public void render(SpriteBatch s) {
-		// TODO Auto-generated method stub
-		System.out.println("pong");
 		s.begin();
 		s.draw(load, 0,0,JTCM.WIDTH,JTCM.HEIGHT);
 		SettingsScreen.applyBrightness(s);
@@ -66,7 +64,6 @@ public class LoadingScreen extends Screen {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
