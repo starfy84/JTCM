@@ -6,7 +6,12 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.main.game.JTCM;
 import com.badlogic.gdx.assets.AssetManager;
 /**
@@ -19,7 +24,12 @@ import com.badlogic.gdx.assets.AssetManager;
  */
 public class MenuScreen extends Screen {
 
-	private Texture menu,lI,lA,hI,hA,iI,iA,eI,eA,sI,sA;
+	private FreeTypeFontGenerator gen;
+	private FreeTypeFontParameter param;
+	private BitmapFont font;
+	private GlyphLayout glyph;
+	Texture menu,lI,lA,hI,hA,iI,iA,eI,eA,sI,sA;
+
 	/**
 	 * {@link MenuScreen} Constructor
 	 * 
@@ -44,9 +54,14 @@ public class MenuScreen extends Screen {
                 sI = man.get("settingIdle.png",Texture.class);
                 sA = man.get("settingActive.png",Texture.class);
                 
-                
-                
-	}
+            	gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
+                param = new FreeTypeFontParameter();
+                param.size = 125;
+                font = gen.generateFont(param);
+                font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+                font.getData().markupEnabled = true;
+                glyph = new GlyphLayout();
+    }
 
 	/**
 	 * This method handles input.
@@ -94,6 +109,8 @@ public class MenuScreen extends Screen {
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-iI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+iI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-500) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-500)-iI.getHeight()?iA:iI,JTCM.WIDTH/2-iI.getWidth()/2,JTCM.HEIGHT-500);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/2-eI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/2+eI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-600) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-600)-eI.getHeight()?eA:eI,JTCM.WIDTH/2-eI.getWidth()/2,JTCM.HEIGHT-600);
 		s.draw(Gdx.input.getX()>=JTCM.WIDTH/4-sI.getWidth()/2 &&Gdx.input.getX()<=JTCM.WIDTH/4+sI.getWidth()/2&& Gdx.input.getY()<=JTCM.HEIGHT-(JTCM.HEIGHT-700) && Gdx.input.getY()>=JTCM.HEIGHT-(JTCM.HEIGHT-700)-sI.getHeight()?sA:sI,JTCM.WIDTH/4-sI.getWidth()/2,JTCM.HEIGHT-700);
+		glyph.setText(font,"Journey to Channelenmajour");
+		font.draw(s,glyph,JTCM.WIDTH/2-glyph.width/2,JTCM.HEIGHT-50);
 		SettingsScreen.applyBrightness(s);
 		s.end();
 

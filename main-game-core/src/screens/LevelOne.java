@@ -102,7 +102,7 @@ public class LevelOne extends Screen {
 			"Meeting freinds in real life is really enjoyable!\nTalking to frinds online is also fun and convenient.",
 			"Talking to friends online is really convenient!\nMeeting freinds can be even more fun too!",
 			"Studying in a work environment is really effective\nsince you can focus! Studying can be boring so make\nsure you relax too.",
-			"Studying is really important in order to have a\nsucessful future. Studying can be boring so make sure you\nrelax too.",
+			"Studying is really important in order to have a\nsucessful future. Studying can be boring so make sure\nyou relax too.",
 			"Relaxing at home is really effective and\nrefreshing!",
 			"Relaxing is important in order to reduce stress\nand fatigue."};
 	
