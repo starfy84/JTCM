@@ -163,7 +163,7 @@ public class LevelTwo extends Screen {
 		act5 = man.get("settingIdle.png", Texture.class);
 		act6 = man.get("settingIdle.png", Texture.class);
 		try {
-			collisionPic = ImageIO.read(new File("assets/collisionDetection.png"));
+			collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
 		}
 

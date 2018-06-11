@@ -99,7 +99,7 @@ public class HighScoresScreen extends Screen {
 	public void write() {
 		try {
 
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:/highscores/"+prefix+"scores.txt")));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscores/"+prefix+"scores.txt")));
 			for(Object[] x : scores)
 				out.println(x[0]+" "+x[1]);
 			out.close();
@@ -114,7 +114,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	public void read() {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader("C:/highscores/"+prefix+"scores.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("highscores/"+prefix+"scores.txt"));
 			String[] tokens= new String[2];
 			String inp="";
 			while((inp=in.readLine())!=null) {
@@ -137,7 +137,7 @@ public class HighScoresScreen extends Screen {
 			sm.pop();
 		if(Gdx.input.isKeyJustPressed(Keys.R)) {
 			try {
-				new PrintWriter(new BufferedWriter(new FileWriter("C:/highscores/"+prefix+"scores.txt"))).close();
+				new PrintWriter(new BufferedWriter(new FileWriter("highscores/"+prefix+"scores.txt"))).close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

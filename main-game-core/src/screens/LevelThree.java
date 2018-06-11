@@ -161,7 +161,7 @@ public class LevelThree extends Screen {
 		//Challenger icon
 		icon = man.get("ChallengerIcon.png",Texture.class);
 		try {
-			collisionPic = ImageIO.read(new File("assets/collisionDetection.png"));
+			collisionPic = ImageIO.read(new File("collisionDetection.png"));
 		} catch (IOException e) {
 		}
 
