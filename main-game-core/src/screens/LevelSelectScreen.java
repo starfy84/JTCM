@@ -8,9 +8,9 @@ import com.badlogic.gdx.assets.AssetManager;
 /**
  * This is the level selection screen which lets the user choose which level to play </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
- * Dereck's Time spent: 1:00 </br>
- * @version 0.2
+ * Date: 6/8/18 </br>
+ * Dereck's Time spent: 0:30 </br>
+ * @version 1
  * @author Dereck 
  */
 public class LevelSelectScreen extends Screen {

@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * This is the main class of our game, it starts the Main Menu screen. </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * 
+ * Date: 6/8/18 </br>
+ * @version 1
  * @author Dereck
  */
 public class ScreenManager {

@@ -18,8 +18,8 @@ import com.main.game.JTCM;
 /**
  * This class contains a blueprint of a screen in our game </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * 
+ * Date: 6/8/18 </br>
+ * @version 1
  * @author Dereck
  */
 public abstract class Screen {
@@ -32,7 +32,6 @@ public abstract class Screen {
     protected OrthogonalTiledMapRenderer otmr;
     protected Viewport vp;
     protected World world;
-    protected TransitionManager tman;
 	/**
 	 * {@link Screen} Constructor
 	 * 
@@ -46,7 +45,6 @@ public abstract class Screen {
                 vp = new FitViewport(JTCM.WIDTH,JTCM.HEIGHT,cam);
                 //cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 pointer = new Vector3();
-                tman = new TransitionManager(JTCM.batch, man.get("blackdot.png",Texture.class));
         }
 
 	/**

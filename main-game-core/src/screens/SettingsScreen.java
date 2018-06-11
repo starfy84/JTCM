@@ -21,9 +21,9 @@ import com.main.game.JTCM;
 /**
  * This class allows adjustments of the settings </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
- * Time spent: 5:00 (Implemented sliders that listen for keyboard input)</br>
- * @version 0.4
+ * Date: 6/8/18 </br>
+ * Time spent: 1:00 (Implemented sliders that listen for keyboard input)</br>
+ * @version 1
  * @author Dereck
  */
 public class SettingsScreen extends Screen {

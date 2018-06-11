@@ -3,6 +3,14 @@ package text;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 
+/**
+ * This processes user input.</br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/8/18 </br>
+ * Time Spent: 00:30 </br>
+ * @version 1
+ * @author Dereck
+ */
 public class TextProcessing implements InputProcessor{
 	private String str;
 	private boolean enter;

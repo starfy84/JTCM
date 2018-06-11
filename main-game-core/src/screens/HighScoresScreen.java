@@ -5,6 +5,7 @@ package screens;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,9 +31,9 @@ import com.main.game.JTCM;
  * This is the main class of our game, it shows a list of highscores. If there
  * arent any highscores, then there will be an error. </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
- * Time Spent: 1:00 (Wrote methods to handle scores)
- * @version 0.4
+ * Date: 6/8/18 </br>
+ * Time Spent: 1:30 (Wrote methods to handle scores)
+ * @version 1
  * @author Dereck
  */
 public class HighScoresScreen extends Screen {
@@ -52,6 +53,9 @@ public class HighScoresScreen extends Screen {
 	 */
 	public HighScoresScreen(ScreenManager sm, AssetManager man,String prefix) {
 		super(sm, man);
+		File s = new File("C:/highscores");
+		if(!s.exists())
+			s.mkdir();
 		posa=341;
 		this.prefix = prefix;
 		posb=900;
@@ -94,7 +98,8 @@ public class HighScoresScreen extends Screen {
 	 */
 	public void write() {
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("highscores/"+prefix+"scores.txt")));
+
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("C:/highscores/"+prefix+"scores.txt")));
 			for(Object[] x : scores)
 				out.println(x[0]+" "+x[1]);
 			out.close();
@@ -109,7 +114,7 @@ public class HighScoresScreen extends Screen {
 	 */
 	public void read() {
 		try {
-			BufferedReader in = new BufferedReader(new FileReader("highscores/"+prefix+"scores.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("C:/highscores/"+prefix+"scores.txt"));
 			String[] tokens= new String[2];
 			String inp="";
 			while((inp=in.readLine())!=null) {
@@ -132,7 +137,7 @@ public class HighScoresScreen extends Screen {
 			sm.pop();
 		if(Gdx.input.isKeyJustPressed(Keys.R)) {
 			try {
-				new PrintWriter(new BufferedWriter(new FileWriter("highscores/"+prefix+"scores.txt"))).close();
+				new PrintWriter(new BufferedWriter(new FileWriter("C:/highscores/"+prefix+"scores.txt"))).close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

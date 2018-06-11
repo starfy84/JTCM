@@ -17,12 +17,12 @@ import com.main.game.JTCM;
 import text.Text;
 
 /**
- * This class shows an instructions screen ---UNIMPLEMENTED--- </br>
+ * This class shows the library </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * 
- * @version 0.1 Time spent: 00:15 </br>
- * @author Dereck
+ * Date: 6/8/18 </br>
+ * Time spent: 1:00</br>
+ * @version 1 
+ * @author Dereck & Rohit
  */
 public class LibraryScreen extends Screen {
 

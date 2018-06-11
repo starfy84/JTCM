@@ -17,11 +17,11 @@ import com.main.game.JTCM;
 import text.Text;
 
 /**
- * This class shows an instructions screen ---UNIMPLEMENTED--- </br>
+ * This class will display instructions on how the game works </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 5/14/18 </br>
- * 
- * @version 0.1 Time spent: 00:15 </br>
+ * Date: 6/8/18 </br>
+ * Time Spent: 1:30 (Wrote methods to handle scores)
+ * @version 1
  * @author Dereck
  */
 public class InstructionsScreen extends Screen {

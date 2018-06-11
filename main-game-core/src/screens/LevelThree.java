@@ -26,10 +26,10 @@ import text.Text;
 /**
  * This class runs level three of the game </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
- * Dereck's Time spent: 1:30 (Implemented music and route to settings) </br>
- * 
- * @version 0.4
+ * Date: 6/8/18 </br>
+ * Dereck's Time spent: 5:00 (Finished class) </br>
+ * Rohit's Time spent: 5:00 (Finished class) </br>
+ * @version 1
  * @author Rohit & Dereck
  */
 public class LevelThree extends Screen {
@@ -161,7 +161,7 @@ public class LevelThree extends Screen {
 		//Challenger icon
 		icon = man.get("ChallengerIcon.png",Texture.class);
 		try {
-			collisionPic = ImageIO.read(new File("collisionDetection.png"));
+			collisionPic = ImageIO.read(new File("assets/collisionDetection.png"));
 		} catch (IOException e) {
 		}
 
@@ -721,16 +721,13 @@ public class LevelThree extends Screen {
 		else {
 			glyph.setText(font, "[RED]LEVEL THREE[]: [LIME]COMPLETE[]\n[BLUE]CONGRADULATIONS! YOU HAVE HIT CHANNELENMAJOUR![]\n[BLACK]CLICK TO CONTINUE[]");
 			font.draw(s, glyph, JTCM.WIDTH / 2 - glyph.width / 2, JTCM.HEIGHT / 2 - glyph.height / 2);
-<<<<<<< HEAD
 			s.draw(icon,JTCM.WIDTH/2-icon.getWidth()/2,JTCM.HEIGHT/2-icon.getHeight()/2+100);
-=======
 			if(Gdx.input.justTouched())
 			{
 				HighScoresScreen hs = new HighScoresScreen(sm,man,"three");
 				hs.insertScore(new Object[] {NameScreen.getName(),(this.health+this.energy+this.social+this.exercise+this.happiness+this.study)*100});
 				sm.set(hs);
 			}
->>>>>>> fff2f0c166a6763c7e267b96f68505f510ffae06
 		}
 		SettingsScreen.applyBrightness(s);
 		if (paused) {

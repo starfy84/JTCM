@@ -18,6 +18,14 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.main.game.JTCM;
 
+/**
+ * This class will direct the user to a specific list of highscores </br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/8/18 </br>
+ * Time Spent: 1:30 (Wrote methods to direct scores)
+ * @version 1
+ * @author Dereck
+ */
 public class HighScoresSelect extends Screen {
 
 	private FreeTypeFontGenerator gen;
@@ -26,6 +34,12 @@ public class HighScoresSelect extends Screen {
 	private BitmapFont font45;
 	private BitmapFont font;
 	private Texture bA,bI;
+	
+	/**
+	 * {@link HighScoresSelect} constructor
+	 * @param sm ScreenManager
+	 * @param man AssetManager
+	 */
 	public HighScoresSelect(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		gen = new FreeTypeFontGenerator(Gdx.files.internal("HeadlinerNo.45 DEMO.ttf"));
@@ -44,9 +58,11 @@ public class HighScoresSelect extends Screen {
 		glyph = new GlyphLayout();
 	}
 
+	/**
+	 * This method handles input
+	 */
 	@Override
 	public void getInput() {
-		// TODO Auto-generated method stub
 		if(Gdx.input.isKeyJustPressed(Keys.NUM_1))
 			sm.push(new HighScoresScreen(sm,man,"one"));
 		else if(Gdx.input.isKeyJustPressed(Keys.NUM_2))
@@ -68,15 +84,19 @@ public class HighScoresSelect extends Screen {
 		}
 	}
 
+	/**
+	 * This method is updates every single frame.
+	 */
 	@Override
 	public void update(double t) {
-		// TODO Auto-generated method stub
 		getInput();
 	}
 
+	/**
+	 * This method renders textures
+	 */
 	@Override
 	public void render(SpriteBatch s) {
-		// TODO Auto-generated method stub
 		s.begin();
 		glyph.setText(font, "1. Level One: Healthy Eating");
 		font.draw(s, glyph, 10, (JTCM.HEIGHT-glyph.height));
@@ -92,9 +112,11 @@ public class HighScoresSelect extends Screen {
 
 	}
 
+	/**
+	 * This disposes of unneeded resources
+	 */
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 
 	}
 

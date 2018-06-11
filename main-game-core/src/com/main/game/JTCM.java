@@ -11,9 +11,9 @@ import screens.*;
 /**
  * This is the main class of our game, it starts the Main Menu screen. </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
- * Time Spent: 0:30 (Optimized asset loading)</br>
- * @version 0.4
+ * Date: 6/8/18 </br>
+ * Time Spent: 0:30 (Added new assets)</br>
+ * @version 1
  * @author Dereck
  */
 public class JTCM extends ApplicationAdapter {

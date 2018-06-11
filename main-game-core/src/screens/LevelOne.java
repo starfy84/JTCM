@@ -27,9 +27,9 @@ import text.Text;
  * This class runs level one of the game </br>
  * Teacher: Ms. Krasteva </br>
  * Date: 6/1/18 </br>
- * Dereck's Time spent: 1:30 (Implemented music and route to settings) </br>
- * 
- * @version 0.4
+ * Dereck's Time spent: 5:00 (finished class) </br>
+ * Rohit's Time spent: 5:00 (finished class) </br>
+ * @version 1
  * @author Rohit & Dereck
  */
 public class LevelOne extends Screen {
@@ -163,7 +163,7 @@ public class LevelOne extends Screen {
 		act6 = man.get("settingIdle.png", Texture.class);
 
 		try {
-			collisionPic = ImageIO.read(new File("collisionDetection.png"));
+			collisionPic = ImageIO.read(new File("assets/collisionDetection.png"));
 		} catch (IOException e) {
 		}
 

@@ -10,10 +10,10 @@ import com.main.game.JTCM;
 /**
  * This class displays an enlarged minimap </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
- * Dereck's Time spent: 0:30 (Implemented music and route to settings) </br>
+ * Date: 6/8/18 </br>
+ * Rohit's time spent: 1:30 improved minimap</br>
  * 
- * @version 0.4
+ * @version 1
  * @author Rohit & Dereck
  */
 public class MinimapScreen extends Screen {

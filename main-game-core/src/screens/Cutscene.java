@@ -24,13 +24,12 @@ import com.main.game.JTCM;
 import text.Text;
 
 /**
- * This class runs level one of the game </br>
+ * This class runsthe cutscene </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
- * Dereck's Time spent: 1:30 (Implemented music and route to settings) </br>
- * 
- * @version 0.4
- * @author Rohit & Dereck
+ * Date: 6/8/18 </br>
+ * Rohit's Time spent: 1:30 ()
+ * @version 1
+ * @author Rohit
  */
 public class Cutscene extends Screen {
 
@@ -108,8 +107,8 @@ public class Cutscene extends Screen {
 			"Relaxing is important in order to reduce stress\nand fatigue." };
 
 	//Cutscene instructions
-	private String[]panels = {"Hi friend. It’s me, narrator! So how’s\nyour journey to Channelenmajour coming along?",
-			"Wait what?!\nYou don’t know what Channelenmajour is?!",
+	private String[]panels = {"Hi friend. Itï¿½s me, narrator! So howï¿½s\nyour journey to Channelenmajour coming along?",
+			"Wait what?!\nYou donï¿½t know what Channelenmajour is?!",
 			"Well put simply,\nChannelenmajour is the state where someone is doing\nextremely well in all aspects of life.",
 			"After each level,\nyou can be one step closer to Channelenmajour.",
 			"Now you are ready to embark on your\njourney to Channelenmajour. Good Luck!"};

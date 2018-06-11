@@ -15,6 +15,14 @@ import com.main.game.JTCM;
 
 import text.Text;
 
+/**
+ * This displays a set of choices for the user to choose from </br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/8/18 </br>
+ * Time Spent: 2:00</br>
+ * @version 1
+ * @author Dereck
+ */
 public class ChoiceScreen extends Screen {
 
 	//Font variables

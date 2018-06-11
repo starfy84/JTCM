@@ -18,9 +18,9 @@ import com.main.game.JTCM;
 /**
  * This is the menu screen.</br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
+ * Date: 6/8/18 </br>
  * Time Spent: 2:30 (Listened for mouse button clicks and positions. Added active and idle states for each button.) </br>
- * @version 0.4
+ * @version 1
  * @author Dereck
  */
 public class MenuScreen extends Screen {

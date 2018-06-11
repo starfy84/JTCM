@@ -7,9 +7,9 @@ import com.main.game.JTCM;
 /**
  * This class displays the loading screen --UNIMPLEMENTED-- </br>
  * Teacher: Ms. Krasteva </br>
- * Date: 6/1/18 </br>
+ * Date: 6/8/18 </br>
  * Time spent: 0:15 </br>
- * @version 0.4
+ * @version 1
  * @author Dereck
  */
 public class LoadingScreen extends Screen {

@@ -12,6 +12,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
+/**
+ * This prints text to the screen.</br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/8/18 </br>
+ * Time Spent: 2:30</br>
+ * @version 1
+ * @author Dereck
+ */
 public class Text {
 	private int i;
 	private long lastT,currT;

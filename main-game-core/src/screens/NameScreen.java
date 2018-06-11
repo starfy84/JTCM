@@ -15,7 +15,14 @@ import com.main.game.JTCM;
 
 import text.TextProcessing;
 
-
+/**
+ * This class will get the user's name</br>
+ * Teacher: Ms. Krasteva </br>
+ * Date: 6/8/18 </br>
+ * Time Spent: 2:30 (Took in input for names) </br>
+ * @version 1
+ * @author Dereck
+ */
 public class NameScreen extends Screen {
 
 	//Background
@@ -27,6 +34,11 @@ public class NameScreen extends Screen {
 	private GlyphLayout glyph;
 	private static String name="";
 	
+	/**
+	 * {@link NameScreen} constructor
+	 * @param sm ScreenManager
+	 * @param man AssetManager
+	 */
 	public NameScreen(ScreenManager sm, AssetManager man) {
 		super(sm, man);
 		// TODO Auto-generated constructor stub
